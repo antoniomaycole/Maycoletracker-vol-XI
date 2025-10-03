@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Inventory Management System vol 6 - MaycoleTechnologies</title>
+    <meta name="description" content="Complete production-ready inventory management application with multi-industry support, barcode scanning, voice control, analytics, and premium subscription tiers.">
+    <meta name="keywords" content="inventory management, barcode scanning, voice control, analytics, multi-industry, Progressive Web App, PWA, enterprise software">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f5f9 100%);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.02) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;  
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .main-logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e40af;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 2px;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1e40af;
+        }
+
+        .feature-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Industry Grid */
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .industry-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .industry-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .industry-restaurant { border-left-color: #f59e0b; }
+        .industry-healthcare { border-left-color: #10b981; }
+        .industry-construction { border-left-color: #f97316; }
+        .industry-retail { border-left-color: #3b82f6; }
+        .industry-manufacturing { border-left-color: #6b7280; }
+        .industry-automotive { border-left-color: #dc2626; }
+        .industry-technology { border-left-color: #8b5cf6; }
+        .industry-education { border-left-color: #059669; }
+
+        .industry-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .industry-features {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .pricing-free {
+            border-color: #e5e7eb;
+        }
+
+        .pricing-professional {
+            border-color: #f59e0b;
+            position: relative;
+        }
+
+        .pricing-professional::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f59e0b;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-enterprise {
+            border-color: #8b5cf6;
+        }
+
+        .pricing-tier {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .pricing-button-free {
+            background: #f1f5f9;
+            color: #1e40af;
+        }
+
+        .pricing-button-professional {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .pricing-button-enterprise {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Technical Specs */
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .tech-spec {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .tech-spec-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1e40af;
+        }
+
+        .tech-spec-value {
+            color: #64748b;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button-primary {
+            background: white;
+            color: #1e40af;
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: white;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Badge animations */
+        .badge-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        /* Icon styles */
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <!-- MaycoleTracker™ Icon with WILD Document Box -->
+                    <svg class="main-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Rich Blue Background Circle -->
+                        <circle cx="50" cy="50" r="49" fill="#ffffff" stroke="none"/>
+                        
+                        <!-- Logo-style Cross Pattern -->
+                        <rect x="20" y="46" width="60" height="8" rx="4" fill="#1e40af" opacity="0.98"/>
+                        <rect x="46" y="20" width="8" height="60" rx="4" fill="#1e40af" opacity="0.98"/>
+                        
+                        <!-- Bolder Sporadic Blue Dots Close to Cross -->
+                        <circle cx="35" cy="14" r="4" fill="#1e40af" opacity="0.95"/>
+                        <circle cx="65" cy="18" r="3.5" fill="#1e40af" opacity="0.9"/>
+                        <circle cx="14" cy="38" r="3.5" fill="#1e40af" opacity="0.92"/>
+                        <circle cx="86" cy="62" r="4" fill="#1e40af" opacity="0.95"/>
+                        <circle cx="35" cy="86" r="3.5" fill="#1e40af" opacity="0.9"/>
+                        <circle cx="65" cy="82" r="3" fill="#1e40af" opacity="0.88"/>
+                        <circle cx="30" cy="35" r="2.5" fill="#1e40af" opacity="0.85"/>
+                        <circle cx="70" cy="32" r="2.8" fill="#1e40af" opacity="0.87"/>
+                        <circle cx="32" cy="68" r="2.2" fill="#1e40af" opacity="0.82"/>
+                        <circle cx="68" cy="65" r="2.6" fill="#1e40af" opacity="0.86"/>
+                        <circle cx="42" cy="28" r="1.8" fill="#1e40af" opacity="0.75"/>
+                        <circle cx="58" cy="25" r="1.5" fill="#1e40af" opacity="0.7"/>
+                        <circle cx="25" cy="58" r="1.8" fill="#1e40af" opacity="0.75"/>
+                        <circle cx="75" cy="55" r="1.6" fill="#1e40af" opacity="0.72"/>
+                        <circle cx="45" cy="72" r="1.4" fill="#1e40af" opacity="0.68"/>
+                        <circle cx="55" cy="75" r="1.7" fill="#1e40af" opacity="0.73"/>
+                        
+                        <!-- WILD Centered Document Box with Bold Lines - BIGGER! -->
+                        <rect x="35" y="32" width="30" height="36" rx="3" fill="#1e40af" opacity="0.98" stroke="rgba(255, 255, 255, 0.3)" stroke-width="0.5"/>
+                        <line x1="38" y1="38" x2="62" y2="38" stroke="#ffffff" stroke-width="1.5" opacity="0.9"/>
+                        <line x1="38" y1="43" x2="58" y2="43" stroke="#ffffff" stroke-width="1.5" opacity="0.85"/>
+                        <line x1="38" y1="48" x2="61" y2="48" stroke="#ffffff" stroke-width="1.5" opacity="0.9"/>
+                        <line x1="38" y1="53" x2="56" y2="53" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+                        <line x1="38" y1="58" x2="60" y2="58" stroke="#ffffff" stroke-width="1.5" opacity="0.85"/>
+                        <line x1="38" y1="63" x2="59" y2="63" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+                        
+                        <!-- Premium Rich Blue Highlight -->
+                        <ellipse cx="35" cy="30" rx="15" ry="10" fill="rgba(30, 64, 175, 0.2)" transform="rotate(-25 35 30)" opacity="0.9"/>
+                    </svg>
+                </div>
+                
+                <h1 class="hero-title">MaycoleTracker™</h1>
+                <p class="hero-subtitle">Inventory Management System</p>
+                <div class="version-badge badge-pulse">Volume XI - Enterprise Edition</div>
+                <p>Complete production-ready inventory management application with comprehensive features</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#industries" class="nav-link">Industries</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#technical" class="nav-link">Technical</a>
+                <a href="#download" class="nav-link">Download</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">🚀 Core Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Progressive Web App (PWA)</h3>
+                    <p class="feature-description">Install on iOS devices via Safari for enterprise distribution without App Store approval. Works offline with full functionality.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏭</div>
+                    <h3 class="feature-title">Multi-Industry Configuration</h3>
+                    <p class="feature-description">Pre-configured for 8 industry verticals with specialized terminology, categories, and workflows tailored to your business needs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Advanced Analytics</h3>
+                    <p class="feature-description">Comprehensive reporting with interactive charts, trend analysis, predictive insights, and customizable dashboards.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📷</div>
+                    <h3 class="feature-title">Barcode Scanning</h3>
+                    <p class="feature-description">Built-in camera integration for barcode/QR code scanning with batch processing and automatic product lookup.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3 class="feature-title">Voice Control</h3>
+                    <p class="feature-description">Hands-free inventory management with voice commands for adding items, checking stock, and navigation.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3 class="feature-title">Emergency Mode</h3>
+                    <p class="feature-description">Critical business continuity features with emergency contacts, offline operation, and disaster recovery protocols.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">User Management</h3>
+                    <p class="feature-description">Role-based access control, user permissions, audit trails, and secure authentication with premium subscription tiers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">React Router Integration</h3>
+                    <p class="feature-description">URL-based navigation with /analytics, /scanner, /camera, and /premium routes for seamless user experience.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Real-time Updates</h3>
+                    <p class="feature-description">Live inventory tracking, automatic alerts, low stock notifications, and real-time synchronization across devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section id="industries" class="section" style="background: rgba(255, 255, 255, 0.5);">
+        <div class="container">
+            <h2 class="section-title">🏢 Industry Support</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #64748b;">Specialized configurations for 8 different industry verticals</p>
+            
+            <div class="industry-grid">
+                <div class="industry-card industry-restaurant">
+                    <h3 class="industry-name">🍽️ Restaurant Operations</h3>
+                    <p class="industry-features">Temperature monitoring, expiration tracking, supplier management, cost control, kitchen workflow optimization</p>
+                </div>
+
+                <div class="industry-card industry-healthcare">
+                    <h3 class="industry-name">🏥 Healthcare Facility</h3>
+                    <p class="industry-features">FDA compliance, lot numbers, expiration tracking, temperature control, medical supply management, audit trails</p>
+                </div>
+
+                <div class="industry-card industry-construction">
+                    <h3 class="industry-name">🏗️ Construction Company</h3>
+                    <p class="industry-features">Tool tracking, job site management, equipment checkout, safety compliance, OSHA reporting</p>
+                </div>
+
+                <div class="industry-card industry-retail">
+                    <h3 class="industry-name">🛍️ Retail Store</h3>
+                    <p class="industry-features">POS integration, sales analytics, customer management, promotion tracking, seasonal inventory</p>
+                </div>
+
+                <div class="industry-card industry-manufacturing">
+                    <h3 class="industry-name">🏭 Manufacturing Plant</h3>
+                    <p class="industry-features">Production planning, quality control, batch tracking, waste management, material flow optimization</p>
+                </div>
+
+                <div class="industry-card industry-automotive">
+                    <h3 class="industry-name">🚗 Auto Service Center</h3>
+                    <p class="industry-features">VIN tracking, service integration, warranty management, parts lookup, vehicle history</p>
+                </div>
+
+                <div class="industry-card industry-technology">
+                    <h3 class="industry-name">💻 Tech Company</h3>
+                    <p class="industry-features">Asset tracking, license management, depreciation calculation, IT asset management, deployment tracking</p>
+                </div>
+
+                <div class="industry-card industry-education">
+                    <h3 class="industry-name">🎓 Educational Institution</h3>
+                    <p class="industry-features">Budget tracking, requisition management, asset tagging, department allocation, supply distribution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">💎 Subscription Tiers</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #64748b;">Choose the plan that fits your business needs</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card pricing-free">
+                    <h3 class="pricing-tier">Free</h3>
+                    <div class="pricing-price">$0</div>
+                    <p class="pricing-period">Forever</p>
+                    <ul class="pricing-features">
+                        <li>Basic inventory tracking</li>
+                        <li>Up to 100 items</li>
+                        <li>Single user</li>
+                        <li>Email support</li>
+                        <li>Mobile app access</li>
+                        <li>Basic reporting</li>
+                    </ul>
+                    <a href="#download" class="pricing-button pricing-button-free">Get Started Free</a>
+                </div>
+
+                <div class="pricing-card pricing-professional">
+                    <h3 class="pricing-tier">Professional</h3>
+                    <div class="pricing-price">$89</div>
+                    <p class="pricing-period">per month</p>
+                    <ul class="pricing-features">
+                        <li>Unlimited items</li>
+                        <li>Barcode scanning</li>
+                        <li>Advanced analytics</li>
+                        <li>Voice control</li>
+                        <li>Multi-user access</li>
+                        <li>Industry configurations</li>
+                        <li>Priority support</li>
+                        <li>Custom reports</li>
+                        <li>API access</li>
+                    </ul>
+                    <a href="#contact" class="pricing-button pricing-button-professional">Start Professional</a>
+                </div>
+
+                <div class="pricing-card pricing-enterprise">
+                    <h3 class="pricing-tier">Enterprise</h3>
+                    <div class="pricing-price">$199</div>
+                    <p class="pricing-period">per month</p>
+                    <ul class="pricing-features">
+                        <li>Everything in Professional</li>
+                        <li>Emergency mode</li>
+                        <li>Advanced security</li>
+                        <li>Audit trails</li>
+                        <li>White-label options</li>
+                        <li>Custom integrations</li>
+                        <li>Dedicated support</li>
+                        <li>SLA guarantee</li>
+                        <li>On-premise deployment</li>
+                    </ul>
+                    <a href="#contact" class="pricing-button pricing-button-enterprise">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section id="technical" class="section" style="background: rgba(255, 255, 255, 0.5);">
+        <div class="container">
+            <h2 class="section-title">⚙️ Technical Specifications</h2>
+            
+            <div class="tech-specs">
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Frontend Framework</h3>
+                    <p class="tech-spec-value">React 18 with TypeScript, Motion for animations</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Styling</h3>
+                    <p class="tech-spec-value">Tailwind CSS v4.0 with custom design system</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">UI Components</h3>
+                    <p class="tech-spec-value">shadcn/ui library with custom components</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Icons</h3>
+                    <p class="tech-spec-value">Lucide React icon library</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Charts & Analytics</h3>
+                    <p class="tech-spec-value">Recharts library for data visualization</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Navigation</h3>
+                    <p class="tech-spec-value">React Router with URL-based routing</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">PWA Features</h3>
+                    <p class="tech-spec-value">Service worker, offline support, installable</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Device Support</h3>
+                    <p class="tech-spec-value">iOS, Android, desktop via web browser</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Performance</h3>
+                    <p class="tech-spec-value">Lazy loading, code splitting, optimized builds</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Build Tool</h3>
+                    <p class="tech-spec-value">Vite for fast development and builds</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Code Quality</h3>
+                    <p class="tech-spec-value">ESLint, TypeScript strict mode, error boundaries</p>
+                </div>
+
+                <div class="tech-spec">
+                    <h3 class="tech-spec-title">Deployment</h3>
+                    <p class="tech-spec-value">Netlify optimized with custom configurations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Features -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">✨ Premium Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <h3 class="feature-title">11 Premium Features</h3>
+                    <p class="feature-description">Advanced analytics, barcode scanning, voice control, emergency mode, multi-user access, custom reports, API access, audit trails, priority support, white-label options, and custom integrations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Premium Feature Guards</h3>
+                    <p class="feature-description">Conditional rendering system that seamlessly upgrades user experience based on subscription tier with elegant upgrade prompts.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">User Context Management</h3>
+                    <p class="feature-description">Advanced user management with role-based permissions, subscription tracking, and feature access control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download/CTA Section -->
+    <section id="download" class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Inventory Management?</h2>
+            <p class="cta-description">
+                Get started with MaycoleTracker™ today and experience the future of inventory management. 
+                No App Store required - install directly on iOS devices via Safari.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="https://maycoletracker.netlify.app" class="cta-button cta-button-primary" target="_blank">
+                    🚀 Launch MaycoleTracker™
+                </a>
+                <a href="#contact" class="cta-button cta-button-secondary">
+                    📞 Contact Sales
+                </a>
+                <a href="https://github.com/maycoletechnologies/maycoletracker" class="cta-button cta-button-secondary" target="_blank">
+                    📂 View Documentation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MaycoleTracker™</h3>
+                    <p>Complete inventory management solution for modern businesses. Built with cutting-edge technology and industry expertise.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#industries">Industries</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#technical">Technical Specs</a></li>
+                        <li><a href="https://maycoletracker.netlify.app" target="_blank">Live Demo</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://maycoletechnologies.com">MaycoleTechnologies</a></li>
+                        <li><a href="mailto:info@maycoletechnologies.com">Contact Us</a></li>
+                        <li><a href="#support">Support</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#documentation">Documentation</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                        <li><a href="#tutorials">Tutorials</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 MaycoleTechnologies.com - MaycoleTracker™ Inventory Management System Volume XI</p>
+                <p>Complete production-ready inventory management application with comprehensive enterprise features</p>
+                <p><strong>Built with React, TypeScript, Tailwind CSS, and modern web technologies</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.feature-card, .industry-card, .pricing-card, .tech-spec').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

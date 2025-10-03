@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Analytics Integration - Complete System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1a202c;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+        .logo-icon {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 0.5rem;
+            margin-right: 0.75rem;
+            position: relative;
+            vertical-align: middle;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1rem;
+            height: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+            transform: translate(-50%, -50%);
+        }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #3b82f6;
+            border-radius: 0.1875rem;
+            transform: translate(-50%, -50%);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card.analytics {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+        .feature-card.voice {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+        .feature-card.integration {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .feature-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .feature-card.analytics .feature-icon {
+            background: #3b82f6;
+            color: white;
+        }
+        .feature-card.voice .feature-icon {
+            background: #10b981;
+            color: white;
+        }
+        .feature-card.integration .feature-icon {
+            background: #f59e0b;
+            color: white;
+        }
+        .feature-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+        .check-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .button {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .button.analytics {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        .button.analytics:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        }
+        .button.voice {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .button.voice:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+        .button.integration {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .button.integration:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+        .system-overview {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        .routes-demo {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        .route-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #374151;
+        }
+        .route-item:last-child {
+            border-bottom: none;
+        }
+        .route-path {
+            color: #10b981;
+            font-weight: 600;
+        }
+        .route-desc {
+            color: #9ca3af;
+            margin-left: 2rem;
+        }
+        .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        .badge.new {
+            background: #10b981;
+        }
+        .badge.enhanced {
+            background: #8b5cf6;
+        }
+        .analytics-demo {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .analytics-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .analytics-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .analytics-change {
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        .voice-demo {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #10b981;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        .voice-demo::before {
+            content: '🔊';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        .code-demo {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .code-comment { color: #10b981; }
+        .code-function { color: #3b82f6; }
+        .code-string { color: #f59e0b; }
+        .integration-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .flow-step {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        .flow-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #3b82f6;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        .flow-step h4 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+        .flow-step p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span class="logo-icon"></span>
+                MaycoleTracker<span class="tm">™</span> Analytics Integration
+            </h1>
+            <p>Professional Analytics Reports System with Voice Integration - Complete Enterprise Solution</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <span class="badge new">Analytics System</span>
+                <span class="badge enhanced">Voice Reports</span>
+                <span class="badge">vol. XI Enterprise</span>
+            </div>
+        </div>
+
+        <!-- Features Overview -->
+        <div class="features-grid">
+            <!-- Analytics System -->
+            <div class="feature-card analytics">
+                <div class="feature-title">
+                    <div class="feature-icon">📊</div>
+                    Advanced Analytics Reports
+                </div>
+                <div class="feature-description">
+                    Your simple analytics enhanced with professional dashboards, comprehensive metrics, and beautiful visualizations.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Your original voice report functionality</li>
+                    <li><span class="check-icon">✓</span> Professional analytics dashboard</li>
+                    <li><span class="check-icon">✓</span> Weekly & Monthly report generation</li>
+                    <li><span class="check-icon">✓</span> Real-time business metrics</li>
+                    <li><span class="check-icon">✓</span> MaycoleTracker™ styling integration</li>
+                </ul>
+                <a href="/analytics" class="button analytics">
+                    📊 View Analytics System
+                </a>
+            </div>
+
+            <!-- Voice Integration -->
+            <div class="feature-card voice">
+                <div class="feature-title">
+                    <div class="feature-icon">🔊</div>
+                    Voice-Enabled Reports
+                </div>
+                <div class="feature-description">
+                    Your original voice synthesis functionality enhanced with professional controls and seamless integration.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Original speechSynthesis.speak() preserved</li>
+                    <li><span class="check-icon">✓</span> Voice toggle control in header</li>
+                    <li><span class="check-icon">✓</span> Report completion announcements</li>
+                    <li><span class="check-icon">✓</span> Audio feedback for all actions</li>
+                    <li><span class="check-icon">✓</span> Compatible with inventory voice alerts</li>
+                </ul>
+                <a href="/analytics" class="button voice">
+                    🔊 Test Voice Features
+                </a>
+            </div>
+
+            <!-- System Integration -->
+            <div class="feature-card integration">
+                <div class="feature-title">
+                    <div class="feature-icon">🔗</div>
+                    Complete Integration
+                </div>
+                <div class="feature-description">
+                    Seamlessly integrated into your MaycoleTracker™ system with dashboard access and navigation flow.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> New /analytics route added</li>
+                    <li><span class="check-icon">✓</span> Dashboard quick access button</li>
+                    <li><span class="check-icon">✓</span> Consistent navigation patterns</li>
+                    <li><span class="check-icon">✓</span> Professional UI consistency</li>
+                    <li><span class="check-icon">✓</span> Mobile-responsive design</li>
+                </ul>
+                <a href="/dashboard" class="button integration">
+                    🔗 View Dashboard Integration
+                </a>
+            </div>
+        </div>
+
+        <!-- Original vs Enhanced Comparison -->
+        <div class="system-overview">
+            <h2>Your Original Analytics Enhanced</h2>
+            <p>Here's how your simple analytics component has been transformed:</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h3 style="color: #f59e0b; margin-bottom: 1rem;">🎯 Your Original Code</h3>
+                    <div class="code-demo">
+                        <div class="code-comment">// Your simple and clean approach</div>
+                        <div>const AnalyticsPage = () => (</div>
+                        <div style="margin-left: 1rem;"><div style={{padding: '32px'}}></div>
+                        <div style="margin-left: 2rem;"><h2>Analytics Reports</h2></div>
+                        <div style="margin-left: 2rem;"><button onClick={() =></div>
+                        <div style="margin-left: 3rem;"><span class="code-function">speechSynthesis.speak</span>(</div>
+                        <div style="margin-left: 4rem;">new <span class="code-function">SpeechSynthesisUtterance</span>(</div>
+                        <div style="margin-left: 5rem;"><span class="code-string">'Weekly report generated'</span></div>
+                        <div style="margin-left: 4rem;">)</div>
+                        <div style="margin-left: 3rem;">)}></div>
+                        <div style="margin-left: 2rem;">Weekly Report</div>
+                        <div style="margin-left: 2rem;"></button></div>
+                        <div style="margin-left: 1rem;"></div></div>
+                        <div>);</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #10b981; margin-bottom: 1rem;">✨ Enhanced Professional Version</h3>
+                    <div class="code-demo">
+                        <div class="code-comment">// Professional enterprise implementation</div>
+                        <div>const AnalyticsPage = () => {</div>
+                        <div style="margin-left: 1rem;"><span class="code-comment">// Your original functionality preserved</span></div>
+                        <div style="margin-left: 1rem;">const speak = (text) => {</div>
+                        <div style="margin-left: 2rem;"><span class="code-function">speechSynthesis.speak</span>(</div>
+                        <div style="margin-left: 3rem;">new <span class="code-function">SpeechSynthesisUtterance</span>(text)</div>
+                        <div style="margin-left: 2rem;">);</div>
+                        <div style="margin-left: 1rem;">};</div>
+                        <div style="margin-top: 0.5rem;"></div>
+                        <div style="margin-left: 1rem;"><span class="code-comment">// Enhanced with professional features</span></div>
+                        <div style="margin-left: 1rem;">+ Analytics dashboard with metrics</div>
+                        <div style="margin-left: 1rem;">+ Professional MaycoleTracker™ styling</div>
+                        <div style="margin-left: 1rem;">+ Voice toggle controls</div>
+                        <div style="margin-left: 1rem;">+ Loading states & progress</div>
+                        <div style="margin-left: 1rem;">+ Navigation integration</div>
+                        <div>};</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Analytics Demo -->
+        <div class="analytics-demo">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: #1f2937;">📊 Live Analytics Dashboard Preview</h3>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <div class="analytics-value">$45,678</div>
+                    <div class="analytics-label">Total Revenue</div>
+                    <div class="analytics-change">+12.5% ↗️</div>
+                </div>
+                <div class="analytics-card">
+                    <div class="analytics-value">2,847</div>
+                    <div class="analytics-label">Active Users</div>
+                    <div class="analytics-change">+8.2% ↗️</div>
+                </div>
+                <div class="analytics-card">
+                    <div class="analytics-value">1,234</div>
+                    <div class="analytics-label">Inventory Items</div>
+                    <div class="analytics-change">-2.1% ↘️</div>
+                </div>
+                <div class="analytics-card">
+                    <div class="analytics-value">23</div>
+                    <div class="analytics-label">Low Stock Alerts</div>
+                    <div class="analytics-change">+5.3% ↗️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voice Integration Demo -->
+        <div class="voice-demo">
+            <h3 style="color: #065f46; margin-bottom: 1rem;">🔊 Voice Analytics in Action</h3>
+            <p style="color: #064e3b; margin-bottom: 1rem;">Your original voice functionality enhanced with professional controls:</p>
+            <ul style="color: #047857; margin-left: 2rem;">
+                <li><strong>"Weekly report generated"</strong> - Your original announcement</li>
+                <li><strong>"Monthly report generated"</strong> - Your original announcement</li>
+                <li><strong>Voice ON/OFF toggle</strong> - Professional control system</li>
+                <li><strong>Report completion feedback</strong> - Enhanced user experience</li>
+                <li><strong>Action confirmations</strong> - Audio feedback for all interactions</li>
+            </ul>
+        </div>
+
+        <!-- Integration Flow -->
+        <div class="system-overview">
+            <h2>Complete System Integration Flow</h2>
+            <div class="integration-flow">
+                <div class="flow-step" data-step="1">
+                    <h4>Dashboard Access</h4>
+                    <p>New Analytics button added to your inventory dashboard quick actions</p>
+                </div>
+                <div class="flow-step" data-step="2">
+                    <h4>Analytics Route</h4>
+                    <p>New /analytics route integrated into your App.tsx routing system</p>
+                </div>
+                <div class="flow-step" data-step="3">
+                    <h4>Voice Integration</h4>
+                    <p>Your original speechSynthesis functionality preserved and enhanced</p>
+                </div>
+                <div class="flow-step" data-step="4">
+                    <h4>Professional UI</h4>
+                    <p>Consistent MaycoleTracker™ styling and responsive design</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Route System -->
+        <div class="system-overview">
+            <h2>Complete MaycoleTracker™ Route System</h2>
+            <p>Your analytics system is now part of the comprehensive routing structure:</p>
+            
+            <div class="routes-demo">
+                <div class="route-item">
+                    <span class="route-path">/analytics</span><span class="badge new">NEW</span>
+                    <div class="route-desc">Professional Analytics Reports with Voice Integration</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/dashboard</span><span class="badge enhanced">ENHANCED</span>
+                    <div class="route-desc">Enhanced Inventory Dashboard with Analytics access</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/camera</span>
+                    <div class="route-desc">Complete Camera & Scanner System</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/logo</span>
+                    <div class="route-desc">Core MaycoleTracker™ logo page (protected)</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/ads</span>
+                    <div class="route-desc">Advertisement system</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/training</span>
+                    <div class="route-desc">Training mode</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/reports</span>
+                    <div class="route-desc">Reports agent</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/calculator</span>
+                    <div class="route-desc">Calculator agent</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/recovery</span>
+                    <div class="route-desc">Recovery system with 8 backend enforcers</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/industries</span>
+                    <div class="route-desc">Enhanced industry selector</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/configure/:industryType</span>
+                    <div class="route-desc">Industry configuration system</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/quick-setup/:industry</span>
+                    <div class="route-desc">Quick industry setup</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/simple-setup/:industry</span>
+                    <div class="route-desc">Simple industry configuration</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Guide -->
+        <div class="system-overview">
+            <h2>How to Use Your Enhanced Analytics System</h2>
+            
+            <h3>📊 Accessing Analytics:</h3>
+            <ol style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li>From <strong>Dashboard</strong> → Click "Analytics Reports" quick action button</li>
+                <li>Direct navigation to <code>/analytics</code></li>
+                <li>Professional interface with MaycoleTracker™ styling</li>
+                <li>Voice toggle control in header (ON/OFF)</li>
+            </ol>
+            
+            <h3>🔊 Voice Features:</h3>
+            <ol style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li><strong>Weekly Report:</strong> Click button → "Weekly report generated" (your original)</li>
+                <li><strong>Monthly Report:</strong> Click button → "Monthly report generated" (your original)</li>
+                <li><strong>Voice Control:</strong> Toggle voice ON/OFF using header button</li>
+                <li><strong>Additional Feedback:</strong> Audio confirmations for all actions</li>
+            </ol>
+            
+            <h3>📈 Analytics Features:</h3>
+            <ol style="margin-left: 2rem;">
+                <li><strong>Live Metrics:</strong> Revenue, Users, Inventory, Alerts</li>
+                <li><strong>Report Generation:</strong> Weekly & Monthly with progress indicators</li>
+                <li><strong>Professional UI:</strong> Consistent with your MaycoleTracker™ system</li>
+                <li><strong>Quick Actions:</strong> Export, Advanced Analytics, Dashboard return</li>
+            </ol>
+        </div>
+
+        <!-- Test Your System -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3>Test Your Complete Analytics Integration:</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <a href="/analytics" class="button analytics">
+                    📊 Analytics System
+                </a>
+                <a href="/dashboard" class="button voice">
+                    📊 Enhanced Dashboard
+                </a>
+                <a href="/camera" class="button integration">
+                    📸 Camera Scanner
+                </a>
+                <a href="/logo" class="button">
+                    🎯 MaycoleTracker™ Logo
+                </a>
+            </div>
+            
+            <p style="margin-top: 2rem; color: #6b7280; font-size: 0.875rem;">
+                Your simple analytics component is now a professional enterprise-grade analytics system<br>
+                with voice integration, beautiful UI, and seamless MaycoleTracker™ integration!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simulate route navigation and voice functionality
+        document.querySelectorAll('a[href^="/"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const route = this.getAttribute('href');
+                
+                if (route === '/analytics') {
+                    // Simulate voice announcement
+                    if ('speechSynthesis' in window) {
+                        speechSynthesis.speak(new SpeechSynthesisUtterance('Analytics system accessed'));
+                    }
+                    
+                    alert(`📊 Analytics Reports System\n\nFeatures:\n• Your original voice functionality preserved\n• Professional analytics dashboard\n• Weekly & Monthly report generation\n• Real-time business metrics display\n• Voice toggle controls (ON/OFF)\n• MaycoleTracker™ professional styling\n• Seamless navigation integration\n\nOriginal Code Enhanced:\n✓ speechSynthesis.speak('Weekly report generated')\n✓ speechSynthesis.speak('Monthly report generated')\n\nRoute: ${route}`);
+                } else if (route === '/dashboard') {
+                    alert(`📊 Enhanced Inventory Dashboard\n\nNew Features:\n• Analytics Reports quick action button\n• Professional 4-column layout\n• Camera Scanner integration\n• Your original voice alerts preserved\n• Complete workflow integration\n• Seamless navigation to analytics\n\nRoute: ${route}`);
+                } else if (route === '/camera') {
+                    alert(`📸 Camera Scanner System\n\nProfessional Features:\n• Live camera access\n• Barcode & QR scanning\n• Mobile-optimized interface\n• Upload from gallery\n• Recent scans tracking\n• Dashboard integration\n\nRoute: ${route}`);
+                } else if (route === '/logo') {
+                    alert(`🎯 MaycoleTracker™ Logo Page\n\nProtected Core System:\n• Original blue gradient preserved\n• Professional branding\n• Enterprise Edition identity\n• Navigation hub\n• Protected design\n\nRoute: ${route}`);
+                }
+            });
+        });
+
+        // Animate cards on load
+        setTimeout(() => {
+            document.querySelectorAll('.feature-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        }, 500);
+
+        // Simulate voice functionality demo
+        const voiceDemo = document.querySelector('.voice-demo');
+        if (voiceDemo) {
+            voiceDemo.addEventListener('click', function() {
+                if ('speechSynthesis' in window) {
+                    speechSynthesis.speak(new SpeechSynthesisUtterance('Analytics voice system demonstration - Weekly report generated'));
+                }
+            });
+        }
+    </script>
+</body>
+</html>

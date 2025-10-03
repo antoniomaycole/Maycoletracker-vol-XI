@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker Emergency Reset</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .reset-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #030213, #7c3aed);
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        h1 { color: #030213; margin: 10px 0; }
+        .subtitle { color: #7c3aed; font-size: 14px; margin-bottom: 20px; }
+        .description { color: #666; margin: 20px 0; line-height: 1.6; }
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .action-btn:hover { transform: translateY(-2px); }
+        .primary-btn {
+            background: linear-gradient(135deg, #030213, #7c3aed);
+            color: white;
+        }
+        .secondary-btn {
+            background: #f1f3f4;
+            color: #030213;
+            border: 1px solid #e0e0e0;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="reset-container">
+        <div class="icon">🔧</div>
+        <h1>Emergency Reset</h1>
+        <div class="subtitle">MaycoleTracker Recovery Tool</div>
+        
+        <div class="description">
+            If your MaycoleTracker app is stuck, frozen, or showing "page unresponsive" errors, 
+            use these tools to get it working again.
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ Important:</strong> The "Clear All Data" option will remove all your inventory items and usage logs. 
+            Only use this as a last resort.
+        </div>
+        
+        <div class="success" id="successMessage">
+            <strong>✅ Reset Complete!</strong> You can now go back to your app. 
+            <a href="/">Open MaycoleTracker</a>
+        </div>
+        
+        <button onclick="clearCache()" class="action-btn secondary-btn">
+            🧹 Clear Browser Cache Only
+        </button>
+        
+        <button onclick="softReset()" class="action-btn secondary-btn">
+            🔄 Soft Reset (Keep Data)
+        </button>
+        
+        <button onclick="hardReset()" class="action-btn primary-btn">
+            💣 Clear All Data & Reset
+        </button>
+        
+        <button onclick="goBack()" class="action-btn secondary-btn">
+            ← Back to App
+        </button>
+        
+        <div style="margin-top: 30px; font-size: 14px; color: #666;">
+            <p><strong>Quick Tips:</strong></p>
+            <ul style="text-align: left; padding-left: 20px;">
+                <li>Try "Clear Browser Cache" first</li>
+                <li>If still stuck, use "Soft Reset"</li>
+                <li>Only use "Clear All Data" if nothing else works</li>
+                <li>Consider using a different browser if problems persist</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function clearCache() {
+            try {
+                // Clear service worker cache
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(registrations => {
+                        registrations.forEach(registration => {
+                            registration.unregister();
+                        });
+                    });
+                }
+                
+                // Clear browser cache (what we can access)
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => {
+                            caches.delete(name);
+                        });
+                    });
+                }
+                
+                showSuccess("Browser cache cleared successfully!");
+            } catch (error) {
+                alert("Cache clearing failed. Try refreshing your browser manually.");
+            }
+        }
+        
+        function softReset() {
+            try {
+                // Clear potentially problematic keys but keep data
+                localStorage.removeItem('maycoletraker-analytics-cache');
+                localStorage.removeItem('maycoletraker-performance-data');
+                
+                // Clear session data
+                sessionStorage.clear();
+                
+                showSuccess("Soft reset complete! App performance should be improved.");
+            } catch (error) {
+                alert("Soft reset failed: " + error.message);
+            }
+        }
+        
+        function hardReset() {
+            if (confirm("⚠️ This will DELETE ALL your inventory data. Are you absolutely sure?")) {
+                if (confirm("🚨 FINAL WARNING: All items, usage logs, and settings will be lost. Continue?")) {
+                    try {
+                        // Clear all localStorage
+                        localStorage.clear();
+                        sessionStorage.clear();
+                        
+                        // Clear IndexedDB if present
+                        if (window.indexedDB) {
+                            indexedDB.deleteDatabase('maycoletraker');
+                        }
+                        
+                        showSuccess("Complete reset finished! Your app is now fresh and clean.");
+                    } catch (error) {
+                        alert("Reset failed: " + error.message);
+                    }
+                }
+            }
+        }
+        
+        function goBack() {
+            window.location.href = '/';
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.innerHTML = `<strong>✅ Success!</strong> ${message} <a href="/">Open MaycoleTracker</a>`;
+            successDiv.style.display = 'block';
+            
+            // Auto-redirect after 3 seconds
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 3000);
+        }
+        
+        // Auto-clear cache on page load if needed
+        if (new URLSearchParams(window.location.search).get('auto') === 'clear') {
+            clearCache();
+        }
+    </script>
+</body>
+</html>

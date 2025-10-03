@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Route Test</title>
+</head>
+<body>
+    <h1>Basic Route Test</h1>
+    <p>If you can see this, the basic routing is working.</p>
+    
+    <h2>Current URL:</h2>
+    <p id="currentUrl"></p>
+    
+    <h2>Tests:</h2>
+    <ul>
+        <li>✅ HTML loads</li>
+        <li id="jsTest">❌ JavaScript loading...</li>
+        <li id="routeTest">❌ Route testing...</li>
+    </ul>
+    
+    <script>
+        // Test JavaScript
+        document.getElementById('jsTest').innerHTML = '✅ JavaScript works';
+        document.getElementById('currentUrl').textContent = window.location.href;
+        
+        // Test route detection
+        if (window.location.pathname === '/') {
+            document.getElementById('routeTest').innerHTML = '✅ Root route detected';
+        } else {
+            document.getElementById('routeTest').innerHTML = '⚠️ Route: ' + window.location.pathname;
+        }
+        
+        // Check for React
+        setTimeout(() => {
+            if (window.React) {
+                console.log('✅ React is loaded');
+            } else {
+                console.log('❌ React not found');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install MaycoleTracker - Universal AI Inventory Management</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #030213 0%, #1e40af 50%, #7c3aed 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .share-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #030213 0%, #1e40af 50%, #7c3aed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(3,2,19,0.3);
+        }
+        
+        .app-icon svg {
+            width: 80px;
+            height: 80px;
+            fill: white;
+        }
+        
+        h1 {
+            color: #030213;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7c3aed;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .features h3 {
+            color: #030213;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .features ul {
+            list-style: none;
+            space-y: 8px;
+        }
+        
+        .features li {
+            color: #444;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li::before {
+            content: "✓";
+            color: #7c3aed;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .install-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .install-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+            gap: 10px;
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .primary-btn {
+            background: linear-gradient(135deg, #030213 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .secondary-btn {
+            background: white;
+            color: #030213;
+            border: 2px solid #030213;
+        }
+        
+        .device-instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f4fd;
+            border-radius: 12px;
+            border-left: 4px solid #1e40af;
+        }
+        
+        .device-instructions h4 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        
+        .device-instructions p {
+            color: #444;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .company-badge {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .share-card {
+                padding: 30px 20px;
+            }
+            
+            .app-icon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .app-icon svg {
+                width: 60px;
+                height: 60px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="share-card">
+        <div class="app-icon">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="10" width="14" height="9" rx="1.5" fill="white" fill-opacity="0.9" />
+                <rect x="10" y="11" width="12" height="1" fill="rgba(255,255,255,0.8)" />
+                <rect x="10" y="13" width="8" height="0.8" fill="rgba(255,255,255,0.6)" />
+                <rect x="10" y="15" width="6" height="0.8" fill="rgba(255,255,255,0.6)" />
+                <rect x="10" y="17" width="10" height="0.8" fill="rgba(255,255,255,0.6)" />
+                <circle cx="24" cy="8" r="1" fill="white" fill-opacity="0.8" />
+                <circle cx="8" cy="24" r="1" fill="white" fill-opacity="0.8" />
+            </svg>
+        </div>
+        
+        <h1>MaycoleTracker</h1>
+        <div class="subtitle">by MaycoleTechnologies™</div>
+        <p class="description">
+            The world's first truly universal AI-powered inventory management system. 
+            Works for any business - restaurants, retail, manufacturing, healthcare, and more.
+        </p>
+        
+        <div class="features">
+            <h3>🚀 Revolutionary Features</h3>
+            <ul>
+                <li>Voice Control & AI Analytics</li>
+                <li>QR/Barcode Scanning</li>
+                <li>Photo Recognition</li>
+                <li>Predictive Reordering</li>
+                <li>Works Offline</li>
+                <li>Universal Business Support</li>
+            </ul>
+        </div>
+        
+        <div class="install-buttons">
+            <a href="/" class="install-btn primary-btn" onclick="installApp()">
+                📱 Install App Now
+            </a>
+            <a href="/" class="install-btn secondary-btn">
+                🌐 Try in Browser
+            </a>
+        </div>
+        
+        <div class="device-instructions">
+            <h4>📋 Installation Instructions:</h4>
+            <p>
+                <strong>iPhone:</strong> Open in Safari → Share → "Add to Home Screen"<br>
+                <strong>Android:</strong> Open in Chrome → Menu → "Install app" or "Add to Home Screen"<br>
+                <strong>Desktop:</strong> Install notification will appear in your browser
+            </p>
+        </div>
+        
+        <div class="company-badge">
+            Enterprise-Grade Inventory Management<br>
+            Trusted by businesses worldwide<br>
+            <strong>Contact:</strong> (213) 312-7814 • sales@maycoletechnologies.com
+        </div>
+    </div>
+    
+    <script>
+        function installApp() {
+            // Redirect to main app where PWA install will be triggered
+            window.location.href = '/';
+        }
+        
+        // Auto-detect and redirect to main app after a moment
+        setTimeout(() => {
+            document.querySelector('.primary-btn').style.background = 'linear-gradient(135deg, #7c3aed 0%, #030213 100%)';
+        }, 2000);
+    </script>
+</body>
+</html>

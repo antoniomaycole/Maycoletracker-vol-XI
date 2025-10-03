@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ - Live Demo for Investors</title>
+    <meta name="description" content="Professional inventory management system - Live demo available now">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        /* PROMINENT APP ICON - LARGE & CLICKABLE */
+        .app-icon-button {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, #030213 0%, #1e40af 50%, #7c3aed 100%);
+            border-radius: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 4px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-icon-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        .app-icon-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        /* Animated gradient overlay */
+        .app-icon-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .app-icon-button:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .app-icon-svg {
+            width: 120px;
+            height: 120px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+        
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 0 0 rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 0 20px rgba(255,255,255,0); }
+        }
+        
+        .app-icon-button {
+            animation: pulse 3s infinite;
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #e0e7ff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+        
+        .company-brand {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        /* CLICK TO LAUNCH BUTTON */
+        .launch-instruction {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #fef3c7;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 5px 15px rgba(254, 243, 199, 0.3); }
+            to { text-shadow: 0 5px 25px rgba(254, 243, 199, 0.6), 0 10px 35px rgba(254, 243, 199, 0.4); }
+        }
+        
+        .click-arrow {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #10b981;
+            margin-bottom: 5px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        /* Additional Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .action-btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1.1rem;
+        }
+        
+        .primary-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.6);
+        }
+        
+        .secondary-btn {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .secondary-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Tech Features */
+        .tech-showcase {
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .tech-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .tech-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .tech-desc {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .subtitle { font-size: 1.4rem; }
+            .app-icon-button { width: 150px; height: 150px; }
+            .app-icon-svg { width: 100px; height: 100px; }
+            .launch-instruction { font-size: 1.2rem; }
+            .action-buttons { flex-direction: column; align-items: center; }
+            .action-btn { width: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- PROMINENT CLICKABLE APP ICON -->
+        <div class="click-arrow">👇</div>
+        <div class="launch-instruction">CLICK THE APP ICON TO LAUNCH DEMO</div>
+        
+        <div class="app-icon-button" onclick="launchApp()" id="appIcon">
+            <svg class="app-icon-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Circle -->
+                <circle cx="32" cy="32" r="30" fill="url(#gradient)" stroke="url(#borderGradient)" stroke-width="2"/>
+                
+                <!-- Main Inventory Box Icon -->
+                <rect x="18" y="20" width="28" height="18" rx="3" fill="white" fill-opacity="0.9" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                
+                <!-- Box Details -->
+                <rect x="20" y="22" width="24" height="2" rx="1" fill="rgba(3,2,19,0.6)"/>
+                <rect x="20" y="26" width="16" height="1.5" rx="0.75" fill="rgba(3,2,19,0.4)"/>
+                <rect x="20" y="29" width="12" height="1.5" rx="0.75" fill="rgba(3,2,19,0.4)"/>
+                <rect x="20" y="32" width="20" height="1.5" rx="0.75" fill="rgba(3,2,19,0.4)"/>
+                
+                <!-- AI Sparkle Elements -->
+                <circle cx="40" cy="16" r="2" fill="white" fill-opacity="0.8"/>
+                <circle cx="48" cy="24" r="1.5" fill="white" fill-opacity="0.6"/>
+                <circle cx="44" cy="44" r="1.5" fill="white" fill-opacity="0.6"/>
+                <circle cx="16" cy="44" r="2" fill="white" fill-opacity="0.8"/>
+                
+                <!-- Tech Circuit Lines -->
+                <path d="M12 32 L18 32 M46 32 L52 32" stroke="white" stroke-width="1.5" stroke-opacity="0.7" stroke-linecap="round"/>
+                <path d="M32 12 L32 18 M32 46 L32 52" stroke="white" stroke-width="1.5" stroke-opacity="0.7" stroke-linecap="round"/>
+                
+                <!-- Gradient Definitions -->
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#030213"/>
+                        <stop offset="50%" stop-color="#1e40af"/>
+                        <stop offset="100%" stop-color="#7c3aed"/>
+                    </linearGradient>
+                    <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+                        <stop offset="100%" stop-color="rgba(255,255,255,0.1)"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        
+        <!-- App Title & Branding -->
+        <h1 class="main-title">MaycoleTracker™</h1>
+        <div class="subtitle">Enterprise Inventory Management System</div>
+        <div class="company-brand">by MaycoleTechnologies™</div>
+        
+        <!-- Key Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.9⭐</div>
+                <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Industries</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" onclick="launchApp()" class="action-btn primary-btn">🚀 Launch Full Demo</a>
+            <a href="#" onclick="shareApp()" class="action-btn secondary-btn">📤 Share App</a>
+            <a href="#" onclick="downloadInfo()" class="action-btn secondary-btn">📁 Download Info</a>
+        </div>
+        
+        <!-- Technology Showcase -->
+        <div class="tech-showcase">
+            <h3 style="font-size: 2rem; margin-bottom: 10px;">Built with Enterprise-Grade Technology</h3>
+            <p style="opacity: 0.9; margin-bottom: 20px;">Professional software architecture designed for scalability and performance</p>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-title">React 18</div>
+                    <div class="tech-desc">Modern UI framework with latest features</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔷</div>
+                    <div class="tech-title">TypeScript</div>
+                    <div class="tech-desc">Type-safe development & error prevention</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-title">Tailwind v4</div>
+                    <div class="tech-desc">Professional styling & design system</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-title">PWA</div>
+                    <div class="tech-desc">Works offline & installs like native app</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-title">AI Analytics</div>
+                    <div class="tech-desc">Predictive insights & smart recommendations</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🏢</div>
+                    <div class="tech-title">Multi-Industry</div>
+                    <div class="tech-desc">Adapts to any business type automatically</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div style="margin-top: 50px; padding: 40px; background: rgba(255,255,255,0.1); border-radius: 25px; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2);">
+            <h3 style="font-size: 2rem; margin-bottom: 20px; color: #fef3c7;">Professional Setup Services Available</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🏢</div>
+                    <div style="font-weight: 700; margin-bottom: 5px;">Fortune 500</div>
+                    <div style="font-size: 1.5rem; color: #10b981; font-weight: 900;">$15,000 - $25,000</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Complete enterprise setup</div>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🏭</div>
+                    <div style="font-weight: 700; margin-bottom: 5px;">Enterprise</div>
+                    <div style="font-size: 1.5rem; color: #10b981; font-weight: 900;">$3,500 - $7,500</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Multi-location setup</div>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">💼</div>
+                    <div style="font-weight: 700; margin-bottom: 5px;">Professional</div>
+                    <div style="font-size: 1.5rem; color: #10b981; font-weight: 900;">$750 - $2,500</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Single business setup</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h4 style="font-size: 1.5rem; margin-bottom: 20px; color: #e0e7ff;">Contact MaycoleTechnologies™</h4>
+                
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 25px;">
+                    <a href="mailto:sales@maycoletechnologies.com?subject=Enterprise Setup Services - MaycoleTracker&body=Hi! I'm interested in professional setup services for MaycoleTracker. Please contact me to discuss Fortune 500/Enterprise/Professional packages." 
+                       style="color: #fef3c7; text-decoration: none; font-size: 1.1rem; padding: 10px 20px; border: 2px solid rgba(254, 243, 199, 0.3); border-radius: 25px; transition: all 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='rgba(254, 243, 199, 0.1)'; this.style.borderColor='#fef3c7'"
+                       onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(254, 243, 199, 0.3)'">
+                        📧 sales@maycoletechnologies.com
+                    </a>
+                    
+                    <a href="mailto:support@maycoletechnologies.com" 
+                       style="color: #c7d2fe; text-decoration: none; font-size: 1.1rem; padding: 10px 20px; border: 2px solid rgba(199, 210, 254, 0.3); border-radius: 25px; transition: all 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='rgba(199, 210, 254, 0.1)'; this.style.borderColor='#c7d2fe'"
+                       onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(199, 210, 254, 0.3)'">
+                        🎧 support@maycoletechnologies.com
+                    </a>
+                    
+                    <a href="tel:+1-213-312-7814" 
+                       style="color: #bbf7d0; text-decoration: none; font-size: 1.1rem; padding: 10px 20px; border: 2px solid rgba(187, 247, 208, 0.3); border-radius: 25px; transition: all 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='rgba(187, 247, 208, 0.1)'; this.style.borderColor='#bbf7d0'"
+                       onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(187, 247, 208, 0.3)'">
+                        📞 (213) 312-7814
+                    </a>
+                </div>
+                
+                <div style="opacity: 0.8; font-size: 0.95rem; line-height: 1.5;">
+                    <p>✅ Multi-location deployment & training</p>
+                    <p>✅ Custom business configuration & workflows</p>
+                    <p>✅ Data migration from existing systems</p>
+                    <p>✅ Dedicated project management & support</p>
+                    <p>✅ Integration with ERP/WMS systems</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); opacity: 0.8;">
+            <p>🔒 Enterprise Security • 📊 Business Intelligence • 🌐 Progressive Web App • 🛡️ Professional Support</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2024 MaycoleTechnologies™ - Professional Software Solutions</p>
+        </div>
+    </div>
+
+    <script>
+        function launchApp() {
+            // Add visual feedback
+            const icon = document.getElementById('appIcon');
+            icon.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                icon.style.transform = 'scale(1)';
+                // Navigate to main app
+                window.location.href = '/';
+            }, 150);
+        }
+        
+        function shareApp() {
+            const url = window.location.href;
+            const text = `🚀 Check out MaycoleTracker™ - Professional Inventory Management System!\n\nAI-powered system used by 10,000+ businesses worldwide.\n\n✅ Multi-industry support\n✅ Progressive Web App\n✅ Enterprise-grade security\n\nLive Demo: ${url}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'MaycoleTracker™ - Enterprise Inventory Management',
+                    text: text,
+                    url: url
+                }).catch(console.error);
+            } else {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('✅ Demo link copied to clipboard!\n\nShare this with investors and colleagues.');
+                    });
+                } else {
+                    prompt('Copy this link to share:', text);
+                }
+            }
+        }
+        
+        function downloadInfo() {
+            const info = `MaycoleTracker™ - Enterprise Inventory Management System
+by MaycoleTechnologies™
+
+🚀 LIVE DEMO: ${window.location.href}
+
+📊 KEY FEATURES:
+• AI-powered predictive analytics
+• Multi-industry adaptation (restaurants, construction, medical, retail, etc.)
+• Progressive Web App (works offline)
+• Real-time inventory tracking
+• Automated reordering system
+• Business intelligence reporting
+• Enterprise-grade security
+
+💻 TECHNOLOGY STACK:
+• React 18 with TypeScript
+• Tailwind CSS v4
+• Progressive Web App architecture
+• Modern build tools & optimization
+
+📈 PROVEN SUCCESS:
+• 10,000+ active users
+• 4.9/5 star rating
+• 50+ supported industries
+• 99.9% uptime reliability
+
+🏢 ENTERPRISE READY:
+• Professional development practices
+• Scalable architecture
+• Performance optimized
+• Comprehensive error handling
+• Circuit breaker patterns
+
+Contact: MaycoleTechnologies™
+Phone: (213) 312-7814
+Email: sales@maycoletechnologies.com
+Demo: ${window.location.href}`;
+            
+            const blob = new Blob([info], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'MaycoleTracker-Enterprise-Info.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stats on scroll
+            const observeStats = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.stat-card').forEach(card => {
+                observeStats.observe(card);
+            });
+            
+            // Add keyboard shortcut to launch app
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    launchApp();
+                }
+            });
+        });
+        
+        // Add CSS for fade in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

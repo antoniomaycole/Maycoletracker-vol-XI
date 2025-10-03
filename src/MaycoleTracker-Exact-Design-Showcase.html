@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Volume XI - Exact Design Showcase</title>
+    <meta name="description" content="Experience the exact design and interface of MaycoleTracker™ Inventory Management System Volume XI - Enterprise Edition">
+    
+    <!-- Exact Tailwind CSS and Custom Styles from MaycoleTracker -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Exact CSS from MaycoleTracker globals.css */
+        @custom-variant dark (&:is(.dark *));
+
+        :root {
+            --font-size: 16px;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --background: #f8f9fa;
+            --foreground: oklch(0.145 0 0);
+            --card: #ffffff;
+            --card-foreground: oklch(0.145 0 0);
+            --primary: #030213;
+            --secondary: oklch(0.95 0.0058 264.53);
+            --muted: #f1f3f4;
+            --muted-foreground: #717182;
+            --accent: #f1f3f4;
+            --border: rgba(0, 0, 0, 0.08);
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-pink: #ec4899;
+            --radius: 0.625rem;
+        }
+
+        .dark {
+            --background: #1a1a1a;
+            --foreground: oklch(0.985 0 0);
+            --card: #242424;
+            --muted: #2a2a2a;
+            --border: oklch(0.269 0 0);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f5f9 100%);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(34, 197, 94, 0.02) 0%, transparent 40%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .dark body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #1e1e2e 100%);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(34, 197, 94, 0.03) 0%, transparent 40%);
+        }
+
+        /* Enhanced card shadows for floating effect */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                0 1px 2px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.03);
+            transform: translateY(-2px);
+        }
+
+        /* Professional primary button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            border: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #5b21b6 100%);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Launch Button Circle */
+        .launch-button-circle {
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(59, 130, 246, 0.05) 80%, transparent 100%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 8px 32px rgba(59, 130, 246, 0.15),
+                0 4px 16px rgba(168, 85, 247, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .launch-button-circle:hover {
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.15) 0%, rgba(168, 85, 247, 0.12) 40%, rgba(59, 130, 246, 0.08) 80%, transparent 100%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+            box-shadow: 
+                0 12px 48px rgba(59, 130, 246, 0.25),
+                0 6px 24px rgba(168, 85, 247, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Pro Badge Styles */
+        .pro-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-radius: 9999px;
+            box-shadow: 
+                0 4px 14px rgba(245, 158, 11, 0.25),
+                0 2px 6px rgba(245, 158, 11, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pro-badge-premium {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            box-shadow: 
+                0 4px 14px rgba(139, 92, 246, 0.25),
+                0 2px 6px rgba(139, 92, 246, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .pro-badge-enterprise {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            box-shadow: 
+                0 4px 14px rgba(239, 68, 68, 0.25),
+                0 2px 6px rgba(239, 68, 68, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-shift 4s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Tab Styles */
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--muted-foreground);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button:hover {
+            background: var(--accent);
+            color: var(--foreground);
+        }
+
+        .tab-button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+            
+            .mobile-col {
+                flex-direction: column;
+            }
+            
+            .mobile-full {
+                width: 100%;
+            }
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Feature Icons */
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .interactive-element:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-online {
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+        }
+
+        .status-offline {
+            background: #ef4444;
+        }
+
+        .status-premium {
+            background: #f59e0b;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+        <span id="dark-mode-icon">🌙</span>
+    </button>
+
+    <!-- Main Container -->
+    <div id="app-container">
+        <!-- Launcher Screen -->
+        <div id="launcher-screen" class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+            <!-- Background Effects -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/5 to-pink-600/10"></div>
+            
+            <div class="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
+                <!-- Logo and Title -->
+                <div class="text-center mb-12 animate-fade-in-up">
+                    <div class="flex items-center justify-center mb-6">
+                        <!-- MaycoleTracker™ Icon -->
+                        <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-float">
+                            <!-- Rich Blue Background Circle -->
+                            <circle cx="50" cy="50" r="49" fill="#1e40af" stroke="none"/>
+                            
+                            <!-- Logo-style Cross Pattern -->
+                            <rect x="20" y="46" width="60" height="8" rx="4" fill="#ffffff" opacity="0.98"/>
+                            <rect x="46" y="20" width="8" height="60" rx="4" fill="#ffffff" opacity="0.98"/>
+                            
+                            <!-- Sporadic White Dots -->
+                            <circle cx="35" cy="14" r="4" fill="#ffffff" opacity="0.95"/>
+                            <circle cx="65" cy="18" r="3.5" fill="#ffffff" opacity="0.9"/>
+                            <circle cx="14" cy="38" r="3.5" fill="#ffffff" opacity="0.92"/>
+                            <circle cx="86" cy="62" r="4" fill="#ffffff" opacity="0.95"/>
+                            <circle cx="35" cy="86" r="3.5" fill="#ffffff" opacity="0.9"/>
+                            <circle cx="65" cy="82" r="3" fill="#ffffff" opacity="0.88"/>
+                            
+                            <!-- WILD Document Box - MASSIVE! -->
+                            <rect x="35" y="32" width="30" height="36" rx="3" fill="#ffffff" opacity="0.98" stroke="rgba(30, 64, 175, 0.3)" stroke-width="0.5"/>
+                            <line x1="38" y1="38" x2="62" y2="38" stroke="#1e40af" stroke-width="1.5" opacity="0.9"/>
+                            <line x1="38" y1="43" x2="58" y2="43" stroke="#1e40af" stroke-width="1.5" opacity="0.85"/>
+                            <line x1="38" y1="48" x2="61" y2="48" stroke="#1e40af" stroke-width="1.5" opacity="0.9"/>
+                            <line x1="38" y1="53" x2="56" y2="53" stroke="#1e40af" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="38" y1="58" x2="60" y2="58" stroke="#1e40af" stroke-width="1.5" opacity="0.85"/>
+                            <line x1="38" y1="63" x2="59" y2="63" stroke="#1e40af" stroke-width="1.5" opacity="0.8"/>
+                            
+                            <!-- Premium Highlight -->
+                            <ellipse cx="35" cy="30" rx="15" ry="10" fill="rgba(30, 64, 175, 0.2)" transform="rotate(-25 35 30)" opacity="0.9"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4">
+                        MaycoleTracker™
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-2">
+                        Inventory Management System
+                    </p>
+                    <p class="text-lg text-gray-400 mb-4">
+                        Volume XI - Enterprise Edition
+                    </p>
+                    
+                    <div class="pro-badge pro-badge-enterprise animate-pulse">
+                        <span>🔥</span> Production Ready
+                    </div>
+                </div>
+
+                <!-- Launch Button -->
+                <div class="launch-button-circle w-32 h-32 flex items-center justify-center mb-12" onclick="launchApp()">
+                    <div class="text-center">
+                        <div class="text-2xl mb-1">🚀</div>
+                        <div class="text-sm font-semibold text-white">Launch App</div>
+                    </div>
+                </div>
+
+                <!-- Feature Badges -->
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="pro-badge">
+                        <span>🏭</span> Multi-Industry
+                    </div>
+                    <div class="pro-badge pro-badge-premium">
+                        <span>🎤</span> Voice Control
+                    </div>
+                    <div class="pro-badge">
+                        <span>📱</span> Barcode Scanning
+                    </div>
+                    <div class="pro-badge pro-badge-premium">
+                        <span>📊</span> Analytics
+                    </div>
+                    <div class="pro-badge pro-badge-enterprise">
+                        <span>🚨</span> Emergency Mode
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white/80 text-sm">
+                    <div>
+                        <div class="text-2xl font-bold text-blue-400">139+</div>
+                        <div>Components</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-green-400">8</div>
+                        <div>Industries</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-purple-400">11</div>
+                        <div>Premium Features</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-orange-400">PWA</div>
+                        <div>Ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Interface -->
+        <div id="main-app" class="hidden min-h-screen bg-background">
+            <!-- Header -->
+            <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
+                <div class="max-w-7xl mx-auto px-4 py-4">
+                    <div class="flex items-center justify-between">
+                        <!-- Logo and Back Button -->
+                        <div class="flex items-center gap-4">
+                            <button onclick="goBack()" class="interactive-element p-2 hover:bg-gray-100 rounded-lg">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            
+                            <div class="flex items-center gap-3">
+                                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shadow-lg rounded-lg">
+                                    <circle cx="50" cy="50" r="49" fill="#1e40af"/>
+                                    <rect x="20" y="46" width="60" height="8" rx="4" fill="#ffffff" opacity="0.98"/>
+                                    <rect x="46" y="20" width="8" height="60" rx="4" fill="#ffffff" opacity="0.98"/>
+                                    <rect x="35" y="32" width="30" height="36" rx="3" fill="#ffffff" opacity="0.98"/>
+                                    <line x1="38" y1="38" x2="62" y2="38" stroke="#1e40af" stroke-width="1.5"/>
+                                    <line x1="38" y1="43" x2="58" y2="43" stroke="#1e40af" stroke-width="1.5"/>
+                                    <line x1="38" y1="48" x2="61" y2="48" stroke="#1e40af" stroke-width="1.5"/>
+                                    <line x1="38" y1="53" x2="56" y2="53" stroke="#1e40af" stroke-width="1.5"/>
+                                    <line x1="38" y1="58" x2="60" y2="58" stroke="#1e40af" stroke-width="1.5"/>
+                                    <line x1="38" y1="63" x2="59" y2="63" stroke="#1e40af" stroke-width="1.5"/>
+                                </svg>
+                                
+                                <div>
+                                    <h1 class="text-xl font-bold gradient-text">MaycoleTracker™</h1>
+                                    <p class="text-sm text-gray-600">Restaurant Operations</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Breadcrumb -->
+                        <div class="hidden md:block">
+                            <nav class="flex items-center space-x-2 text-sm text-gray-600">
+                                <span>Home</span>
+                                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                                <span class="text-blue-600 font-medium">Dashboard</span>
+                            </nav>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex items-center gap-2">
+                            <!-- Voice Control -->
+                            <button class="interactive-element p-2 border border-gray-300 rounded-lg hover:bg-gray-50" onclick="toggleVoice()" title="Voice Control">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                    <line x1="12" y1="19" x2="12" y2="23"/>
+                                    <line x1="8" y1="23" x2="16" y2="23"/>
+                                </svg>
+                            </button>
+
+                            <!-- Scanner -->
+                            <button class="interactive-element p-2 border border-gray-300 rounded-lg hover:bg-gray-50" onclick="toggleScanner()" title="Barcode Scanner">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h1M21 7v4a1 1 0 01-1 1h-1M10 12h4M7 16h10M3 17v-4a1 1 0 011-1h1M21 17v-4a1 1 0 00-1-1h-1"/>
+                                </svg>
+                            </button>
+
+                            <!-- Emergency Mode -->
+                            <button class="interactive-element p-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50" onclick="toggleEmergency()" title="Emergency Mode">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16v2h2v-2h-2zm0-6v4h2v-4h-2z"/>
+                                </svg>
+                            </button>
+
+                            <!-- User Status -->
+                            <div class="pro-badge pro-badge-premium">
+                                <span>👑</span> Professional
+                            </div>
+
+                            <!-- Mobile Menu -->
+                            <button class="interactive-element p-2 border border-gray-300 rounded-lg hover:bg-gray-50 md:hidden" onclick="toggleMobileMenu()">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="max-w-7xl mx-auto p-4">
+                <!-- Navigation Tabs -->
+                <div class="mb-6">
+                    <div class="hidden md:flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                        <button class="tab-button active" onclick="switchTab('dashboard')">
+                            <svg class="feature-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                            Dashboard
+                        </button>
+                        <button class="tab-button" onclick="switchTab('analytics')">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                            Analytics
+                            <span class="pro-badge pro-badge-premium" style="transform: scale(0.7); margin-left: 4px;">PRO</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab('reports')">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Reports
+                        </button>
+                        <button class="tab-button" onclick="switchTab('suppliers')">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M10.5 3L12 2l1.5 1L15 2l1.5 1L18 2v4.5l-1.5 1L15 6.5 13.5 8 12 6.5 10.5 8 9 6.5 7.5 8 6 6.5 4.5 8 3 6.5V2l1.5 1L6 2l1.5 1L9 2l1.5 1z"/>
+                            </svg>
+                            Suppliers
+                        </button>
+                        <button class="tab-button" onclick="switchTab('settings')">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Settings
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="tab-content">
+                    <!-- Dashboard Tab -->
+                    <div id="dashboard-content" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Quick Stats Cards -->
+                            <div class="card p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 mb-1">Total Items</p>
+                                        <p class="text-2xl font-bold text-gray-900">1,247</p>
+                                        <p class="text-xs text-green-600">+12% from last month</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        📦
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 mb-1">Low Stock</p>
+                                        <p class="text-2xl font-bold text-orange-600">23</p>
+                                        <p class="text-xs text-orange-600">Needs attention</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                                        ⚠️
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 mb-1">Total Value</p>
+                                        <p class="text-2xl font-bold text-green-600">$89,432</p>
+                                        <p class="text-xs text-green-600">+8% from last month</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        💰
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 mb-1">Categories</p>
+                                        <p class="text-2xl font-bold text-purple-600">8</p>
+                                        <p class="text-xs text-gray-600">Active categories</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                        🏷️
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="card p-6">
+                            <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                                    <div class="status-indicator status-online"></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">New item added: Premium Coffee Beans</p>
+                                        <p class="text-sm text-gray-600">2 minutes ago</p>
+                                    </div>
+                                    <div class="pro-badge" style="transform: scale(0.8);">+50 units</div>
+                                </div>
+
+                                <div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                                    <div class="status-indicator status-premium"></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">Low stock alert: Olive Oil</p>
+                                        <p class="text-sm text-gray-600">15 minutes ago</p>
+                                    </div>
+                                    <div class="pro-badge pro-badge-premium" style="transform: scale(0.8);">⚠️ Alert</div>
+                                </div>
+
+                                <div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                                    <div class="status-indicator status-online"></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">Supplier delivery: Fresh Produce Co.</p>
+                                        <p class="text-sm text-gray-600">1 hour ago</p>
+                                    </div>
+                                    <div class="pro-badge pro-badge-premium" style="transform: scale(0.8);">✅ Received</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Tab -->
+                    <div id="analytics-content" class="tab-content hidden">
+                        <div class="card p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Inventory Analytics</h3>
+                                <div class="pro-badge pro-badge-premium">
+                                    <span>👑</span> Premium Feature
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-8 text-center">
+                                <div class="mb-4">
+                                    <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="mx-auto text-blue-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-xl font-bold mb-2">Advanced Analytics Dashboard</h4>
+                                <p class="text-gray-600 mb-4">Gain deep insights into your inventory performance with our premium analytics suite.</p>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <div class="text-lg font-bold text-blue-600">Real-time</div>
+                                        <div>Stock Levels</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <div class="text-lg font-bold text-green-600">Predictive</div>
+                                        <div>Analytics</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <div class="text-lg font-bold text-purple-600">Trend</div>
+                                        <div>Analysis</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <div class="text-lg font-bold text-orange-600">Cost</div>
+                                        <div>Optimization</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reports Tab -->
+                    <div id="reports-content" class="tab-content hidden">
+                        <div class="card p-6">
+                            <h3 class="text-lg font-semibold mb-4">Inventory Reports</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 cursor-pointer interactive-element">
+                                    <h4 class="font-semibold mb-2">📊 Inventory Summary</h4>
+                                    <p class="text-sm text-gray-600">Complete overview of all inventory items</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 cursor-pointer interactive-element">
+                                    <h4 class="font-semibold mb-2">📉 Low Stock Report</h4>
+                                    <p class="text-sm text-gray-600">Items requiring immediate attention</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 cursor-pointer interactive-element">
+                                    <h4 class="font-semibold mb-2">💰 Valuation Report</h4>
+                                    <p class="text-sm text-gray-600">Financial summary of inventory value</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 cursor-pointer interactive-element">
+                                    <h4 class="font-semibold mb-2">📈 Usage Trends</h4>
+                                    <p class="text-sm text-gray-600">Historical usage patterns and predictions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suppliers Tab -->
+                    <div id="suppliers-content" class="tab-content hidden">
+                        <div class="card p-6">
+                            <h3 class="text-lg font-semibold mb-4">Supplier Management</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">🏢</div>
+                                        <div>
+                                            <h4 class="font-semibold">Fresh Produce Co.</h4>
+                                            <p class="text-sm text-gray-600">Fruits & Vegetables • Active since 2023</p>
+                                        </div>
+                                    </div>
+                                    <div class="status-indicator status-online"></div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">🥫</div>
+                                        <div>
+                                            <h4 class="font-semibold">Quality Foods Ltd.</h4>
+                                            <p class="text-sm text-gray-600">Dry Goods • Active since 2022</p>
+                                        </div>
+                                    </div>
+                                    <div class="status-indicator status-online"></div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">🍖</div>
+                                        <div>
+                                            <h4 class="font-semibold">Premium Meats Inc.</h4>
+                                            <p class="text-sm text-gray-600">Meat & Poultry • Active since 2023</p>
+                                        </div>
+                                    </div>
+                                    <div class="status-indicator status-premium"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="settings-content" class="tab-content hidden">
+                        <div class="card p-6">
+                            <h3 class="text-lg font-semibold mb-4">System Settings</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="font-medium mb-2">Industry Configuration</h4>
+                                    <div class="flex items-center gap-2">
+                                        <span class="pro-badge">🍽️ Restaurant Operations</span>
+                                        <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Change Industry</button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-medium mb-2">Subscription Status</h4>
+                                    <div class="flex items-center gap-2">
+                                        <span class="pro-badge pro-badge-premium">👑 Professional Plan</span>
+                                        <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Upgrade to Enterprise</button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-medium mb-2">Premium Features</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="status-indicator status-online"></div>
+                                            <span>Advanced Analytics</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <div class="status-indicator status-online"></div>
+                                            <span>Voice Control</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <div class="status-indicator status-online"></div>
+                                            <span>Barcode Scanning</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <div class="status-indicator status-premium"></div>
+                                            <span>Emergency Mode</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Bottom Navigation (Mobile) -->
+            <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-30">
+                <div class="grid grid-cols-5 gap-1 p-2">
+                    <button class="tab-button mobile-tab active" onclick="switchTab('dashboard')">
+                        <svg class="feature-icon mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                        </svg>
+                        <span class="text-xs">Dashboard</span>
+                    </button>
+                    <button class="tab-button mobile-tab" onclick="switchTab('analytics')">
+                        <svg class="feature-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        <span class="text-xs">Analytics</span>
+                    </button>
+                    <button class="tab-button mobile-tab" onclick="switchTab('reports')">
+                        <svg class="feature-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span class="text-xs">Reports</span>
+                    </button>
+                    <button class="tab-button mobile-tab" onclick="switchTab('suppliers')">
+                        <svg class="feature-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M10.5 3L12 2l1.5 1L15 2l1.5 1L18 2v4.5l-1.5 1L15 6.5 13.5 8 12 6.5 10.5 8 9 6.5 7.5 8 6 6.5 4.5 8 3 6.5V2l1.5 1L6 2l1.5 1L9 2l1.5 1z"/>
+                        </svg>
+                        <span class="text-xs">Suppliers</span>
+                    </button>
+                    <button class="tab-button mobile-tab" onclick="switchTab('settings')">
+                        <svg class="feature-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span class="text-xs">Settings</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // State Management
+        let currentTab = 'dashboard';
+        let isVoiceActive = false;
+        let isScannerActive = false;
+        let isEmergencyMode = false;
+        let isDarkMode = false;
+
+        // Initialize App
+        function initializeApp() {
+            // Set initial state
+            updateActiveTab();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', handleKeyboardShortcuts);
+            
+            console.log('🚀 MaycoleTracker™ Volume XI Initialized');
+        }
+
+        // Launch App
+        function launchApp() {
+            document.getElementById('launcher-screen').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+            
+            // Simulate loading
+            setTimeout(() => {
+                showNotification('Welcome to MaycoleTracker™ Volume XI!', 'success');
+            }, 500);
+        }
+
+        // Go Back to Launcher
+        function goBack() {
+            document.getElementById('main-app').classList.add('hidden');
+            document.getElementById('launcher-screen').classList.remove('hidden');
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            
+            // Update tab buttons
+            updateActiveTab();
+            
+            // Show notification for premium features
+            if (tabName === 'analytics') {
+                showNotification('Premium Feature: Upgrade to access advanced analytics', 'info');
+            }
+        }
+
+        // Update Active Tab Styling
+        function updateActiveTab() {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.mobile-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Add active class to current tab
+            const activeButtons = document.querySelectorAll(`[onclick="switchTab('${currentTab}')"]`);
+            activeButtons.forEach(button => {
+                button.classList.add('active');
+            });
+        }
+
+        // Toggle Voice Control
+        function toggleVoice() {
+            isVoiceActive = !isVoiceActive;
+            
+            if (isVoiceActive) {
+                showNotification('🎤 Voice control activated', 'success');
+                // Simulate voice listening animation
+                startVoiceAnimation();
+            } else {
+                showNotification('🎤 Voice control deactivated', 'info');
+                stopVoiceAnimation();
+            }
+        }
+
+        // Toggle Scanner
+        function toggleScanner() {
+            isScannerActive = !isScannerActive;
+            
+            if (isScannerActive) {
+                showNotification('📱 Barcode scanner activated', 'success');
+                // Simulate scan result after 3 seconds
+                setTimeout(() => {
+                    showNotification('📦 Product scanned: Premium Coffee Beans', 'success');
+                    isScannerActive = false;
+                }, 3000);
+            } else {
+                showNotification('📱 Scanner deactivated', 'info');
+            }
+        }
+
+        // Toggle Emergency Mode
+        function toggleEmergency() {
+            isEmergencyMode = !isEmergencyMode;
+            
+            if (isEmergencyMode) {
+                document.body.style.filter = 'hue-rotate(0deg) contrast(1.1)';
+                showNotification('🚨 Emergency mode activated', 'warning');
+            } else {
+                document.body.style.filter = 'none';
+                showNotification('✅ Emergency mode deactivated', 'success');
+            }
+        }
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            
+            if (isDarkMode) {
+                document.body.classList.add('dark');
+                document.getElementById('dark-mode-icon').textContent = '☀️';
+                showNotification('🌙 Dark mode enabled', 'info');
+            } else {
+                document.body.classList.remove('dark');
+                document.getElementById('dark-mode-icon').textContent = '🌙';
+                showNotification('☀️ Light mode enabled', 'info');
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            // This would normally toggle a mobile menu overlay
+            showNotification('📱 Mobile menu toggled', 'info');
+        }
+
+        // Voice Animation
+        function startVoiceAnimation() {
+            const voiceButton = document.querySelector('[onclick="toggleVoice()"]');
+            voiceButton.style.animation = 'pulse 1s infinite';
+            voiceButton.style.backgroundColor = '#10b981';
+            voiceButton.style.color = 'white';
+        }
+
+        function stopVoiceAnimation() {
+            const voiceButton = document.querySelector('[onclick="toggleVoice()"]');
+            voiceButton.style.animation = '';
+            voiceButton.style.backgroundColor = '';
+            voiceButton.style.color = '';
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm transition-all duration-300 transform translate-x-full`;
+            
+            // Set notification style based on type
+            const styles = {
+                success: 'bg-green-500 text-white',
+                warning: 'bg-orange-500 text-white',
+                error: 'bg-red-500 text-white',
+                info: 'bg-blue-500 text-white'
+            };
+            
+            notification.className += ` ${styles[type] || styles.info}`;
+            notification.textContent = message;
+            
+            // Add to document
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Keyboard Shortcuts
+        function handleKeyboardShortcuts(event) {
+            // Ctrl/Cmd + 1-5 for tabs
+            if ((event.ctrlKey || event.metaKey)) {
+                const tabs = ['dashboard', 'analytics', 'reports', 'suppliers', 'settings'];
+                const keyNum = parseInt(event.key);
+                
+                if (keyNum >= 1 && keyNum <= 5) {
+                    event.preventDefault();
+                    switchTab(tabs[keyNum - 1]);
+                }
+            }
+            
+            // Escape to go back
+            if (event.key === 'Escape') {
+                goBack();
+            }
+            
+            // Space for voice control
+            if (event.key === ' ' && event.target.tagName !== 'INPUT') {
+                event.preventDefault();
+                toggleVoice();
+            }
+        }
+
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        // Add some dynamic content updates
+        setInterval(() => {
+            // Simulate real-time updates
+            const timeElements = document.querySelectorAll('[data-time]');
+            timeElements.forEach(element => {
+                const minutes = Math.floor(Math.random() * 60);
+                element.textContent = `${minutes} minutes ago`;
+            });
+        }, 30000);
+
+        console.log(`
+        🚀 MaycoleTracker™ Volume XI - Enterprise Edition
+        
+        ✅ Exact Design Showcase Loaded
+        📱 Progressive Web App Ready
+        🏭 Multi-Industry Configuration
+        👑 Premium Features Enabled
+        🎤 Voice Control Available
+        📷 Barcode Scanner Ready
+        📊 Advanced Analytics
+        🚨 Emergency Mode
+        
+        Keyboard Shortcuts:
+        • Ctrl/Cmd + 1-5: Switch tabs
+        • Space: Toggle voice control
+        • Escape: Go back
+        
+        Built with React, TypeScript & Tailwind CSS
+        `);
+    </script>
+</body>
+</html>

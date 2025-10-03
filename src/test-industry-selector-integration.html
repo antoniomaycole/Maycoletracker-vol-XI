@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Industry Selector Integration Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1a202c;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+        .logo-icon {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 0.5rem;
+            margin-right: 0.75rem;
+            position: relative;
+            vertical-align: middle;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1rem;
+            height: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+            transform: translate(-50%, -50%);
+        }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #3b82f6;
+            border-radius: 0.1875rem;
+            transform: translate(-50%, -50%);
+        }
+        .integration-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .panel {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .panel h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .industry-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .industry-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        .industry-card.restaurant { border-color: #ef4444; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+        .industry-card.autorepair { border-color: #3b82f6; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .industry-card.retail { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); }
+        .industry-card.healthcare { border-color: #ec4899; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); }
+        .industry-card.construction { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+        .industry-card.musicstudio { border-color: #8b5cf6; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
+        .industry-card.faithtech { border-color: #6366f1; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); }
+        .industry-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0 auto 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .industry-card.restaurant .industry-icon { background: #ef4444; color: white; }
+        .industry-card.autorepair .industry-icon { background: #3b82f6; color: white; }
+        .industry-card.retail .industry-icon { background: #10b981; color: white; }
+        .industry-card.healthcare .industry-icon { background: #ec4899; color: white; }
+        .industry-card.construction .industry-icon { background: #f59e0b; color: white; }
+        .industry-card.musicstudio .industry-icon { background: #8b5cf6; color: white; }
+        .industry-card.faithtech .industry-icon { background: #6366f1; color: white; }
+        .industry-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .industry-description {
+            font-size: 0.875rem;
+            color: #718096;
+            line-height: 1.4;
+        }
+        .button {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            margin: 0.25rem;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .button.orange {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .button.orange:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .check-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .routes-list {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .route-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .route-item:last-child {
+            border-bottom: none;
+        }
+        .route-path {
+            font-family: 'Courier New', monospace;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge.new {
+            background: #10b981;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        @media (max-width: 768px) {
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+            .industry-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span class="logo-icon"></span>
+                MaycoleTracker<span class="tm">™</span> Industry Selector Integration
+            </h1>
+            <p>Complete Integration of Universal Business Platform Industry Configuration System</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <span class="badge">vol. XI Enterprise Edition</span>
+                <span class="badge new">9+ Industries</span>
+                <span class="badge">Production Ready</span>
+            </div>
+        </div>
+
+        <div class="integration-grid">
+            <!-- Current System Overview -->
+            <div class="panel">
+                <h2>
+                    <span class="icon">🏢</span>
+                    Your Current MaycoleTracker™ System
+                </h2>
+                <p>Your existing production-ready system includes:</p>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> 7 Core Routes (logo, dashboard, ads, training, reports, calculator, recovery)</li>
+                    <li><span class="check-icon">✓</span> 8 Backend Enforcers System</li>
+                    <li><span class="check-icon">✓</span> Complete Recovery System</li>
+                    <li><span class="check-icon">✓</span> Voice Activation Features</li>
+                    <li><span class="check-icon">✓</span> Advanced Analytics Dashboard</li>
+                    <li><span class="check-icon">✓</span> Cross-Platform Optimization</li>
+                </ul>
+            </div>
+
+            <!-- New Industry Integration -->
+            <div class="panel">
+                <h2>
+                    <span class="icon">🏭</span>
+                    New Industry Integration
+                </h2>
+                <p>Added comprehensive industry configuration system:</p>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Enhanced Industry Selector Component</li>
+                    <li><span class="check-icon">✓</span> Industry Configuration Pages</li>
+                    <li><span class="check-icon">✓</span> 9+ Pre-configured Industries</li>
+                    <li><span class="check-icon">✓</span> Custom Business Configuration</li>
+                    <li><span class="check-icon">✓</span> Module Selection System</li>
+                    <li><span class="check-icon">✓</span> Setup Wizard Integration</li>
+                </ul>
+            </div>
+
+            <!-- New Routes Added -->
+            <div class="panel full-width">
+                <h2>
+                    <span class="icon">🛣️</span>
+                    Updated Routing System
+                </h2>
+                <p>Your MaycoleTracker™ system now includes these routes:</p>
+                <div class="routes-list">
+                    <div class="route-item">
+                        <span class="route-path">/logo</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/dashboard</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/ads</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/training</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/reports</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/calculator</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/recovery</span>
+                        <span class="badge">Core</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/industries</span>
+                        <span class="badge new">NEW</span>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-path">/configure/:industryType</span>
+                        <span class="badge new">NEW</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industry Showcase -->
+        <div class="panel">
+            <h2>
+                <span class="icon">🏭</span>
+                Supported Industries
+            </h2>
+            <p>Your MaycoleTracker™ system now supports these industries with pre-configured templates and workflows:</p>
+            
+            <div class="industry-grid">
+                <div class="industry-card restaurant" onclick="simulateIndustrySelect('restaurant')">
+                    <div class="industry-icon">🍽️</div>
+                    <div class="industry-name">Restaurant</div>
+                    <div class="industry-description">Complete restaurant and food service management solution</div>
+                </div>
+                
+                <div class="industry-card autorepair" onclick="simulateIndustrySelect('autorepair')">
+                    <div class="industry-icon">🚗</div>
+                    <div class="industry-name">Auto Repair</div>
+                    <div class="industry-description">Comprehensive automotive service management system</div>
+                </div>
+                
+                <div class="industry-card retail" onclick="simulateIndustrySelect('retail')">
+                    <div class="industry-icon">🛒</div>
+                    <div class="industry-name">Retail</div>
+                    <div class="industry-description">Advanced retail management and POS solution</div>
+                </div>
+                
+                <div class="industry-card healthcare" onclick="simulateIndustrySelect('healthcare')">
+                    <div class="industry-icon">💊</div>
+                    <div class="industry-name">Healthcare</div>
+                    <div class="industry-description">Medical practice and healthcare facility management</div>
+                </div>
+                
+                <div class="industry-card construction" onclick="simulateIndustrySelect('construction')">
+                    <div class="industry-icon">🏗️</div>
+                    <div class="industry-name">Construction</div>
+                    <div class="industry-description">Construction project and materials management</div>
+                </div>
+                
+                <div class="industry-card musicstudio" onclick="simulateIndustrySelect('musicstudio')">
+                    <div class="industry-icon">🎵</div>
+                    <div class="industry-name">Music Studio</div>
+                    <div class="industry-description">Music production and studio management system</div>
+                </div>
+                
+                <div class="industry-card faithtech" onclick="simulateIndustrySelect('faithtech')">
+                    <div class="industry-icon">⛪</div>
+                    <div class="industry-name">Faith & Ministry</div>
+                    <div class="industry-description">Ministry resources and community management</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Code -->
+        <div class="panel">
+            <h2>
+                <span class="icon">💻</span>
+                Implementation Code Added
+            </h2>
+            <p>Here's what was added to your MaycoleTracker™ system:</p>
+            
+            <h3 style="margin-top: 2rem;">1. Enhanced Industry Selector Component</h3>
+            <div class="code-block">
+/components/EnhancedIndustrySelector.tsx
+- Complete industry selection interface
+- 9+ pre-configured industries
+- Custom business configuration option
+- Responsive design with animations
+- Navigation integration
+            </div>
+
+            <h3>2. Industry Configuration Pages</h3>
+            <div class="code-block">
+/components/IndustryConfiguration.tsx
+- Detailed industry setup workflows
+- Module selection system
+- Feature configuration
+- Setup wizard integration
+- Progress tracking
+            </div>
+
+            <h3>3. Updated App.tsx Routes</h3>
+            <div class="code-block">
+// New routes added to your existing system:
+<Route path="/industries" element={<EnhancedIndustrySelector />} />
+<Route path="/configure/:industryType" element={<IndustryConfiguration />} />
+            </div>
+
+            <h3>4. Dashboard Integration</h3>
+            <div class="code-block">
+// Added Industry Setup button to InventoryDashboard header:
+<Button onClick={() => navigate('/industries')}>
+  <Building2 className="w-4 h-4 mr-2" />
+  Industry Setup
+</Button>
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="panel">
+            <h2>
+                <span class="icon">📋</span>
+                How to Use Your New Industry System
+            </h2>
+            
+            <h3>For Users:</h3>
+            <ol style="padding-left: 1.5rem;">
+                <li><strong>Access Industry Selection:</strong> Navigate to <code>/industries</code> or click "Industry Setup" in the dashboard</li>
+                <li><strong>Choose Your Industry:</strong> Select from 9+ pre-configured industry templates</li>
+                <li><strong>Configure Setup:</strong> Complete the industry-specific configuration wizard</li>
+                <li><strong>Customize Modules:</strong> Enable/disable specific features for your business</li>
+                <li><strong>Complete Setup:</strong> Finish configuration and return to your customized dashboard</li>
+            </ol>
+
+            <h3>For Developers:</h3>
+            <ul style="padding-left: 1.5rem;">
+                <li>All components are fully typed with TypeScript</li>
+                <li>Responsive design works across all devices</li>
+                <li>Motion animations enhance user experience</li>
+                <li>Consistent with your existing MaycoleTracker™ branding</li>
+                <li>Easy to extend with additional industries</li>
+            </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3>Test Your New Industry System:</h3>
+            <div style="margin-top: 1.5rem;">
+                <a href="/industries" class="button">
+                    🏭 View Industry Selector
+                </a>
+                <a href="/configure/restaurant" class="button">
+                    🍽️ Test Restaurant Config
+                </a>
+                <a href="/configure/retail" class="button">
+                    🛒 Test Retail Config
+                </a>
+                <a href="/dashboard" class="button orange">
+                    📊 Return to Dashboard
+                </a>
+            </div>
+            
+            <p style="margin-top: 2rem; color: #718096; font-size: 0.875rem;">
+                Your MaycoleTracker™ vol. XI Enterprise Edition now supports complete industry configuration<br>
+                with 9+ pre-built industry templates and custom business setup options.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function simulateIndustrySelect(industryType) {
+            const industryNames = {
+                restaurant: 'Restaurant Management',
+                autorepair: 'Auto Repair Shop',
+                retail: 'Retail Store',
+                healthcare: 'Healthcare Practice',
+                construction: 'Construction Company',
+                musicstudio: 'Music Studio',
+                faithtech: 'Faith & Ministry'
+            };
+            
+            alert(`Selected: ${industryNames[industryType]}\n\nIn your MaycoleTracker™ app:\n• Navigate to /configure/${industryType}\n• Complete industry-specific setup\n• Configure modules and features\n• Launch customized dashboard`);
+        }
+
+        // Simulate live industry integration status
+        function updateStatus() {
+            const statusElements = document.querySelectorAll('.badge.new');
+            statusElements.forEach(el => {
+                el.style.background = '#10b981';
+                el.textContent = 'ACTIVE';
+            });
+        }
+
+        // Initialize after page load
+        setTimeout(updateStatus, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+/**
+ * MaycoleTracker™ Brand Kit CSS
+ * Complete branding styles for MaycoleTechnologies.com
+ * Copy and paste into your website's CSS file
+ */
+
+/* ========================================
+   BRAND COLORS & VARIABLES
+   ======================================== */
+:root {
+  /* MaycoleTracker™ Brand Colors */
+  --maycole-blue: #1e40af;
+  --maycole-blue-dark: #1e3a8a;
+  --maycole-blue-light: #3b82f6;
+  --maycole-blue-lighter: #60a5fa;
+  --maycole-white: #ffffff;
+  --maycole-gray: #f8f9fa;
+  --maycole-shadow: rgba(30, 64, 175, 0.3);
+  --maycole-shadow-light: rgba(30, 64, 175, 0.15);
+  --maycole-shadow-dark: rgba(30, 64, 175, 0.45);
+  
+  /* Gradients */
+  --maycole-gradient: linear-gradient(135deg, var(--maycole-blue) 0%, var(--maycole-blue-dark) 100%);
+  --maycole-gradient-hover: linear-gradient(135deg, var(--maycole-blue-dark) 0%, var(--maycole-blue) 100%);
+  
+  /* Border Radius */
+  --maycole-radius: 10px;
+  --maycole-radius-small: 6px;
+  --maycole-radius-large: 15px;
+  --maycole-radius-round: 50%;
+}
+
+/* ========================================
+   TRADEMARK SYMBOL STYLING
+   ======================================== */
+.trademark::after {
+  content: "™";
+  font-size: 0.6em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: -0.1em;
+  opacity: 0.9;
+  font-weight: 400;
+  position: relative;
+  top: -0.3em;
+}
+
+.trademark-small::after {
+  font-size: 0.5em;
+  top: -0.4em;
+}
+
+.trademark-large::after {
+  font-size: 0.4em;
+  top: -0.5em;
+}
+
+/* ========================================
+   MAYCOLETRACKER™ LOGO STYLES
+   ======================================== */
+.maycole-logo {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  color: var(--maycole-blue);
+  text-decoration: none;
+}
+
+.maycole-logo-small {
+  font-size: 1rem;
+}
+
+.maycole-logo-medium {
+  font-size: 1.5rem;
+}
+
+.maycole-logo-large {
+  font-size: 2rem;
+}
+
+.maycole-logo-hero {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.maycole-logo:hover {
+  color: var(--maycole-blue-dark);
+  transition: color 0.3s ease;
+}
+
+/* ========================================
+   ICON STYLES
+   ======================================== */
+.maycole-icon {
+  display: inline-block;
+  border-radius: var(--maycole-radius-round);
+  filter: drop-shadow(0 4px 12px var(--maycole-shadow));
+  transition: all 0.3s ease;
+}
+
+.maycole-icon:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 16px var(--maycole-shadow-dark));
+}
+
+.maycole-icon-small {
+  width: 24px;
+  height: 24px;
+}
+
+.maycole-icon-medium {
+  width: 40px;
+  height: 40px;
+}
+
+.maycole-icon-large {
+  width: 64px;
+  height: 64px;
+}
+
+.maycole-icon-hero {
+  width: 120px;
+  height: 120px;
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+.btn-maycole {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--maycole-gradient);
+  color: var(--maycole-white);
+  text-decoration: none;
+  border-radius: var(--maycole-radius);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--maycole-shadow-light);
+  user-select: none;
+}
+
+.btn-maycole:hover {
+  background: var(--maycole-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--maycole-shadow);
+  text-decoration: none;
+  color: var(--maycole-white);
+}
+
+.btn-maycole:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--maycole-shadow-light);
+}
+
+/* Button Sizes */
+.btn-maycole-small {
+  padding: 8px 16px;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.btn-maycole-large {
+  padding: 16px 32px;
+  font-size: 18px;
+  gap: 12px;
+}
+
+.btn-maycole-hero {
+  padding: 20px 40px;
+  font-size: 20px;
+  gap: 15px;
+  border-radius: var(--maycole-radius-large);
+}
+
+/* Button Variants */
+.btn-maycole-secondary {
+  background: var(--maycole-white);
+  color: var(--maycole-blue);
+  border: 2px solid var(--maycole-blue);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-maycole-secondary:hover {
+  background: var(--maycole-blue);
+  color: var(--maycole-white);
+  border-color: var(--maycole-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--maycole-shadow);
+}
+
+.btn-maycole-outline {
+  background: transparent;
+  color: var(--maycole-blue);
+  border: 2px solid var(--maycole-blue);
+  box-shadow: none;
+}
+
+.btn-maycole-outline:hover {
+  background: var(--maycole-blue);
+  color: var(--maycole-white);
+}
+
+.btn-maycole-ghost {
+  background: rgba(30, 64, 175, 0.1);
+  color: var(--maycole-blue);
+  border: none;
+  box-shadow: none;
+}
+
+.btn-maycole-ghost:hover {
+  background: rgba(30, 64, 175, 0.2);
+  color: var(--maycole-blue-dark);
+}
+
+/* ========================================
+   CARD & CONTAINER STYLES
+   ======================================== */
+.maycole-card {
+  background: var(--maycole-white);
+  border-radius: var(--maycole-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.maycole-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-color: var(--maycole-blue-light);
+}
+
+.maycole-card-accent {
+  border-top: 4px solid var(--maycole-blue);
+}
+
+/* ========================================
+   HEADER & NAVIGATION STYLES
+   ======================================== */
+.maycole-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 24px;
+  background: var(--maycole-white);
+  border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.maycole-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.maycole-nav-link {
+  color: var(--maycole-blue);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: var(--maycole-radius-small);
+  transition: all 0.3s ease;
+}
+
+.maycole-nav-link:hover {
+  background: rgba(30, 64, 175, 0.1);
+  color: var(--maycole-blue-dark);
+  text-decoration: none;
+}
+
+.maycole-nav-link.active {
+  background: var(--maycole-blue);
+  color: var(--maycole-white);
+}
+
+/* ========================================
+   BADGE & TAG STYLES
+   ======================================== */
+.maycole-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--maycole-blue);
+  color: var(--maycole-white);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.maycole-badge-light {
+  background: rgba(30, 64, 175, 0.1);
+  color: var(--maycole-blue);
+}
+
+.maycole-badge-outline {
+  background: transparent;
+  color: var(--maycole-blue);
+  border: 1px solid var(--maycole-blue);
+}
+
+/* ========================================
+   HERO SECTION STYLES
+   ======================================== */
+.maycole-hero {
+  background: linear-gradient(135deg, 
+    rgba(30, 64, 175, 0.05) 0%, 
+    rgba(30, 64, 175, 0.02) 100%);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.maycole-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.maycole-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.maycole-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--maycole-blue);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.maycole-hero p {
+  font-size: 1.25rem;
+  color: #64748b;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.text-maycole {
+  color: var(--maycole-blue);
+}
+
+.text-maycole-dark {
+  color: var(--maycole-blue-dark);
+}
+
+.text-maycole-light {
+  color: var(--maycole-blue-light);
+}
+
+.bg-maycole {
+  background-color: var(--maycole-blue);
+}
+
+.bg-maycole-gradient {
+  background: var(--maycole-gradient);
+}
+
+.bg-maycole-light {
+  background-color: rgba(30, 64, 175, 0.05);
+}
+
+.border-maycole {
+  border-color: var(--maycole-blue);
+}
+
+.shadow-maycole {
+  box-shadow: 0 4px 12px var(--maycole-shadow);
+}
+
+.shadow-maycole-lg {
+  box-shadow: 0 8px 20px var(--maycole-shadow);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .maycole-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .maycole-hero p {
+    font-size: 1.125rem;
+  }
+  
+  .btn-maycole-hero {
+    padding: 16px 24px;
+    font-size: 18px;
+  }
+  
+  .maycole-header {
+    padding: 12px 16px;
+  }
+  
+  .maycole-nav {
+    gap: 12px;
+  }
+  
+  .maycole-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maycole-hero {
+    padding: 60px 16px;
+  }
+  
+  .maycole-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .btn-maycole {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .maycole-nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* ========================================
+   DARK MODE SUPPORT
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --maycole-white: #1a1a1a;
+    --maycole-gray: #2a2a2a;
+  }
+  
+  .maycole-card {
+    background: var(--maycole-gray);
+    color: #ffffff;
+  }
+  
+  .maycole-header {
+    background: var(--maycole-gray);
+    color: #ffffff;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes maycole-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes maycole-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.maycole-fade-in {
+  animation: maycole-fade-in 0.6s ease-out;
+}
+
+.maycole-slide-in {
+  animation: maycole-slide-in 0.6s ease-out;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  .btn-maycole {
+    background: transparent !important;
+    color: var(--maycole-blue) !important;
+    border: 1px solid var(--maycole-blue) !important;
+    box-shadow: none !important;
+  }
+  
+  .maycole-icon {
+    filter: none !important;
+  }
+}

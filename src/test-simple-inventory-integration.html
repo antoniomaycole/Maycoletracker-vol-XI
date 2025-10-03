@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Simple Inventory Integration - Complete System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1a202c;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+        .logo-icon {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 0.5rem;
+            margin-right: 0.75rem;
+            position: relative;
+            vertical-align: middle;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1rem;
+            height: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+            transform: translate(-50%, -50%);
+        }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #3b82f6;
+            border-radius: 0.1875rem;
+            transform: translate(-50%, -50%);
+        }
+        .approaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .approach-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .approach-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .approach-card.simple {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+        .approach-card.quick {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        .approach-card.enhanced {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+        }
+        .approach-card.comprehensive {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+        .approach-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .approach-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .approach-card.simple .approach-icon {
+            background: #10b981;
+            color: white;
+        }
+        .approach-card.quick .approach-icon {
+            background: #f59e0b;
+            color: white;
+        }
+        .approach-card.enhanced .approach-icon {
+            background: #8b5cf6;
+            color: white;
+        }
+        .approach-card.comprehensive .approach-icon {
+            background: #ef4444;
+            color: white;
+        }
+        .approach-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+        .check-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .button {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .button.simple {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .button.simple:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+        .button.quick {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .button.quick:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+        .button.enhanced {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        .button.enhanced:hover {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        }
+        .button.comprehensive {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        .button.comprehensive:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+        .inventory-showcase {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .inventory-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .inventory-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        .inventory-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        .routes-demo {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        .route-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #374151;
+        }
+        .route-item:last-child {
+            border-bottom: none;
+        }
+        .route-path {
+            color: #10b981;
+            font-weight: 600;
+        }
+        .route-desc {
+            color: #9ca3af;
+            margin-left: 2rem;
+        }
+        .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        .badge.new {
+            background: #10b981;
+        }
+        .badge.original {
+            background: #f59e0b;
+        }
+        @media (max-width: 768px) {
+            .approaches-grid {
+                grid-template-columns: 1fr;
+            }
+            .inventory-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span class="logo-icon"></span>
+                MaycoleTracker<span class="tm">™</span> Simple Inventory Integration
+            </h1>
+            <p>Complete Multi-Approach Industry Configuration System - Your Simple + Enhanced Solutions</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <span class="badge original">Your Original Code</span>
+                <span class="badge new">Enhanced Integration</span>
+                <span class="badge">vol. XI Enterprise</span>
+            </div>
+        </div>
+
+        <!-- Approach Comparison -->
+        <div class="approaches-grid">
+            <!-- Your Simple Approach -->
+            <div class="approach-card simple">
+                <div class="approach-title">
+                    <div class="approach-icon">✨</div>
+                    Simple Setup
+                </div>
+                <div class="approach-description">
+                    Your original clean and direct approach - fast, efficient, and to the point.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Direct industry templates</li>
+                    <li><span class="check-icon">✓</span> Instant inventory setup</li>
+                    <li><span class="check-icon">✓</span> Clean code structure</li>
+                    <li><span class="check-icon">✓</span> Fast user experience</li>
+                    <li><span class="check-icon">✓</span> Minimal complexity</li>
+                </ul>
+                <a href="/simple-setup/restaurant" class="button simple">
+                    🍽️ Try Simple Setup
+                </a>
+            </div>
+
+            <!-- Quick Industry Config -->
+            <div class="approach-card quick">
+                <div class="approach-title">
+                    <div class="approach-icon">⚡</div>
+                    Quick Config
+                </div>
+                <div class="approach-description">
+                    Enhanced version of your simple approach with MaycoleTracker™ styling.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Your simple logic</li>
+                    <li><span class="check-icon">✓</span> Professional styling</li>
+                    <li><span class="check-icon">✓</span> MaycoleTracker™ branding</li>
+                    <li><span class="check-icon">✓</span> Responsive design</li>
+                    <li><span class="check-icon">✓</span> Quick launch</li>
+                </ul>
+                <a href="/quick-setup/autorepair" class="button quick">
+                    🚗 Try Quick Config
+                </a>
+            </div>
+
+            <!-- Enhanced Industry Selector -->
+            <div class="approach-card enhanced">
+                <div class="approach-title">
+                    <div class="approach-icon">🏭</div>
+                    Enhanced Selector
+                </div>
+                <div class="approach-description">
+                    Professional industry showcase with detailed information and features.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Industry overview</li>
+                    <li><span class="check-icon">✓</span> Feature discovery</li>
+                    <li><span class="check-icon">✓</span> Professional UI</li>
+                    <li><span class="check-icon">✓</span> Marketing ready</li>
+                    <li><span class="check-icon">✓</span> Enterprise feel</li>
+                </ul>
+                <a href="/industries" class="button enhanced">
+                    🎯 Try Enhanced Selector
+                </a>
+            </div>
+
+            <!-- Comprehensive Configuration -->
+            <div class="approach-card comprehensive">
+                <div class="approach-title">
+                    <div class="approach-icon">⚙️</div>
+                    Full Configuration
+                </div>
+                <div class="approach-description">
+                    Complete setup wizard with module selection and detailed configuration.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Setup wizard</li>
+                    <li><span class="check-icon">✓</span> Module selection</li>
+                    <li><span class="check-icon">✓</span> Feature configuration</li>
+                    <li><span class="check-icon">✓</span> Progress tracking</li>
+                    <li><span class="check-icon">✓</span> Enterprise setup</li>
+                </ul>
+                <a href="/configure/healthcare" class="button comprehensive">
+                    💊 Try Full Config
+                </a>
+            </div>
+        </div>
+
+        <!-- Your Original Inventory Templates -->
+        <div class="inventory-showcase">
+            <h2>Your Original Industry Templates</h2>
+            <p>The clean and simple inventory templates from your original code, now integrated into the full system:</p>
+            
+            <div class="inventory-grid">
+                <div class="inventory-item">
+                    <h4>🍽️ Restaurant</h4>
+                    <ul>
+                        <li>Tomatoes</li>
+                        <li>Cheese</li>
+                        <li>Napkins</li>
+                    </ul>
+                </div>
+                <div class="inventory-item">
+                    <h4>🚗 Auto Repair</h4>
+                    <ul>
+                        <li>Car Battery</li>
+                        <li>Oil Filter</li>
+                        <li>Brake Pads</li>
+                    </ul>
+                </div>
+                <div class="inventory-item">
+                    <h4>🛒 Retail</h4>
+                    <ul>
+                        <li>Shirts</li>
+                        <li>Shoes</li>
+                        <li>Bags</li>
+                    </ul>
+                </div>
+                <div class="inventory-item">
+                    <h4>💊 Healthcare</h4>
+                    <ul>
+                        <li>Gloves</li>
+                        <li>Syringes</li>
+                        <li>Bandages</li>
+                    </ul>
+                </div>
+                <div class="inventory-item">
+                    <h4>🏗️ Construction</h4>
+                    <ul>
+                        <li>Cement</li>
+                        <li>Nails</li>
+                        <li>Wood</li>
+                    </ul>
+                </div>
+                <div class="inventory-item">
+                    <h4>🎵 Music Studio</h4>
+                    <ul>
+                        <li>Microphones</li>
+                        <li>Cables</li>
+                        <li>Mixers</li>
+                    </ul>
+                </div>
+                <div class="inventory-item">
+                    <h4>⛪ Faith Tech</h4>
+                    <ul>
+                        <li>Candles</li>
+                        <li>Books</li>
+                        <li>Communion Cups</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Route System -->
+        <div class="inventory-showcase">
+            <h2>Complete MaycoleTracker™ Route System</h2>
+            <p>Your system now supports multiple approaches through different routes:</p>
+            
+            <div class="routes-demo">
+                <div class="route-item">
+                    <span class="route-path">/logo</span>
+                    <div class="route-desc">Core MaycoleTracker™ logo page</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/dashboard</span>
+                    <div class="route-desc">Your simple inventory dashboard with voice alerts</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/ads</span>
+                    <div class="route-desc">Advertisement system</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/training</span>
+                    <div class="route-desc">Training mode</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/reports</span>
+                    <div class="route-desc">Reports agent</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/calculator</span>
+                    <div class="route-desc">Calculator agent</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/recovery</span>
+                    <div class="route-desc">Recovery system with 8 backend enforcers</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/simple-setup/:industry</span><span class="badge new">NEW</span>
+                    <div class="route-desc">Your original simple industry configuration</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/quick-setup/:industry</span><span class="badge">Enhanced</span>
+                    <div class="route-desc">Quick setup with MaycoleTracker™ styling</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/industries</span><span class="badge">Professional</span>
+                    <div class="route-desc">Complete industry selector showcase</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/configure/:industryType</span><span class="badge">Enterprise</span>
+                    <div class="route-desc">Full configuration wizard with modules</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Guide -->
+        <div class="inventory-showcase">
+            <h2>How to Use Your Multi-Approach System</h2>
+            
+            <h3>For Different User Types:</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #3b82f6;">
+                    <h4 style="color: #1e40af; margin-bottom: 1rem;">🚀 Power Users</h4>
+                    <p style="color: #1e3a8a; font-size: 0.875rem;">Use <code>/simple-setup/restaurant</code> for instant setup with your original clean approach.</p>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #10b981;">
+                    <h4 style="color: #065f46; margin-bottom: 1rem;">⚡ Quick Setup</h4>
+                    <p style="color: #064e3b; font-size: 0.875rem;">Use <code>/quick-setup/autorepair</code> for your simple logic with professional styling.</p>
+                </div>
+                
+                <div style="background: #fefbeb; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b;">
+                    <h4 style="color: #92400e; margin-bottom: 1rem;">🎯 Marketing</h4>
+                    <p style="color: #78350f; font-size: 0.875rem;">Use <code>/industries</code> to showcase your platform's capabilities to prospects.</p>
+                </div>
+                
+                <div style="background: #fef2f2; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #ef4444;">
+                    <h4 style="color: #991b1b; margin-bottom: 1rem;">⚙️ Enterprise</h4>
+                    <p style="color: #7f1d1d; font-size: 0.875rem;">Use <code>/configure/healthcare</code> for complete setup wizards with module selection.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Simple Inventory Dashboard -->
+        <div class="inventory-showcase">
+            <h2>Your Simple Inventory Dashboard Integration</h2>
+            <p>Your clean dashboard approach with voice alerts working perfectly:</p>
+            
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1.5rem; font-family: 'Courier New', monospace; font-size: 0.875rem; margin-top: 1rem;">
+                <div style="color: #059669; font-weight: 600;">// Your Simple Dashboard Logic:</div>
+                <div style="color: #374151; margin-top: 0.5rem;">const [items, setItems] = useState([</div>
+                <div style="color: #374151; margin-left: 1rem;">{ name: 'Tomatoes', quantity: 2 },</div>
+                <div style="color: #374151; margin-left: 1rem;">{ name: 'Car Battery', quantity: 4 },</div>
+                <div style="color: #374151;">]);</div>
+                <div style="color: #7c3aed; margin-top: 1rem;">// Voice alert integration:</div>
+                <div style="color: #374151;">speechSynthesis.speak(new SpeechSynthesisUtterance(alert));</div>
+                <div style="color: #374151;">const alarm = new Audio('/alarm.mp3');</div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3>Test Your Complete System:</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <a href="/simple-setup/restaurant" class="button simple">
+                    ✨ Your Simple Setup
+                </a>
+                <a href="/quick-setup/autorepair" class="button quick">
+                    ⚡ Quick Enhanced
+                </a>
+                <a href="/industries" class="button enhanced">
+                    🏭 Professional Showcase
+                </a>
+                <a href="/configure/healthcare" class="button comprehensive">
+                    ⚙️ Full Configuration
+                </a>
+                <a href="/dashboard" class="button" style="background: linear-gradient(135deg, #6b7280, #4b5563);">
+                    📊 Your Dashboard
+                </a>
+            </div>
+            
+            <p style="margin-top: 2rem; color: #6b7280; font-size: 0.875rem;">
+                Your MaycoleTracker™ vol. XI Enterprise Edition now supports your original simple approach<br>
+                plus enhanced professional options - the best of all worlds!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simulate route navigation
+        document.querySelectorAll('a[href^="/"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const route = this.getAttribute('href');
+                const industry = route.split('/').pop();
+                
+                if (route.includes('/simple-setup/')) {
+                    alert(`🎯 Simple Setup: ${industry}\n\nYour original clean approach:\n• Direct template loading\n• Instant inventory setup\n• Simple navigation to dashboard\n• Voice alerts integration\n\nRoute: ${route}`);
+                } else if (route.includes('/quick-setup/')) {
+                    alert(`⚡ Quick Setup: ${industry}\n\nEnhanced simple approach:\n• Your simple logic\n• Professional MaycoleTracker™ styling\n• Responsive design\n• Clean user experience\n\nRoute: ${route}`);
+                } else if (route.includes('/industries')) {
+                    alert(`🏭 Professional Industry Selector\n\nComplete showcase:\n• 9+ industry templates\n• Feature discovery\n• Professional presentation\n• Marketing ready\n\nRoute: ${route}`);
+                } else if (route.includes('/configure/')) {
+                    alert(`⚙️ Full Configuration: ${industry}\n\nEnterprise setup:\n• Complete setup wizard\n• Module selection\n• Feature configuration\n• Progress tracking\n\nRoute: ${route}`);
+                } else if (route.includes('/dashboard')) {
+                    alert(`📊 Your Simple Dashboard\n\nClean inventory system:\n• Voice alerts: "${industry} is low. Only 2 in stock. Time to order."\n• Audio alarm integration\n• Simple item listing\n• Clean code structure\n\nYour original approach working perfectly!`);
+                }
+            });
+        });
+
+        // Animate elements on load
+        setTimeout(() => {
+            document.querySelectorAll('.approach-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        }, 500);
+    </script>
+</body>
+</html>

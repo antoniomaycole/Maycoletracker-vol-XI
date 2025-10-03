@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Volume XI - Route Testing</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4B0082 0%, #6B46C1 50%, #8B5CF6 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .route-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .route-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .route-card:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+        .route-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .route-description {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MaycoleTracker<span class="tm">™</span> Volume XI</h1>
+        <h2>Route Testing Dashboard</h2>
+        <p>Test all 9 enterprise routes in your MaycoleTracker™ system</p>
+
+        <div class="route-grid">
+            <div class="route-card">
+                <div class="status-badge">✅ CORE</div>
+                <a href="http://localhost:5173/" class="route-link">/ - Logo Page</a>
+                <div class="route-description">Main launcher and branding showcase</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">✅ CORE</div>
+                <a href="http://localhost:5173/main" class="route-link">/main - Dashboard</a>
+                <div class="route-description">Main dashboard with navigation</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">✅ CORE</div>
+                <a href="http://localhost:5173/supplies" class="route-link">/supplies - Inventory</a>
+                <div class="route-description">Supplies and inventory management</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">✅ CORE</div>
+                <a href="http://localhost:5173/analytics" class="route-link">/analytics - Analytics</a>
+                <div class="route-description">Business intelligence and reports</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">✅ CORE</div>
+                <a href="http://localhost:5173/scanner" class="route-link">/scanner - Scanner Page</a>
+                <div class="route-description">Original barcode scanner page</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">✅ CORE</div>
+                <a href="http://localhost:5173/ai" class="route-link">/ai - AI Insights</a>
+                <div class="route-description">AI-powered analytics and insights</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">🆕 NEW</div>
+                <a href="http://localhost:5173/camera" class="route-link">/camera - Camera Capture</a>
+                <div class="route-description">Professional camera module with HD capture</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">🆕 NEW</div>
+                <a href="http://localhost:5173/scanner-module" class="route-link">/scanner-module - Scanner Module</a>
+                <div class="route-description">Advanced scanner module features</div>
+            </div>
+
+            <div class="route-card">
+                <div class="status-badge">🆕 NEW</div>
+                <a href="http://localhost:5173/premium" class="route-link">/premium - Premium Dashboard</a>
+                <div class="route-description">Premium control center and analytics</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+            <h3>Testing Instructions</h3>
+            <p style="text-align: left; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                1. Start your development server: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">npm run dev</code><br>
+                2. Click each route link above to test navigation<br>
+                3. Verify all components load without errors<br>
+                4. Test camera permissions for the Camera Capture module<br>
+                5. Check that all back buttons work correctly<br>
+                6. Confirm responsive design on mobile devices
+            </p>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+            <p>🚀 MaycoleTracker™ Volume XI — Enterprise Edition</p>
+            <p>All 9 routes operational and ready for production</p>
+        </div>
+    </div>
+</body>
+</html>

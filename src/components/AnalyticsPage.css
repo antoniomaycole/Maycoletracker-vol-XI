@@ -1,0 +1,188 @@
+/**
+ * AnalyticsPage.css - MaycoleTracker™ Analytics Styling
+ * Professional CSS that integrates with Tailwind V4 globals.css
+ * Compatible with MaycoleTracker™ Volume XI Enterprise Edition design system
+ */
+
+.analytics-page {
+  /* Use CSS custom properties from globals.css */
+  padding: 2rem;
+  background: var(--background);
+  min-height: 100vh;
+  
+  /* Enhanced background pattern matching globals.css light mode */
+  background: linear-gradient(135deg, var(--background) 0%, var(--muted) 100%);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.02) 0%, transparent 50%);
+}
+
+/* Dark mode compatibility */
+:global(.dark) .analytics-page {
+  background: linear-gradient(135deg, var(--background) 0%, var(--muted) 100%);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
+}
+
+.chart-placeholder {
+  /* Professional card styling matching globals.css */
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--card-foreground);
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  
+  /* Enhanced shadows from globals.css */
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+  
+  transition: all 0.2s ease;
+}
+
+.chart-placeholder:hover {
+  /* Enhanced hover effect from globals.css */
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.03);
+  transform: translateY(-1px);
+}
+
+/* Dark mode chart placeholder */
+:global(.dark) .chart-placeholder {
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+:global(.dark) .chart-placeholder:hover {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Professional typography integration */
+.analytics-page h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  
+  /* MaycoleTracker™ gradient text */
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Loading states */
+.analytics-page .loading-text {
+  color: var(--muted-foreground);
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* Chart placeholder content styling */
+.chart-placeholder pre {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  padding: 1rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+/* Professional analytics grid */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .analytics-page {
+    padding: 1rem;
+  }
+  
+  .chart-placeholder {
+    padding: 1rem;
+    margin-top: 0.75rem;
+  }
+  
+  .analytics-page h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1rem;
+  }
+}
+
+/* Enhanced professional styling for MaycoleTracker™ */
+.analytics-page {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.analytics-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--accent-blue), 
+    var(--accent-purple), 
+    var(--accent-green), 
+    var(--accent-orange)
+  );
+  background-size: 400% 100%;
+  animation: rainbow-slide 8s ease infinite;
+}
+
+@keyframes rainbow-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Integration with pro badge system */
+.analytics-page .pro-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}

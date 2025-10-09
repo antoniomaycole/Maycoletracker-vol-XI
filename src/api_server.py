@@ -29,5 +29,4 @@ def bond_system():
         })
 
 if __name__ == "__main__":
-    print("🚀 API server is launching...")
-    app.run(debug=True)ue)
+    app.run(debug=True)

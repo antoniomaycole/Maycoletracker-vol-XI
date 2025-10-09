@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from "framer-motion";  
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -13,8 +13,8 @@ import {
   ChefHat, Car, ShoppingCart, Heart, HardHat, Music, Church, Factory, Hotel,
   ArrowLeft, CheckCircle, Settings, Star, Crown, Zap, 
   Users, DollarSign, BarChart3, Package, Calendar, Bell,
-  Shield, Globe, Smartphone
-} from 'lucide-react';
+  Shield, Globe, ArrowRight, Smartphone
+} from 'lucide-react'; 
 
 // Industry configuration data
 const industryConfigs = {

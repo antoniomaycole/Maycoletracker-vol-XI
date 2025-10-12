@@ -16,6 +16,7 @@
     "src/components/LogoPage.css",
     "src/styles/brand-override.css",
     "src/components/AnalyticsPage.css",
-    "src/index 2.css"
+    "src/index 2.css",
+    "src/components/legacy/**"
   ]
 }

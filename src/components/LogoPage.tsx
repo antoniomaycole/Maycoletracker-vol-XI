@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import KineticLogo from './KineticLogo';
 import MaycoleTrackerIconButton from './MaycoleTrackerIconButton';
 import './LogoPage.css';
-import './LogoPage.fixed.css';
+import './LogoPage.layout.css';
 
 const LogoPage = () => {
   const navigate = useNavigate();

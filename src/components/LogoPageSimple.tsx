@@ -11,6 +11,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LogoPage.css';
+import './LogoPage.layout.css';
 import KineticLogo from './KineticLogo';
 
 export default function LogoPageSimple() {

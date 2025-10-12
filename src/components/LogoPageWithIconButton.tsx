@@ -12,6 +12,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LogoPage.css';
+import './LogoPage.layout.css';
 import IconButton from './IconButton';
 import MaycoleTrackerBrand from './MaycoleTrackerBrand';
 

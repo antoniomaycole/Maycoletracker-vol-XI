@@ -6,7 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Badge } from './ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { ArrowLeft, Search, AlertTriangle } from 'lucide-react';
-import { InventoryItem, AppScreen } from '../App';
+import type { InventoryItem } from '../types/inventory';
+import type { AppScreen } from '../types/navigation';
 import type { BusinessConfig } from './BusinessConfig';
 
 interface InventoryListProps {

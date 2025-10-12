@@ -6,7 +6,7 @@ import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog';
 import { ArrowLeft, Trash2 } from 'lucide-react';
-import { InventoryItem } from '../App';
+import type { InventoryItem } from '../types/inventory';
 
 interface AddEditItemProps {
   item?: InventoryItem | null;

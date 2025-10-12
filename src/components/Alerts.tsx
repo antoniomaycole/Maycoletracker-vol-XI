@@ -4,7 +4,8 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { ArrowLeft, AlertTriangle, Package } from 'lucide-react';
-import { InventoryItem, AppScreen } from '../App';
+import type { InventoryItem } from '../types/inventory';
+import type { AppScreen } from '../types/navigation';
 
 interface AlertsProps {
   lowStockItems: InventoryItem[];

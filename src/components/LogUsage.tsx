@@ -7,7 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Textarea } from './ui/textarea';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { ArrowLeft } from 'lucide-react';
-import { InventoryItem, UsageLog, AppScreen } from '../App';
+import type { InventoryItem } from '../types/inventory';
+import type { AppScreen } from '../types/navigation';
+import type { Transaction as UsageLog } from '../types/inventory';
 
 interface LogUsageProps {
   items: InventoryItem[];

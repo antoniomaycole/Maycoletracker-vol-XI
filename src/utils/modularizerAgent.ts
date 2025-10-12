@@ -6,9 +6,13 @@
  */
 
 // Component metadata interface
+import * as path from 'path';
+
+// Component metadata interface
 interface ComponentMetadata {
   name: string;
   filePath: string;
+
   type: 'page' | 'component' | 'ui' | 'utility' | 'agent' | 'system';
   category: 'core' | 'business' | 'inventory' | 'analytics' | 'scanner' | 'voice' | 'ui' | 'premium';
   dependencies: string[];

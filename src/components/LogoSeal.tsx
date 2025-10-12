@@ -1,6 +1,29 @@
+// NOTE: Previously this file used a STAGED-MIGRATION marker and ts-nocheck
+// to temporarily bypass TypeScript issues originating from mismatched
+// framer-motion/react types. The goal here is to keep the runtime behavior
+// unchanged while providing a narrow, explicit typing surface so we can
+// remove the suppressed checks.
 import React, { FC, KeyboardEvent } from 'react';
 import { useNavigate, BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+// Lightweight prop type for the MotionDiv wrapper. We avoid importing
+// framer-motion's HTMLMotionProps directly to reduce heavy type resolution
+// in this large legacy repo — the wrapper keeps the runtime behavior but
+// limits TypeScript surface area.
+type DivProps = React.ComponentPropsWithoutRef<'div'> & {
+  initial?: unknown
+  animate?: unknown
+  whileHover?: unknown
+  whileTap?: unknown
+  transition?: unknown
+}
+
+const MotionDiv: React.FC<DivProps> = ({ children, ...rest }) => {
+  // Cast to unknown then any for the createElement call to avoid fragile
+  // JSX intrinsic typing with motion.div while keeping the runtime value.
+  return React.createElement(motion.div as unknown as any, rest, children);
+};
 import MaycoleTrackerIconButton from './MaycoleTrackerIconButton';
 
 /**
@@ -59,7 +82,7 @@ const LandingPage: FC = () => {
         data-audit="sealed" 
       >
         {/* Icon Button Wrapper - Decorative/Visual */}
-          <motion.div
+          <MotionDiv
           className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 border-2 border-white/10 flex items-center justify-center flex-shrink-0 transition-all duration-300 shadow-lg shadow-blue-500/30 text-white"
           aria-hidden="true"
           tabIndex={-1}
@@ -74,7 +97,7 @@ const LandingPage: FC = () => {
           >
             {/* Use MaycoleTrackerIconButton so production bundles contain the real SVG */}
             <MaycoleTrackerIconButton size={40} className="maycole-brand-icon" data-testid="brand-icon" aria-hidden="true" />
-          </motion.div>
+          </MotionDiv>
 
         {/* Brand Title Text */}
         <div className="text-left min-w-[220px]" data-testid="brand-title">

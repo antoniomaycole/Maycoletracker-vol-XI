@@ -303,15 +303,4 @@ export function performImmediateCalculation(
 }
 
 // Export all calculation functions for immediate use
-export {
-  calculateROI,
-  calculateProfitMargin,
-  calculateInventoryTurnover,
-  calculateDaysInInventory,
-  assessBusinessImpact,
-  generateRecommendations,
-  analyzeProduct,
-  analyzePortfolio,
-  calculateCostSavings,
-  performImmediateCalculation
-};
+// Note: functions are exported inline; no additional export list needed.

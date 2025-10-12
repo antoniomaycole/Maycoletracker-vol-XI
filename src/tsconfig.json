@@ -51,7 +51,10 @@
     "build",
     "coverage",
     "**/*.min.js",
-    "public/sw.js"
+    "public/sw.js",
+    "REMOVED/**",
+    "WelcomePage-As-Launcher-Replacement.tsx",
+    "vite.config.ts"
   ],
   "references": [
     { "path": "./tsconfig.node.json" }

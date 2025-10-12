@@ -7,7 +7,7 @@
 
 /* stylelint-disable */
 /* NOTE: This file contains a mix of Tailwind entry points and legacy compiled
-  styles. Temporarily disabling stylelint here to avoid noisy, large-scale
+  styles. STAGED-MIGRATION: disabling stylelint here to avoid noisy, large-scale
   linter reports while we progressively remediate component CSS. Remove this
   directive after targeted cleanup. */
 

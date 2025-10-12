@@ -40,7 +40,10 @@ import { componentCleaner, type CleanupReport } from '../utils/componentCleaner'
 import { routeEnforcer, type RouteEnforcementReport } from '../utils/routeEnforcer';
 import { backendFunctionValidator, type FunctionValidationReport } from '../utils/backendFunctionValidator';
 import { dependencyPatcher, type DependencyPatchReport } from '../utils/dependencyPatcher';
-import { generateRecoveryReport, quickHealthCheck, emergencyRecoverySummary, type RecoveryReport } from '../utils/recoverySummaryModule';
+import { generateRecoveryReport, quickHealthCheck, emergencyRecoverySummary } from '../utils/recoverySummaryModule';
+// Mount inventory and dependency/security agents when this page is active so they attach to AgentBus
+import InventoryAIAgent from './InventoryAIAgent';
+import DependenciesAIAgent from './DependenciesAIAgent';
 
 interface BackendFunction {
   fnName: string;
@@ -59,6 +62,8 @@ interface AIAgent {
   lastActivity: string;
   performance: number;
   type: 'inventory' | 'compliance' | 'ui' | 'voice' | 'analytics';
+  // optional runtime properties used in UI
+  bondStrength?: number;
 }
 
 interface Dependency {
@@ -71,15 +76,89 @@ interface Dependency {
 }
 
 interface RecoveryReport {
+  // core
+  timestamp?: string;
+  healthyFunctions: string[];
+  repairedFunctions: string[];
+  agentBondingStatus?: AIAgent[] | any[];
+  dependenciesPatched?: string[];
+  overallHealth?: number;
+  criticalIssues?: number | string[];
+  warnings?: number;
+
+  // extended UI fields (optional) used throughout the component
+  reportId?: string;
+  overallSystemHealth?: number;
+  systemStatus?: string;
+  executiveSummary?: string;
+  enforcersActive?: number;
+  bondedAgents?: number;
+  actionPriority?: string;
+  enforcerStatus?: Record<string, boolean>;
+  performanceMetrics?: {
+    avgResponseTime?: number;
+    systemLatency?: number;
+    errorRate?: number;
+    throughput?: number;
+    memoryUsage?: number;
+    cpuUsage?: number;
+  };
+  moduleHealth?: Array<{ name?: string; status?: string; type?: string; healthScore?: number; lastCheck?: string; issues?: string[] }>;
+  criticalIssuesList?: string[];
+  // NOTE: legacy shape variance — prefer an array of issue identifiers for UI mapping
+  // during triage we normalize this to a consistent shape in the component state.
+  recoveryActions?: string[];
+  recommendations?: string[];
+  nextMaintenanceDate?: string | number;
+  confidenceScore?: number;
+  recoveryStats?: RecoveryStats;
+  uptime?: string | number;
+}
+
+// Normalized runtime shape used for component state to avoid pervasive "possibly undefined" checks
+interface NormalizedRecoveryReport extends RecoveryReport {
   timestamp: string;
   healthyFunctions: string[];
   repairedFunctions: string[];
-  agentBondingStatus: { id: string; bondedTo: string; status: string }[];
+  agentBondingStatus: AIAgent[] | any[];
   dependenciesPatched: string[];
   overallHealth: number;
-  criticalIssues: number;
+  criticalIssues: string[];
   warnings: number;
+  enforcerStatus: Record<string, boolean>;
+  performanceMetrics: {
+    avgResponseTime: number;
+    systemLatency: number;
+    errorRate: number;
+    throughput: number;
+    memoryUsage: number;
+    cpuUsage: number;
+  };
+  recoveryActions: string[];
+  recommendations: string[];
 }
+
+const DEFAULT_RECOVERY_REPORT: NormalizedRecoveryReport = {
+  timestamp: new Date(0).toISOString(),
+  healthyFunctions: [],
+  repairedFunctions: [],
+  agentBondingStatus: [],
+  dependenciesPatched: [],
+  overallHealth: 0,
+  criticalIssues: [],
+  warnings: 0,
+  enforcerStatus: {},
+  performanceMetrics: {
+    avgResponseTime: 0,
+    systemLatency: 0,
+    errorRate: 0,
+    throughput: 0,
+    memoryUsage: 0,
+    cpuUsage: 0
+  },
+  recoveryActions: [],
+  recommendations: []
+};
 
 // Mock backend functions for MaycoleTracker™ Enterprise
 const initialBackendFunctions: BackendFunction[] = [
@@ -235,7 +314,7 @@ const RecoveryCheckAgentBonding = () => {
   const [aiAgents, setAIAgents] = useState<AIAgent[]>(initialAIAgents);
   const [dependencies, setDependencies] = useState<Dependency[]>(initialDependencies);
   const [isRunningCheck, setIsRunningCheck] = useState(false);
-  const [lastReport, setLastReport] = useState<RecoveryReport | null>(null);
+  const [lastReport, setLastReport] = useState<NormalizedRecoveryReport>(DEFAULT_RECOVERY_REPORT);
   const [activeTab, setActiveTab] = useState<'functions' | 'agents' | 'dependencies' | 'report' | 'bonding' | 'components' | 'cleaner' | 'routes' | 'validator' | 'patcher' | 'summary'>('functions');
   
   // New state for backend enforcers
@@ -246,14 +325,14 @@ const RecoveryCheckAgentBonding = () => {
   const [routeReport, setRouteReport] = useState<RouteEnforcementReport | null>(null);
   const [validationReport, setValidationReport] = useState<FunctionValidationReport | null>(null);
   const [dependencyReport, setDependencyReport] = useState<DependencyPatchReport | null>(null);
-  const [recoveryReport, setRecoveryReport] = useState<RecoveryReport | null>(null);
+  const [recoveryReport, setRecoveryReport] = useState<NormalizedRecoveryReport>(DEFAULT_RECOVERY_REPORT);
   const [enforcersEnabled, setEnforcersEnabled] = useState(true);
   // AgentBus integration (publish recovery status updates)
   // Importing the bus lazily to avoid heavy coupling in this large component
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { useAgentBus } = (require('../contexts/AgentBusContext') as any);
+  const { useAgentBus } = (require('../contexts/AgentBusContext') as { useAgentBus: () => { publish: (topic: string, payload: any) => void } });
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const bus = useAgentBus();
+  const bus = useAgentBus() as { publish?: (topic: string, payload: any) => void };
 
   useEffect(() => {
     // publish a periodic recovery status for monitoring
@@ -264,7 +343,10 @@ const RecoveryCheckAgentBonding = () => {
           healthyFunctions: backendFunctions.filter(f => f.status === 'healthy').length,
           brokenFunctions: backendFunctions.filter(f => f.status === 'broken').length
         };
-        bus.publish('recovery:status', status);
+        // guard in case the bus is not available in some render environments
+        if (bus && typeof bus.publish === 'function') {
+          bus.publish('recovery:status', status);
+        }
       } catch (e) {
         // ignore
       }
@@ -409,26 +491,29 @@ const RecoveryCheckAgentBonding = () => {
           // Generate comprehensive recovery summary
           try {
             // Collect all health function results from previous checks
-            const allHealthFunctions = [
+            const allHealthFunctions: any[] = [
               // Add health functions from other enforcers if available
-              ...(healthReport?.checks || []).map(check => ({
+              ...((healthReport as any)?.checks || []).map((check: any) => ({
                 fnName: check.module,
-                status: check.healthy ? "✅ Healthy" as const : "❌ Broken" as const,
+                status: check.healthy ? "✅ Healthy" : "❌ Broken",
                 responseTime: check.responseTime,
                 lastChecked: new Date().toISOString(),
                 errorCount: check.errors?.length || 0,
                 description: `${check.module} system health check`,
-                criticality: 'high' as const,
+                criticality: 'high',
                 module: check.module
               }))
             ];
-            
-            const recoveryResult = generateRecoveryReport(allHealthFunctions);
-            setRecoveryReport(recoveryResult);
+
+            // generateRecoveryReport may return a partial or unknown shape from external modules
+            const recoveryResult = generateRecoveryReport(allHealthFunctions) as Partial<NormalizedRecoveryReport> | undefined;
+            // Merge with defaults to ensure the component always has a normalized shape
+            setRecoveryReport({ ...DEFAULT_RECOVERY_REPORT, ...(recoveryResult || {}) } as NormalizedRecoveryReport);
             console.log('✅ Recovery Summary Module completed successfully');
           } catch (error) {
             console.error('❌ Recovery Summary Module error:', error);
-            setRecoveryReport(null);
+            // On error, keep a normalized empty report instead of null
+            setRecoveryReport(DEFAULT_RECOVERY_REPORT);
           }
           
           console.log('✅ All Backend Enforcers completed');
@@ -439,13 +524,13 @@ const RecoveryCheckAgentBonding = () => {
       
       // Check each backend function
       const updatedFunctions = await Promise.all(
-        backendFunctions.map(func => checkFunctionHealth(func.fnName))
+        backendFunctions.map((func: BackendFunction) => checkFunctionHealth(func.fnName))
       );
       
       setBackendFunctions(updatedFunctions);
       
       // Repair broken functions
-      const repairedFunctions = updatedFunctions.map(func => {
+      const repairedFunctions = updatedFunctions.map((func: BackendFunction) => {
         if (func.status === 'broken') {
           return { ...func, status: 'repaired' as const };
         }
@@ -455,7 +540,7 @@ const RecoveryCheckAgentBonding = () => {
       setBackendFunctions(repairedFunctions);
       
       // Repair agent bonding
-      const repairedAgents = aiAgents.map(agent => {
+      const repairedAgents = aiAgents.map((agent: AIAgent) => {
         if (agent.status === 'unbonded' || agent.status === 'error') {
           return repairAgentBonding(agent);
         }
@@ -465,12 +550,12 @@ const RecoveryCheckAgentBonding = () => {
       setAIAgents(repairedAgents);
       
       // Patch dependencies
-      const patchedDependencies = dependencies.map(patchDependency);
+  const patchedDependencies = dependencies.map((dep: Dependency) => patchDependency(dep));
       setDependencies(patchedDependencies);
       
       // Generate enhanced recovery report
       const baseHealth = Math.round(
-        (repairedFunctions.filter(f => f.status === 'healthy' || f.status === 'repaired').length / repairedFunctions.length) * 100
+        (repairedFunctions.filter((f: BackendFunction) => f.status === 'healthy' || f.status === 'repaired').length / repairedFunctions.length) * 100
       );
       
       // Factor in backend enforcer results
@@ -485,20 +570,24 @@ const RecoveryCheckAgentBonding = () => {
       
       const report: RecoveryReport = {
         timestamp: new Date().toISOString(),
-        healthyFunctions: repairedFunctions.filter(f => f.status === 'healthy').map(f => f.fnName),
-        repairedFunctions: repairedFunctions.filter(f => f.status === 'repaired').map(f => f.fnName),
-        agentBondingStatus: repairedAgents.map(a => ({
+        healthyFunctions: repairedFunctions.filter((f: BackendFunction) => f.status === 'healthy').map((f: BackendFunction) => f.fnName),
+        repairedFunctions: repairedFunctions.filter((f: BackendFunction) => f.status === 'repaired').map((f: BackendFunction) => f.fnName),
+        agentBondingStatus: repairedAgents.map((a: AIAgent) => ({
           id: a.id,
+          name: a.name,
           bondedTo: a.bondedTo,
-          status: a.status
+          status: a.status,
+          lastActivity: a.lastActivity,
+          performance: a.performance,
+          type: a.type
         })),
-        dependenciesPatched: patchedDependencies.filter(d => d.status === 'compatible').map(d => d.name),
+        dependenciesPatched: patchedDependencies.filter((d: Dependency) => d.status === 'compatible').map((d: Dependency) => d.name),
         overallHealth: adjustedHealth,
         criticalIssues: repairedFunctions.filter(f => f.status === 'broken' && f.criticalLevel === 'critical').length,
         warnings: repairedFunctions.filter(f => f.status === 'broken' && f.criticalLevel !== 'critical').length
       };
       
-      setLastReport(report);
+  setLastReport({ ...DEFAULT_RECOVERY_REPORT, ...(report || {}) } as NormalizedRecoveryReport);
       
     } finally {
       setIsRunningCheck(false);
@@ -585,6 +674,11 @@ const RecoveryCheckAgentBonding = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Mount related AI agent components (inventory & dependency/security) to ensure they are active while viewing recovery */}
+      <div style={{ display: 'none' }} aria-hidden>
+        <InventoryAIAgent />
+        <DependenciesAIAgent />
+      </div>
       {/* Enterprise Header */}
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white p-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -925,7 +1019,7 @@ const RecoveryCheckAgentBonding = () => {
         {activeTab === 'functions' && (
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Backend Function Health Status</h2>
-            {backendFunctions.map((func) => (
+            {backendFunctions.map((func: BackendFunction) => (
               <Card key={func.fnName} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -961,7 +1055,7 @@ const RecoveryCheckAgentBonding = () => {
         {activeTab === 'agents' && (
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">AI Agent Bonding Status</h2>
-            {aiAgents.map((agent) => (
+            {aiAgents.map((agent: AIAgent) => (
               <Card key={agent.id} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -999,7 +1093,7 @@ const RecoveryCheckAgentBonding = () => {
         {activeTab === 'dependencies' && (
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Dependency Status</h2>
-            {dependencies.map((dep) => (
+            {dependencies.map((dep: Dependency) => (
               <Card key={dep.name} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -1062,7 +1156,7 @@ const RecoveryCheckAgentBonding = () => {
 
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-gray-900">Module Status Details</h3>
-                  {bondingReport.results.map((result, index) => (
+                  {bondingReport.results.map((result: any, index: number) => (
                     <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
@@ -1091,11 +1185,11 @@ const RecoveryCheckAgentBonding = () => {
                   ))}
                 </div>
 
-                {bondingReport.recommendations.length > 0 && (
+                {bondingReport?.recommendations?.length > 0 && (
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Bonding Recommendations</h3>
                     <div className="space-y-2">
-                      {bondingReport.recommendations.map((rec, index) => (
+                      {bondingReport?.recommendations?.map((rec: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <AlertTriangle className="w-4 h-4 text-yellow-600" />
                           <span className="text-sm">{rec}</span>
@@ -1145,7 +1239,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Components by Type</h3>
                     <div className="space-y-3">
-                      {Object.entries(modularizerReport.componentsByType).map(([type, count]) => (
+                      {Object.entries(modularizerReport.componentsByType).map(([type, count]: [string, number]) => (
                         <div key={type} className="flex items-center justify-between">
                           <span className="capitalize font-medium">{type}</span>
                           <Badge variant="outline">{count}</Badge>
@@ -1157,7 +1251,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Components by Category</h3>
                     <div className="space-y-3">
-                      {Object.entries(modularizerReport.componentsByCategory).map(([category, count]) => (
+                      {Object.entries(modularizerReport.componentsByCategory).map(([category, count]: [string, number]) => (
                         <div key={category} className="flex items-center justify-between">
                           <span className="capitalize font-medium">{category}</span>
                           <Badge variant="outline">{count}</Badge>
@@ -1171,7 +1265,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance Issues</h3>
                     <div className="space-y-2">
-                      {modularizerReport.performanceIssues.map((issue, index) => (
+                      {modularizerReport.performanceIssues.map((issue: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <AlertTriangle className="w-4 h-4 text-orange-600" />
                           <span className="text-sm">{issue}</span>
@@ -1185,7 +1279,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Missing Components</h3>
                     <div className="space-y-2">
-                      {modularizerReport.missingComponents.map((missing, index) => (
+                      {modularizerReport.missingComponents.map((missing: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <XCircle className="w-4 h-4 text-red-600" />
                           <span className="text-sm">{missing}</span>
@@ -1199,7 +1293,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Component Recommendations</h3>
                     <div className="space-y-2">
-                      {modularizerReport.recommendations.map((rec, index) => (
+                      {modularizerReport.recommendations.map((rec: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <AlertTriangle className="w-4 h-4 text-blue-600" />
                           <span className="text-sm">{rec}</span>
@@ -1257,7 +1351,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Component Health Status</h3>
                     <div className="space-y-3">
-                      {cleanupReport.results.slice(0, 10).map((component, index) => (
+                      {cleanupReport.results.slice(0, 10).map((component: any, index: number) => (
                         <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <div className="flex items-center gap-3">
                             {component.status === 'healthy' && <CheckCircle className="w-5 h-5 text-green-600" />}
@@ -1288,7 +1382,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Cleanup Actions Performed</h3>
                     <div className="space-y-2 max-h-64 overflow-y-auto">
-                      {cleanupReport.cleanupActions.map((action, index) => (
+                      {cleanupReport.cleanupActions.map((action: any, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{action}</span>
@@ -1305,7 +1399,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Cleanup Recommendations</h3>
                     <div className="space-y-2">
-                      {cleanupReport.recommendations.map((rec, index) => (
+                      {cleanupReport.recommendations.map((rec: string, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <AlertTriangle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{rec}</span>
@@ -1318,7 +1412,7 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Detailed Component Issues</h3>
                   <div className="space-y-4">
-                    {cleanupReport.results.filter(c => c.issues.length > 0).slice(0, 5).map((component, index) => (
+                    {cleanupReport.results.filter((c: any) => c.issues.length > 0).slice(0, 5).map((component: any, index: number) => (
                       <div key={index} className="border rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-medium text-gray-900">{component.name}</h4>
@@ -1336,7 +1430,7 @@ const RecoveryCheckAgentBonding = () => {
                         <div className="mt-3">
                           <p className="text-sm font-medium text-gray-900 mb-1">Issues:</p>
                           <ul className="text-sm text-gray-600 space-y-1">
-                            {component.issues.map((issue, idx) => (
+                            {component.issues.map((issue: any, idx: number) => (
                               <li key={idx} className="flex items-start gap-2">
                                 <span className="w-1 h-1 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
                                 {issue}
@@ -1348,7 +1442,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Repair Actions:</p>
                             <ul className="text-sm text-green-600 space-y-1">
-                              {component.repairActions.map((action, idx) => (
+                              {component.repairActions.map((action: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {action}
@@ -1410,7 +1504,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Route Health Status</h3>
                     <div className="space-y-3">
-                      {routeReport.routeHealth.slice(0, 10).map((route, index) => (
+                      {routeReport.routeHealth.slice(0, 10).map((route: any, index: number) => (
                         <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <div className="flex items-center gap-3">
                             {route.status === 'valid' && <CheckCircle className="w-5 h-5 text-green-600" />}
@@ -1465,7 +1559,7 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Enforcement Actions Performed</h3>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
-                    {routeReport.enforcementActions.map((action, index) => (
+                    {routeReport.enforcementActions.map((action: any, index: number) => (
                       <div key={index} className="flex items-start gap-2">
                         <Shield className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-gray-700">{action}</span>
@@ -1481,7 +1575,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Security Recommendations</h3>
                     <div className="space-y-2">
-                      {routeReport.recommendations.map((rec, index) => (
+                      {routeReport.recommendations.map((rec: string, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <AlertTriangle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{rec}</span>
@@ -1494,7 +1588,7 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Detailed Route Analysis</h3>
                   <div className="space-y-4">
-                    {routeReport.routeHealth.filter(r => r.errors.length > 0 || r.healingActions.length > 0).slice(0, 5).map((route, index) => (
+                    {routeReport.routeHealth.filter((r: any) => r.errors.length > 0 || r.healingActions.length > 0).slice(0, 5).map((route: any, index: number) => (
                       <div key={index} className="border rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-medium text-gray-900">{route.path}</h4>
@@ -1516,7 +1610,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Security Issues:</p>
                             <ul className="text-sm text-red-600 space-y-1">
-                              {route.errors.map((error, idx) => (
+                              {route.errors.map((error: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {error}
@@ -1529,7 +1623,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Enforcement Actions:</p>
                             <ul className="text-sm text-green-600 space-y-1">
-                              {route.healingActions.map((action, idx) => (
+                              {route.healingActions.map((action: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {action}
@@ -1595,7 +1689,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Dependency Status</h3>
                     <div className="space-y-3">
-                      {dependencyReport.results.slice(0, 10).map((result, index) => (
+                      {dependencyReport.results.slice(0, 10).map((result: any, index: number) => (
                         <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <div className="flex items-center gap-3">
                             {result.status === 'verified' && <CheckCircle className="w-5 h-5 text-green-600" />}
@@ -1686,7 +1780,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Patch Actions Performed</h3>
                     <div className="space-y-2 max-h-64 overflow-y-auto">
-                      {dependencyReport.patchActions.map((action, index) => (
+                      {dependencyReport.patchActions.map((action: any, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <Package className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{action}</span>
@@ -1703,7 +1797,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6 border-l-4 border-red-500">
                     <h3 className="text-lg font-semibold text-red-900 mb-4">Critical Issues</h3>
                     <div className="space-y-2">
-                      {dependencyReport.criticalIssues.map((issue, index) => (
+                      {dependencyReport.criticalIssues.map((issue: any, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-red-700">{issue}</span>
@@ -1717,7 +1811,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Maintenance Recommendations</h3>
                     <div className="space-y-2">
-                      {dependencyReport.recommendations.map((rec, index) => (
+                      {dependencyReport.recommendations.map((rec: string, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{rec}</span>
@@ -1735,7 +1829,7 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Dependency Details</h3>
                   <div className="space-y-4">
-                    {dependencyReport.results.filter(r => r.errors.length > 0 || r.patchActions.length > 0).slice(0, 5).map((result, index) => (
+                    {dependencyReport.results.filter((r: any) => r.errors.length > 0 || r.patchActions.length > 0).slice(0, 5).map((result: any, index: number) => (
                       <div key={index} className="border rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-medium text-gray-900">{result.dependency}</h4>
@@ -1761,7 +1855,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Errors:</p>
                             <ul className="text-sm text-red-600 space-y-1">
-                              {result.errors.map((error, idx) => (
+                              {result.errors.map((error: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {error}
@@ -1774,7 +1868,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Patch Actions:</p>
                             <ul className="text-sm text-green-600 space-y-1">
-                              {result.patchActions.slice(-3).map((action, idx) => (
+                              {result.patchActions.slice(-3).map((action: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {action}
@@ -1837,7 +1931,7 @@ const RecoveryCheckAgentBonding = () => {
                       <p className="text-xs text-gray-600">Bonded Agents</p>
                     </div>
                     <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                      <div className="text-2xl font-bold text-orange-600">{recoveryReport.actionPriority.toUpperCase()}</div>
+                      <div className="text-2xl font-bold text-orange-600">{(recoveryReport.actionPriority || '').toUpperCase()}</div>
                       <p className="text-xs text-gray-600">Priority</p>
                     </div>
                   </div>
@@ -1848,7 +1942,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Backend Enforcers Status</h3>
                     <div className="space-y-3">
-                      {Object.entries(recoveryReport.enforcerStatus).map(([enforcer, status]) => (
+                      {Object.entries(recoveryReport.enforcerStatus).map(([enforcer, status]: [string, boolean]) => (
                         <div key={enforcer} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <span className="font-medium text-gray-900 capitalize">
                             {enforcer.replace(/([A-Z])/g, ' $1').trim()}
@@ -1903,11 +1997,11 @@ const RecoveryCheckAgentBonding = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Critical Issues */}
-                  {recoveryReport.criticalIssues.length > 0 && (
+                  {recoveryReport?.criticalIssues?.length > 0 && (
                     <Card className="p-6 border-l-4 border-red-500">
                       <h3 className="text-lg font-semibold text-red-900 mb-4">Critical Issues</h3>
                       <div className="space-y-2">
-                        {recoveryReport.criticalIssues.map((issue, index) => (
+                        {recoveryReport.criticalIssues.map((issue: string, index: number) => (
                           <div key={index} className="flex items-start gap-2">
                             <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
                             <span className="text-sm text-red-700">{issue}</span>
@@ -1918,11 +2012,11 @@ const RecoveryCheckAgentBonding = () => {
                   )}
 
                   {/* Recovery Actions */}
-                  {recoveryReport.recoveryActions.length > 0 && (
+                  {recoveryReport?.recoveryActions?.length > 0 && (
                     <Card className="p-6 border-l-4 border-green-500">
                       <h3 className="text-lg font-semibold text-green-900 mb-4">Recovery Actions</h3>
                       <div className="space-y-2">
-                        {recoveryReport.recoveryActions.map((action, index) => (
+                        {recoveryReport?.recoveryActions?.map((action: string, index: number) => (
                           <div key={index} className="flex items-start gap-2">
                             <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <span className="text-sm text-green-700">{action}</span>
@@ -1937,7 +2031,7 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Module Health Analysis</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {recoveryReport.moduleHealth.map((module, index) => (
+                    {recoveryReport?.moduleHealth?.map((module: any, index: number) => (
                       <div key={index} className="p-4 border rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-medium text-gray-900">{module.name}</h4>
@@ -1965,7 +2059,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Issues:</p>
                             <ul className="text-sm text-red-600 space-y-1">
-                              {module.issues.map((issue, idx) => (
+                              {module.issues.map((issue: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {issue}
@@ -1983,21 +2077,21 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Agent Bonding Status</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {recoveryReport.agentBondingStatus.map((agent, index) => (
+                    {recoveryReport.agentBondingStatus.map((agent: any, index: number) => (
                       <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                         <div className="flex-1">
                           <h4 className="font-medium text-gray-900">{agent.name}</h4>
                           <p className="text-sm text-gray-600">ID: {agent.id}</p>
                           <p className="text-sm text-gray-600">Bonded to: {agent.bondedTo}</p>
                           <div className="mt-2">
-                            <p className="text-xs text-gray-500">Bond Strength: {agent.bondStrength}%</p>
+                            <p className="text-xs text-gray-500">Bond Strength: {agent.bondStrength ?? 0}%</p>
                             <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                               <div 
                                 className={`h-2 rounded-full transition-all ${
-                                  agent.bondStrength >= 80 ? 'bg-green-500' :
-                                  agent.bondStrength >= 60 ? 'bg-yellow-500' : 'bg-red-500'
+                                  (agent.bondStrength ?? 0) >= 80 ? 'bg-green-500' :
+                                  (agent.bondStrength ?? 0) >= 60 ? 'bg-yellow-500' : 'bg-red-500'
                                 }`}
-                                style={{ width: `${agent.bondStrength}%` }}
+                                style={{ width: `${agent.bondStrength ?? 0}%` }}
                               ></div>
                             </div>
                           </div>
@@ -2008,7 +2102,7 @@ const RecoveryCheckAgentBonding = () => {
                           agent.status === 'unbonded' ? 'bg-red-100 text-red-800' :
                           'bg-gray-100 text-gray-800'
                         }>
-                          {agent.status.toUpperCase()}
+                          {(agent.status ?? '').toString().toUpperCase()}
                         </Badge>
                       </div>
                     ))}
@@ -2020,17 +2114,17 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Recommendations</h3>
                     <div className="space-y-2">
-                      {recoveryReport.recommendations.map((rec, index) => (
+                      {recoveryReport.recommendations.map((rec: string, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{rec}</span>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                      <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                       <p className="text-sm text-blue-700">
-                        <strong>Next Maintenance:</strong> {new Date(recoveryReport.nextMaintenanceDate).toLocaleDateString()} - 
-                        <strong> Confidence Score:</strong> {recoveryReport.confidenceScore}%
+                        <strong>Next Maintenance:</strong> {new Date(recoveryReport?.nextMaintenanceDate ?? Date.now()).toLocaleDateString()} - 
+                        <strong> Confidence Score:</strong> {recoveryReport?.confidenceScore ?? 0}%
                       </p>
                     </div>
                   </Card>
@@ -2041,19 +2135,19 @@ const RecoveryCheckAgentBonding = () => {
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Recovery Statistics</h3>
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-600">{recoveryReport.recoveryStats.totalRecoveries}</div>
+                      <div className="text-2xl font-bold text-blue-600">{recoveryReport?.recoveryStats?.totalRecoveries ?? 0}</div>
                       <p className="text-xs text-gray-600">Total Recoveries</p>
                     </div>
                     <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600">{recoveryReport.recoveryStats.successfulRecoveries}</div>
+                      <div className="text-2xl font-bold text-green-600">{recoveryReport?.recoveryStats?.successfulRecoveries ?? 0}</div>
                       <p className="text-xs text-gray-600">Successful</p>
                     </div>
                     <div className="text-center p-4 bg-red-50 rounded-lg">
-                      <div className="text-2xl font-bold text-red-600">{recoveryReport.recoveryStats.failedRecoveries}</div>
+                      <div className="text-2xl font-bold text-red-600">{recoveryReport?.recoveryStats?.failedRecoveries ?? 0}</div>
                       <p className="text-xs text-gray-600">Failed</p>
                     </div>
                     <div className="text-center p-4 bg-purple-50 rounded-lg">
-                      <div className="text-2xl font-bold text-purple-600">{recoveryReport.recoveryStats.averageRecoveryTime}min</div>
+                      <div className="text-2xl font-bold text-purple-600">{recoveryReport?.recoveryStats?.averageRecoveryTime ?? 0}min</div>
                       <p className="text-xs text-gray-600">Avg Time</p>
                     </div>
                     <div className="text-center p-4 bg-gray-50 rounded-lg">
@@ -2111,7 +2205,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Function Health Status</h3>
                     <div className="space-y-3">
-                      {validationReport.functionHealth.slice(0, 10).map((func, index) => (
+                      {validationReport.functionHealth.slice(0, 10).map((func: any, index: number) => (
                         <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <div className="flex items-center gap-3">
                             {func.status === 'healthy' && <CheckCircle className="w-5 h-5 text-green-600" />}
@@ -2198,7 +2292,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Repair Actions Performed</h3>
                     <div className="space-y-2 max-h-64 overflow-y-auto">
-                      {validationReport.repairActions.map((action, index) => (
+                      {validationReport.repairActions.map((action: any, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <Settings className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{action}</span>
@@ -2215,7 +2309,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6 border-l-4 border-red-500">
                     <h3 className="text-lg font-semibold text-red-900 mb-4">Critical Issues</h3>
                     <div className="space-y-2">
-                      {validationReport.criticalIssues.map((issue, index) => (
+                      {validationReport.criticalIssues.map((issue: any, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-red-700">{issue}</span>
@@ -2229,7 +2323,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">System Recommendations</h3>
                     <div className="space-y-2">
-                      {validationReport.recommendations.map((rec, index) => (
+                      {validationReport.recommendations.map((rec: string, index: number) => (
                         <div key={index} className="flex items-start gap-2">
                           <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-700">{rec}</span>
@@ -2242,7 +2336,7 @@ const RecoveryCheckAgentBonding = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Detailed Function Analysis</h3>
                   <div className="space-y-4">
-                    {validationReport.functionHealth.filter(f => f.errors.length > 0 || f.repairActions.length > 0).slice(0, 5).map((func, index) => (
+                    {validationReport.functionHealth.filter((f: any) => f.errors.length > 0 || f.repairActions.length > 0).slice(0, 5).map((func: any, index: number) => (
                       <div key={index} className="border rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-medium text-gray-900">{func.fnName}</h4>
@@ -2273,7 +2367,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Function Errors:</p>
                             <ul className="text-sm text-red-600 space-y-1">
-                              {func.errors.map((error, idx) => (
+                              {func.errors.map((error: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {error}
@@ -2286,7 +2380,7 @@ const RecoveryCheckAgentBonding = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-900 mb-1">Repair Actions:</p>
                             <ul className="text-sm text-green-600 space-y-1">
-                              {func.repairActions.slice(-3).map((action, idx) => (
+                              {func.repairActions.slice(-3).map((action: any, idx: number) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="w-1 h-1 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
                                   {action}
@@ -2340,7 +2434,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Healthy Functions</h3>
                     <div className="space-y-2">
-                      {lastReport.healthyFunctions.map((fn, index) => (
+                      {lastReport.healthyFunctions.map((fn: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-600" />
                           <span className="text-sm">{fn}</span>
@@ -2352,7 +2446,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Repaired Functions</h3>
                     <div className="space-y-2">
-                      {lastReport.repairedFunctions.map((fn, index) => (
+                      {lastReport.repairedFunctions.map((fn: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <Wrench className="w-4 h-4 text-yellow-600" />
                           <span className="text-sm">{fn}</span>
@@ -2364,7 +2458,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Agent Bonding Status</h3>
                     <div className="space-y-2">
-                      {lastReport.agentBondingStatus.map((agent, index) => (
+                      {lastReport.agentBondingStatus.map((agent: any, index: number) => (
                         <div key={index} className="flex items-center justify-between">
                           <span className="text-sm">{agent.id}</span>
                           <Badge className={getStatusColor(agent.status)}>
@@ -2378,7 +2472,7 @@ const RecoveryCheckAgentBonding = () => {
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Patched Dependencies</h3>
                     <div className="space-y-2">
-                      {lastReport.dependenciesPatched.map((dep, index) => (
+                      {lastReport.dependenciesPatched.map((dep: string, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-600" />
                           <span className="text-sm">{dep}</span>

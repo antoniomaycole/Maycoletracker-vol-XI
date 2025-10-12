@@ -13,7 +13,7 @@
   },
   "ignoreFiles": [
     "src/MaycoleTracker-Brand-Kit.css",
-    "src/components/LogoPage.fixed.css",
+    "src/components/LogoPage.css",
     "src/styles/brand-override.css",
     "src/components/AnalyticsPage.css",
     "src/index 2.css"

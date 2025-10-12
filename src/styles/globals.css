@@ -1,7 +1,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* stylelint-disable */
-/* Temporarily disabled to avoid large legacy-file noisy lint reports. */
+/* STAGED-MIGRATION: disabled to avoid large legacy-file noisy lint reports. */
 
 :root {
   --font-size: 16px;

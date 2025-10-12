@@ -1,3 +1,16 @@
+/* LogoPage.fixed.css — validated replacement used during migration
+   This file is intentionally small and conflict-free. Components import
+   this file to avoid legacy parsing errors in the original LogoPage.css.
+*/
+
+:root{--brand-blue:#007bff;--brand-blue-dark:#0056b3}
+.logo-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;color:#fff;text-align:center;background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-blue-dark) 100%)}
+.logo-page h1{font-size:2rem;font-weight:800;margin:.25rem 0;line-height:1.1;background:linear-gradient(135deg,#fff 0%,#e0e7ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.logo-container{margin:2rem 0;display:flex;align-items:center;justify-content:center;gap:1rem}
+.blue-icon-button{background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-blue-dark) 100%);color:#fff;padding:.9rem 1.8rem;border-radius:9999px;border:2px solid rgba(255,255,255,.2)}
+@media (max-width:640px){.logo-page{padding:1rem}.logo-page h1{font-size:1.6rem}}
+
+/* End LogoPage.fixed.css */
 /* Minimal overrides for LogoPage to guarantee stable layout and visuals
    This file intentionally contains only the classes used by LogoPage.tsx
    to avoid touching the large legacy stylesheet. It is imported after

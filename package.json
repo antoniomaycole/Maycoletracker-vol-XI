@@ -68,8 +68,9 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@types/node": "^20.19.21",
     "@vitejs/plugin-react-swc": "^3.0.0",
-    "eslint": "^9.14.0",
+    "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^17.9.0",
@@ -81,7 +82,7 @@
     "stylelint-config-standard": "^39.0.1",
     "stylelint-order": "^7.0.0",
     "typescript": "^5.4.2",
-    "vite": "^5.0.0"
+    "vite": "^7.1.9"
   },
   "peerDependencies": {
     "react": "^18.0.0",

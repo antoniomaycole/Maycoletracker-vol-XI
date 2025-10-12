@@ -375,12 +375,12 @@
   margin-top: 0.5rem;
   background: rgb(255 255 255 / 10%);
 -webkit-
-  border: 1px solid rgb(255 255 255 / 20%);borderborderborderborderborderborderborder
-  border-radius: 0.5rem;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-  padding: 0.5rem;paddingpaddingpaddingpaddingpadding
-  min-width: 12rem;min-widthmin-widthmin-widthmin-width
-  z-index: 50;z-indexz-indexz-index
-  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);box-shadowbox-shadow
+  border: 1px solid rgb(255 255 255 / 20%);borderborderborderborderborderborderborderborder
+  border-radius: 0.5rem;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+  padding: 0.5rem;paddingpaddingpaddingpaddingpaddingpadding
+  min-width: 12rem;min-widthmin-widthmin-widthmin-widthmin-width
+  z-index: 50;z-indexz-indexz-indexz-index
+  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadow
 }
 
 .app-menu-item {
@@ -543,11 +543,11 @@
   background: rgb(255 255 255 / 10%);
 -webkit-
 
-  border: 1px solid rgb(255 255 255 / 20%);borderborderborderborderborderborderborderborderborderborder
-  border-radius: 0.5rem;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-  padding: 0.75rem 1rem;paddingpaddingpaddingpaddingpaddingpaddingpaddingpadding
-  text-align: center;text-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-align
-  transition: all 0.3s ease;transitiontransitiontransitiontransitiontransitiontransition
+  border: 1px solid rgb(255 255 255 / 20%);borderborderborderborderborderborderborderborderborderborderborder
+  border-radius: 0.5rem;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+  padding: 0.75rem 1rem;paddingpaddingpaddingpaddingpaddingpaddingpaddingpaddingpadding
+  text-align: center;text-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-aligntext-align
+  transition: all 0.3s ease;transitiontransitiontransitiontransitiontransitiontransitiontransition
 }
 
 .subscription-tier:hover {
@@ -590,16 +590,16 @@
   box-shadow: 
     0 8px 32px rgb(0 123 255 / 30%),
     0 4px 16px rgb(0 123 255 / 20%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  position: relative;positionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  min-height: 52px;min-heightmin-heightmin-heightmin-heightmin-heightmin-heightmin-height
-  display: inline-flex;displaydisplaydisplaydisplaydisplaydisplay
-  align-items: center;align-itemsalign-itemsalign-itemsalign-itemsalign-items
-  justify-content: center;justify-contentjustify-contentjustify-contentjustify-content
-  text-transform: uppercase;text-transformtext-transformtext-transform
-  letter-spacing: 0.05em;letter-spacingletter-spacing
-  margin: 2rem 0 1rem;margin
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  position: relative;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  min-height: 52px;min-heightmin-heightmin-heightmin-heightmin-heightmin-heightmin-heightmin-height
+  display: inline-flex;displaydisplaydisplaydisplaydisplaydisplaydisplay
+  align-items: center;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
+  justify-content: center;justify-contentjustify-contentjustify-contentjustify-contentjustify-content
+  text-transform: uppercase;text-transformtext-transformtext-transformtext-transform
+  letter-spacing: 0.05em;letter-spacingletter-spacingletter-spacing
+  margin: 2rem 0 1rem;marginmargin
 }
 
 .blue-icon-button-under:hover {
@@ -692,9 +692,9 @@
     inset 0 1px 0 rgb(255 255 255 / 90%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
 }
 
 .logo-page .app-store-icon-button:hover {
@@ -894,7 +894,7 @@
   transition: all 0.3s ease;
 -webkit-
 
-  box-shadow: 0 4px 8px rgb(0 123 255 / 30%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  box-shadow: 0 4px 8px rgb(0 123 255 / 30%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
 }
 
 .far-right-dropdown-trigger:hover {
@@ -912,12 +912,12 @@
   background: rgb(255 255 255 / 10%);
 -webkit-
 
-  border: 1px solid rgb(255 255 255 / 20%);borderborderborderborderborderborderborderborderborderborder
-  border-radius: 0.5rem;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-  padding: 0.5rem;paddingpaddingpaddingpaddingpaddingpaddingpaddingpadding
-  min-width: 12rem;min-widthmin-widthmin-widthmin-widthmin-widthmin-widthmin-width
-  z-index: 50;z-indexz-indexz-indexz-indexz-indexz-index
-  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  border: 1px solid rgb(255 255 255 / 20%);borderborderborderborderborderborderborderborderborderborderborder
+  border-radius: 0.5rem;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+  padding: 0.5rem;paddingpaddingpaddingpaddingpaddingpaddingpaddingpaddingpadding
+  min-width: 12rem;min-widthmin-widthmin-widthmin-widthmin-widthmin-widthmin-widthmin-width
+  z-index: 50;z-indexz-indexz-indexz-indexz-indexz-indexz-index
+  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
 }
 
 /* VOL. XI ENTERPRISE EDITION - IMMEDIATELY UNDER */
@@ -940,11 +940,11 @@
   background: rgb(255 255 255 / 95%);
 -webkit-
 
-  border-radius: 8px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-  border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborderborder
-  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  z-index: 50;z-indexz-indexz-indexz-indexz-indexz-indexz-index
-  min-width: 160px;min-widthmin-widthmin-widthmin-widthmin-widthmin-width
+  border-radius: 8px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+  border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborderborderborder
+  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  z-index: 50;z-indexz-indexz-indexz-indexz-indexz-indexz-indexz-index
+  min-width: 160px;min-widthmin-widthmin-widthmin-widthmin-widthmin-widthmin-width
 }
 
 .perfect-menu-item {
@@ -1009,8 +1009,8 @@
 
   
   /* Only the logo itself with subtle glow */
-  filter: drop-shadow(0 8px 32px rgb(59 130 246 / 30%));filterfilterfilterfilterfilterfilterfilterfilterfilterfilter
-  transition: all 0.3s ease;transitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransition
+  filter: drop-shadow(0 8px 32px rgb(59 130 246 / 30%));filterfilterfilterfilterfilterfilterfilterfilterfilterfilterfilter
+  transition: all 0.3s ease;transitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransition
 }
 
 .perfect-logo-container:hover .perfect-logo {
@@ -1166,12 +1166,12 @@
     inset 0 1px 0 rgb(255 255 255 / 90%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
-  display: flex !important;displaydisplaydisplaydisplaydisplaydisplaydisplay
-  align-items: center !important;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
-  justify-content: center !important;justify-contentjustify-contentjustify-contentjustify-contentjustify-content
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
+  display: flex !important;displaydisplaydisplaydisplaydisplaydisplaydisplaydisplay
+  align-items: center !important;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
+  justify-content: center !important;justify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-content
 }
 
 .app-store-icon-button-next-to-name:hover {
@@ -1201,11 +1201,11 @@
   background: rgb(255 255 255 / 95%);
 -webkit-
 
-  border-radius: 8px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-  border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborderborder
-  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  z-index: 50;z-indexz-indexz-indexz-indexz-indexz-indexz-index
-  min-width: 160px;min-widthmin-widthmin-widthmin-widthmin-widthmin-width
+  border-radius: 8px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+  border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborderborderborder
+  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  z-index: 50;z-indexz-indexz-indexz-indexz-indexz-indexz-indexz-index
+  min-width: 160px;min-widthmin-widthmin-widthmin-widthmin-widthmin-widthmin-width
 }
 
 .app-menu-item {
@@ -1323,16 +1323,16 @@
   box-shadow: 
     0 8px 32px rgb(0 123 255 / 30%),
     0 4px 16px rgb(0 123 255 / 20%),
-    inset 0 1px 0 rgb(255 255 255 / 20%) !important;box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  margin-top: 2rem !important;margin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-top
-  text-transform: uppercase !important;text-transformtext-transformtext-transformtext-transformtext-transformtext-transformtext-transformtext-transform
-  letter-spacing: 0.05em !important;letter-spacingletter-spacingletter-spacingletter-spacingletter-spacingletter-spacingletter-spacing
-  position: relative !important;positionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflow
-  min-height: 52px !important;min-heightmin-heightmin-heightmin-height
-  display: inline-flex !important;displaydisplaydisplay
-  align-items: center !important;align-itemsalign-items
-  justify-content: center !important;justify-content
+    inset 0 1px 0 rgb(255 255 255 / 20%) !important;box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  margin-top: 2rem !important;margin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-topmargin-top
+  text-transform: uppercase !important;text-transformtext-transformtext-transformtext-transformtext-transformtext-transformtext-transformtext-transformtext-transform
+  letter-spacing: 0.05em !important;letter-spacingletter-spacingletter-spacingletter-spacingletter-spacingletter-spacingletter-spacingletter-spacing
+  position: relative !important;positionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflow
+  min-height: 52px !important;min-heightmin-heightmin-heightmin-heightmin-height
+  display: inline-flex !important;displaydisplaydisplaydisplay
+  align-items: center !important;align-itemsalign-itemsalign-items
+  justify-content: center !important;justify-contentjustify-content
 }
 
 .blue-icon-button:hover {
@@ -1378,9 +1378,9 @@
     inset 0 1px 0 rgb(255 255 255 / 90%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
 }
 
 .logo-page .app-store-icon-button:hover {
@@ -1592,10 +1592,10 @@
     inset 0 1px 0 rgb(255 255 255 / 95%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
-  margin-left: 0.75rem !important;margin-leftmargin-leftmargin-leftmargin-leftmargin-leftmargin-leftmargin-left
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
+  margin-left: 0.75rem !important;margin-leftmargin-leftmargin-leftmargin-leftmargin-leftmargin-leftmargin-leftmargin-left
 }
 
 /* NEW: App Store Icon Button - BY THE M */
@@ -1614,10 +1614,10 @@
     inset 0 1px 0 rgb(255 255 255 / 95%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
-  order: 1;orderorderorderorderorderorderorder /* POSITIONED FIRST - BY THE M */
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  flex-shrink: 0 !important;flex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrinkflex-shrink
+  order: 1;orderorderorderorderorderorderorderorder /* POSITIONED FIRST - BY THE M */
 }
 
 /* SINGLE SEALED Button Hover States */
@@ -1673,9 +1673,9 @@
   box-shadow: 
     0 8px 32px rgb(255 255 255 / 10%),
     0 4px 16px rgb(0 123 255 / 20%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransition
-  order: 2;orderorderorderorderorderorderorderorder /* CENTER/RIGHT */
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransition
+  order: 2;orderorderorderorderorderorderorderorderorder /* CENTER/RIGHT */
 }
 
 /* NEW: Brand Seal with SEALED Icon Button */
@@ -1693,9 +1693,9 @@
   box-shadow: 
     0 8px 32px rgb(255 255 255 / 10%),
     0 4px 16px rgb(0 123 255 / 20%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransition
-  order: 2;orderorderorderorderorderorderorderorder /* CENTER */
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransitiontransition
+  order: 2;orderorderorderorderorderorderorderorderorder /* CENTER */
 }
 
 /* Title and Icon Container - SEALED TOGETHER */
@@ -1801,16 +1801,16 @@
     rgb(255 255 255 / 12%) 100%);
 -webkit-
 
-  border-radius: 20px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-  border: 2px solid rgb(255 255 255 / 25%);borderborderborderborderborderborderborderborderborder
-  padding: 1.5rem 2rem;paddingpaddingpaddingpaddingpaddingpaddingpaddingpadding
+  border-radius: 20px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+  border: 2px solid rgb(255 255 255 / 25%);borderborderborderborderborderborderborderborderborderborder
+  padding: 1.5rem 2rem;paddingpaddingpaddingpaddingpaddingpaddingpaddingpaddingpadding
   box-shadow: 
     0 12px 40px rgb(0 123 255 / 20%),
     0 6px 20px rgb(255 255 255 / 15%),
-    inset 0 1px 0 rgb(255 255 255 / 30%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transitiontransitiontransitiontransitiontransitiontransition
-  position: relative;positionpositionpositionpositionposition
-  overflow: visible;overflowoverflowoverflowoverflow
+    inset 0 1px 0 rgb(255 255 255 / 30%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transitiontransitiontransitiontransitiontransitiontransitiontransition
+  position: relative;positionpositionpositionpositionpositionposition
+  overflow: visible;overflowoverflowoverflowoverflowoverflow
 }
 
 .maycole-brand-seal-with-icon-sealed:hover {
@@ -1856,11 +1856,11 @@
     inset 0 1px 0 rgb(255 255 255 / 20%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  display: flex !important;displaydisplaydisplaydisplaydisplaydisplaydisplaydisplay
-  align-items: center !important;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
-  justify-content: center !important;justify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-content
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  display: flex !important;displaydisplaydisplaydisplaydisplaydisplaydisplaydisplaydisplay
+  align-items: center !important;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
+  justify-content: center !important;justify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-content
 }
 
 .app-store-icon-button-sealed:hover {
@@ -1915,17 +1915,17 @@
   left: 0;
   background: linear-gradient(135deg, rgb(255 255 255 / 95%) 0%, rgb(255 255 255 / 90%) 100%);
 -webkit-
-    border-radius: 8px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
-    border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborder
-  border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborder
+    border-radius: 8px;border-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radiusborder-radius
+    border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborderborder
+  border: 1px solid rgb(255 255 255 / 30%);borderborderborderborderborderborderborderborder
   box-shadow: 
     0 15px 50px rgb(0 0 0 / 20%),
     0 8px 25px rgb(0 0 0 / 10%),
-    inset 0 1px 0 rgb(255 255 255 / 50%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  padding: 0.5rem;paddingpaddingpaddingpaddingpadding
-  min-width: 180px;min-widthmin-widthmin-widthmin-width
-  z-index: 1000;z-indexz-indexz-index
-  animation: dropdownSlideIn 0.3s ease-out;animationanimation
+    inset 0 1px 0 rgb(255 255 255 / 50%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  padding: 0.5rem;paddingpaddingpaddingpaddingpaddingpadding
+  min-width: 180px;min-widthmin-widthmin-widthmin-widthmin-width
+  z-index: 1000;z-indexz-indexz-indexz-index
+  animation: dropdownSlideIn 0.3s ease-out;animationanimationanimation
 }
 
 @keyframes dropdownSlideIn {
@@ -2057,12 +2057,12 @@
     inset 0 1px 0 rgb(255 255 255 / 20%) !important;
 -webkit-
 
-  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  display: flex !important;displaydisplaydisplaydisplaydisplaydisplaydisplaydisplay
-  align-items: center !important;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
-  justify-content: center !important;justify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-content
-  animation: large-button-pulse 3s ease-in-out infinite;animationanimationanimationanimationanimation
+  position: relative !important;positionpositionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden !important;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  display: flex !important;displaydisplaydisplaydisplaydisplaydisplaydisplaydisplaydisplay
+  align-items: center !important;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
+  justify-content: center !important;justify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-contentjustify-content
+  animation: large-button-pulse 3s ease-in-out infinite;animationanimationanimationanimationanimationanimation
 }
 
 .app-store-icon-button-large:hover {
@@ -2132,16 +2132,16 @@
   box-shadow: 
     0 6px 24px rgb(0 123 255 / 30%),
     0 3px 12px rgb(0 123 255 / 20%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
-  position: relative;positionpositionpositionpositionpositionpositionpositionpositionposition
-  overflow: hidden;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
-  min-height: 48px;min-heightmin-heightmin-heightmin-heightmin-heightmin-heightmin-height
-  display: inline-flex;displaydisplaydisplaydisplaydisplaydisplay
-  align-items: center;align-itemsalign-itemsalign-itemsalign-itemsalign-items
-  justify-content: center;justify-contentjustify-contentjustify-contentjustify-content
-  text-transform: uppercase;text-transformtext-transformtext-transform
-  letter-spacing: 0.05em;letter-spacingletter-spacing
-  margin-top: 1rem;margin-top
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadowbox-shadow
+  position: relative;positionpositionpositionpositionpositionpositionpositionpositionpositionposition
+  overflow: hidden;overflowoverflowoverflowoverflowoverflowoverflowoverflowoverflowoverflow
+  min-height: 48px;min-heightmin-heightmin-heightmin-heightmin-heightmin-heightmin-heightmin-height
+  display: inline-flex;displaydisplaydisplaydisplaydisplaydisplaydisplay
+  align-items: center;align-itemsalign-itemsalign-itemsalign-itemsalign-itemsalign-items
+  justify-content: center;justify-contentjustify-contentjustify-contentjustify-contentjustify-content
+  text-transform: uppercase;text-transformtext-transformtext-transformtext-transform
+  letter-spacing: 0.05em;letter-spacingletter-spacingletter-spacing
+  margin-top: 1rem;margin-topmargin-top
 }
 
 .blue-icon-button-under:hover {

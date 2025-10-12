@@ -6,10 +6,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './contexts/UserContext';
+import { AgentBusProvider } from './contexts/AgentBusContext';
+import InventoryAIAgent from './components/InventoryAIAgent';
+import DependenciesAIAgent from './components/DependenciesAIAgent';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 
 // Import global styles
 import './styles/globals.css';
+// Brand overrides must be loaded after the base variables in globals.css
+import './styles/brand-override.css';
 
 // Core Business Components
 import LogoPage from './components/LogoPage';
@@ -108,9 +113,13 @@ export default function App() {
   return (
     <ErrorBoundary>
       <UserProvider>
-        <PWAInstallPrompt />
-        <Router>
+        <AgentBusProvider>
+          <PWAInstallPrompt />
+          <Router>
           <React.Suspense fallback={<LoadingScreen />}>
+              {/* Global Inventory AI Agent - non-invasive */}
+              <InventoryAIAgent />
+              <DependenciesAIAgent />
             <Routes>
               <Route path="/logo" element={<LogoPage />} /> {/* DO NOT TOUCH */}
               <Route path="/home" element={<BusinessControlCenter />} /> {/* MAIN CONTROL CENTER */}
@@ -148,7 +157,8 @@ export default function App() {
               <Route path="*" element={<Navigate to="/logo" replace />} />
             </Routes>
           </React.Suspense>
-        </Router>
+          </Router>
+        </AgentBusProvider>
       </UserProvider>
     </ErrorBoundary>
   );

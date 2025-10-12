@@ -429,7 +429,12 @@ export default function AutomatedOrderingSystem() {
       });
       
       setIsProcessingOrders(false);
-      alert(`Processed ${activeRules.length} automated orders successfully!`);
+      try {
+        const toast = (window as any).__maycole_toast_provider__;
+        const msg = `Processed ${activeRules.length} automated orders successfully!`;
+        if (toast && typeof toast.push === 'function') toast.push(msg);
+        else console.info(msg);
+      } catch (e) { console.info(`Processed ${activeRules.length} automated orders successfully!`); }
     }, 3000);
   };
 

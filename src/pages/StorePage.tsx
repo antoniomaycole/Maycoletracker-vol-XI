@@ -30,7 +30,11 @@ const StorePage = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-lg font-bold text-gray-900">{ext.price}</div>
-                  <button className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-1">
+                  <button
+                    onClick={() => navigate(`/inventory?action=install&ext=${encodeURIComponent(ext.name)}`)}
+                    aria-label={`Install ${ext.name} extension`}
+                    className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-1"
+                  >
                     <Download className="w-3 h-3" />
                     Install
                   </button>

@@ -376,7 +376,12 @@ export default function Training() {
 
   const downloadCertificate = (module: TrainingModule) => {
     // Simulate certificate download
-    alert(`Certificate for "${module.title}" would be downloaded here.`);
+    try {
+      const toast = (window as any).__maycole_toast_provider__;
+      const msg = `Certificate for "${module.title}" would be downloaded here.`;
+      if (toast && typeof toast.push === 'function') toast.push(msg);
+      else console.info(msg);
+    } catch (e) { console.info(`Certificate for "${module.title}" would be downloaded here.`); }
   };
 
   const getDifficultyColor = (difficulty: string) => {

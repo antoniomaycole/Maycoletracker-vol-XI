@@ -1,0 +1,22 @@
+.root {
+  display: block;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.industrySelect {
+  margin-bottom: 12px;
+}
+
+.reportActions {
+  margin-top: 12px;
+}
+
+.reportPre {
+  white-space: pre-wrap;
+  margin-top: 8px;
+}

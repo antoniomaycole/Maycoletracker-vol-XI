@@ -44,6 +44,16 @@ const AnalyticsPage = () => {
     }, 2000);
   };
 
+  // Listen for global voice command events
+  useEffect(() => {
+    const handler = (e: any) => {
+      // run the weekly report when voice command triggers
+      generateWeeklyReport();
+    };
+    window.addEventListener('voice:run-weekly-report', handler as EventListener);
+    return () => window.removeEventListener('voice:run-weekly-report', handler as EventListener);
+  }, []);
+
   const generateMonthlyReport = () => {
     setReportGenerating('monthly');
     speak('Monthly report generated');

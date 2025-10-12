@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "name": "maycoletracker",
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "github": {
+    "enabled": true
+  }
+}

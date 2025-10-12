@@ -3,7 +3,8 @@
  * Reports Agent - Advanced Reporting System
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAgentEvent, useAgentBus } from '../contexts/AgentBusContext';
 import { FileText, Download, Calendar, TrendingUp, BarChart3, PieChart, Filter, RefreshCw } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -152,6 +153,17 @@ const ReportsAgent = () => {
       default: return 'text-gray-600';
     }
   };
+
+  // Listen for bus events requesting a weekly report
+  const bus = useAgentBus();
+  useEffect(() => {
+    const unsub = bus.subscribe('request:weekly-report', () => {
+      // Simple demo: when requested, log and notify (could trigger generation)
+      console.info('ReportsAgent: received request:weekly-report');
+      bus.publish('reports:weekly-generated', { timestamp: new Date().toISOString() });
+    });
+    return () => unsub();
+  }, [bus]);
 
   return (
     <div className="min-h-screen bg-white">

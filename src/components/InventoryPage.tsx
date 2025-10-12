@@ -3,6 +3,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useToast } from './ui/ToastProvider';
 import UniversalBackButton from './UniversalBackButton';
 import MaycoleTrackerBrand from './MaycoleTrackerBrand';
 import { useNavigate } from 'react-router-dom';
@@ -124,8 +125,10 @@ export default function InventoryPage() {
   }, []);
 
   const handleAddItem = () => {
+    const toast = useToast?.();
     if (!newItem.name || !newItem.category || !newItem.quantity) {
-      alert('Please fill in all required fields');
+      if (toast) toast.push('Please fill in all required fields');
+      else console.warn('Please fill in all required fields');
       return;
     }
 
@@ -167,7 +170,10 @@ export default function InventoryPage() {
     // Simulated voice recognition
     setTimeout(() => {
       setIsVoiceActive(false);
-      alert('Voice command: "Add new surgical gloves, quantity 200, supplier MedCorp"');
+      const toast = useToast?.();
+      const msg = 'Voice command: "Add new surgical gloves, quantity 200, supplier MedCorp"';
+      if (toast) toast.push(msg);
+      else console.info(msg);
     }, 3000);
   };
 
@@ -188,6 +194,23 @@ export default function InventoryPage() {
     
     return matchesSearch && matchesCategory && matchesIndustry;
   });
+
+    const handleEditItem = (id: string) => {
+      navigate(`/inventory/edit/${id}`);
+    };
+
+    const handleReceiveStock = (id: string) => {
+      navigate(`/inventory/receive/${id}`);
+    };
+
+    const handleConsumeStock = (id: string) => {
+      navigate(`/inventory/consume/${id}`);
+    };
+
+    const handleDeleteItem = (id: string) => {
+      if (!confirm('Delete this item? This action cannot be undone.')) return;
+      setInventoryItems((prev) => prev.filter((it) => it.id !== id));
+    };
 
   const industryStats = {
     totalItems: filteredItems.length,
@@ -236,11 +259,10 @@ export default function InventoryPage() {
           {/* Title and Industry Selector */}
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-              <MaycoleTrackerBrand 
-                size="large" 
-                variant="icon-only" 
+              <MaycoleTrackerBrand
+                fontSize={28}
+                compact={true}
                 clickable={false}
-                iconSize={40}
               />
               Inventory Management System
             </h1>
@@ -345,6 +367,7 @@ export default function InventoryPage() {
               </div>
               <select
                 value={filterCategory}
+                aria-label="Filter category"
                 onChange={(e) => setFilterCategory(e.target.value)}
                 className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
               >
@@ -383,6 +406,7 @@ export default function InventoryPage() {
                     className="bg-white/10 border-white/20 text-white placeholder-white/50"
                   />
                   <select
+                    aria-label="New product category"
                     value={newItem.category || ''}
                     onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
                     className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
@@ -517,6 +541,20 @@ export default function InventoryPage() {
                       </div>
                     </div>
                   </div>
+                    <div className="mt-4 flex items-center justify-end gap-2">
+                      <Button onClick={() => handleEditItem(item.id)} className="btn-on-dark px-3 py-1">
+                        <Edit3 className="w-4 h-4 inline mr-1" /> Edit
+                      </Button>
+                      <Button onClick={() => handleReceiveStock(item.id)} className="btn-on-dark px-3 py-1">
+                        Receive
+                      </Button>
+                      <Button onClick={() => handleConsumeStock(item.id)} className="btn-on-dark px-3 py-1">
+                        Consume
+                      </Button>
+                      <Button onClick={() => handleDeleteItem(item.id)} className="btn-on-dark px-3 py-1">
+                        <Trash2 className="w-4 h-4 inline mr-1" /> Delete
+                      </Button>
+                    </div>
                 </CardContent>
               </Card>
             ))}

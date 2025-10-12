@@ -1,0 +1,22 @@
+/* Stronger rules to ensure the brand icon is visible in production builds */
+.logo-page .app-store-icon-button,
+.brand-icon-left,
+.maycole-brand-icon,
+.brand-icon-perfect {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure shine-effect doesn't cover the icon (z-index) */
+.app-store-icon-button .shine-effect,
+.maycole-brand-icon .shine-effect {
+  z-index: 0 !important;
+}
+
+/* Make sure the SVG inside the button is visible above decorations */
+.app-store-icon-button svg,
+.maycole-brand-icon svg {
+  z-index: 1 !important;
+  position: relative !important;
+}

@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { useAgentBus } from '../contexts/AgentBusContext';
 import { Calculator, DollarSign, TrendingUp, Percent, PieChart, BarChart3 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -20,6 +21,7 @@ interface CalculationResult {
 const CalculatorAgent = () => {
   const [activeCalculator, setActiveCalculator] = useState<'roi' | 'breakeven' | 'pricing' | 'inventory' | 'loan'>('roi');
   const [results, setResults] = useState<CalculationResult[]>([]);
+  const bus = useAgentBus();
 
   // ROI Calculator State
   const [roiData, setRoiData] = useState({
@@ -204,10 +206,22 @@ const CalculatorAgent = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-orange-600 to-orange-700 text-white p-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold flex items-center gap-3">
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold flex items-center gap-3">
             <Calculator className="w-8 h-8" />
             MaycoleTracker™ Calculator Agent
-          </h1>
+            </h1>
+            <div>
+              <button
+                onClick={() => {
+                  try { bus.publish('request:weekly-report'); } catch (e) { console.warn(e); }
+                }}
+                className="bg-white text-orange-600 px-3 py-2 rounded-md font-semibold"
+              >
+                Request Weekly Report
+              </button>
+            </div>
+          </div>
           <p className="text-orange-100 mt-2">
             Advanced business calculations for financial planning and analysis
           </p>

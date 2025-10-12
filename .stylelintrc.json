@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended"
+  ],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      { "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen", "layer", "components", "utilities", "theme", "container", "custom-variant", "import"] }
+    ],
+    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "has-text"] }]
+  },
+  "ignoreFiles": [
+    "src/MaycoleTracker-Brand-Kit.css",
+    "src/components/LogoPage.fixed.css",
+    "src/styles/brand-override.css",
+    "src/components/AnalyticsPage.css",
+    "src/index 2.css"
+  ]
+}

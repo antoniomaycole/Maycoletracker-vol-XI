@@ -2,6 +2,9 @@
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
+  // Derive __dirname from import.meta.url and decode URI components so paths with spaces work
+  const __filename = decodeURI(new URL(import.meta.url).pathname);
+  const __dirname = path.dirname(__filename);
 
   export default defineConfig({
     plugins: [react()],
@@ -16,6 +19,7 @@
         'react-day-picker@8.10.1': 'react-day-picker',
         'next-themes@0.4.6': 'next-themes',
         'lucide-react@0.487.0': 'lucide-react',
+  'motion/react': path.resolve(__dirname, 'src/shims/motion-react.ts'),
         'input-otp@1.4.2': 'input-otp',
         'embla-carousel-react@8.6.0': 'embla-carousel-react',
         'cmdk@1.1.1': 'cmdk',

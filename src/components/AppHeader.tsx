@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { MoreVertical, Info, Settings, HelpCircle, Home, Package, ArrowLeft, ChevronLeft } from 'lucide-react';
+import { MoreVertical, Info, Settings, HelpCircle, Home, ArrowLeft, ChevronLeft } from 'lucide-react';
+import MaycoleTrackerIconButton from './MaycoleTrackerIconButton';
 
 interface AppHeaderProps {
   fontSize?: number;
@@ -101,19 +102,13 @@ const AppHeader: React.FC<AppHeaderProps> = ({
             MaycoleTracker™ vol. XI
           </span>
 
-          {/* Store Icon Button - sized to fit with text, positioned away from name */}
-          <button
+          {/* Canonical MaycoleTracker Icon Button (production-grade) */}
+          <MaycoleTrackerIconButton
+            size={Math.round(iconButtonSize)}
+            className="ml-1"
             onClick={() => navigate('/store')}
-            className="flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 transition-all duration-200"
-            style={{ 
-              width: `${iconButtonSize}px`,
-              height: `${iconButtonSize}px`
-            }}
-            aria-label="App Store - Extensions and Premium Features"
-            title="App Store"
-          >
-            <Package className="text-white" style={{ width: `${iconButtonSize * 0.5}px`, height: `${iconButtonSize * 0.5}px` }} />
-          </button>
+            title="App Store - MaycoleTracker™ Extensions"
+          />
         </div>
       </div>
 

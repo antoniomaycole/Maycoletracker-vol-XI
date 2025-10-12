@@ -184,7 +184,12 @@ export default function ProductAlertSystem() {
     if (!alert) return;
 
     // Simulate executing the recommended action
-    alert('Executing: ' + alert.recommendedAction);
+    try {
+      const toast = (window as any).__maycole_toast_provider__;
+      const msg = 'Executing: ' + alert.recommendedAction;
+      if (toast && typeof toast.push === 'function') toast.push(msg);
+      else console.info(msg);
+    } catch (e) { console.info('Executing: ' + alert.recommendedAction); }
     
     // Mark alert as resolved after action
     setTimeout(() => {

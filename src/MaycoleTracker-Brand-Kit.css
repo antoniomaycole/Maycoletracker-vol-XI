@@ -13,11 +13,11 @@
   --maycole-blue-dark: #1e3a8a;
   --maycole-blue-light: #3b82f6;
   --maycole-blue-lighter: #60a5fa;
-  --maycole-white: #ffffff;
+  --maycole-white: #fff;
   --maycole-gray: #f8f9fa;
-  --maycole-shadow: rgba(30, 64, 175, 0.3);
-  --maycole-shadow-light: rgba(30, 64, 175, 0.15);
-  --maycole-shadow-dark: rgba(30, 64, 175, 0.45);
+  --maycole-shadow: rgb(30 64 175 / 30%);
+  --maycole-shadow-light: rgb(30 64 175 / 15%);
+  --maycole-shadow-dark: rgb(30 64 175 / 45%);
   
   /* Gradients */
   --maycole-gradient: linear-gradient(135deg, var(--maycole-blue) 0%, var(--maycole-blue-dark) 100%);
@@ -183,7 +183,7 @@
   background: var(--maycole-white);
   color: var(--maycole-blue);
   border: 2px solid var(--maycole-blue);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 .btn-maycole-secondary:hover {
@@ -207,14 +207,14 @@
 }
 
 .btn-maycole-ghost {
-  background: rgba(30, 64, 175, 0.1);
+  background: rgb(30 64 175 / 10%);
   color: var(--maycole-blue);
   border: none;
   box-shadow: none;
 }
 
 .btn-maycole-ghost:hover {
-  background: rgba(30, 64, 175, 0.2);
+  background: rgb(30 64 175 / 20%);
   color: var(--maycole-blue-dark);
 }
 
@@ -224,15 +224,15 @@
 .maycole-card {
   background: var(--maycole-white);
   border-radius: var(--maycole-radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   padding: 24px;
   transition: all 0.3s ease;
-  border: 1px solid rgba(30, 64, 175, 0.1);
+  border: 1px solid rgb(30 64 175 / 10%);
 }
 
 .maycole-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 15%);
   border-color: var(--maycole-blue-light);
 }
 
@@ -249,8 +249,8 @@
   gap: 15px;
   padding: 16px 24px;
   background: var(--maycole-white);
-  border-bottom: 1px solid rgba(30, 64, 175, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(30 64 175 / 10%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
 }
 
 .maycole-nav {
@@ -269,7 +269,7 @@
 }
 
 .maycole-nav-link:hover {
-  background: rgba(30, 64, 175, 0.1);
+  background: rgb(30 64 175 / 10%);
   color: var(--maycole-blue-dark);
   text-decoration: none;
 }
@@ -297,7 +297,7 @@
 }
 
 .maycole-badge-light {
-  background: rgba(30, 64, 175, 0.1);
+  background: rgb(30 64 175 / 10%);
   color: var(--maycole-blue);
 }
 
@@ -312,8 +312,8 @@
    ======================================== */
 .maycole-hero {
   background: linear-gradient(135deg, 
-    rgba(30, 64, 175, 0.05) 0%, 
-    rgba(30, 64, 175, 0.02) 100%);
+    rgb(30 64 175 / 5%) 0%, 
+    rgb(30 64 175 / 2%) 100%);
   padding: 80px 20px;
   text-align: center;
   position: relative;
@@ -323,13 +323,10 @@
 .maycole-hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 20% 50%, rgb(30 64 175 / 8%) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgb(30 64 175 / 5%) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -379,7 +376,7 @@
 }
 
 .bg-maycole-light {
-  background-color: rgba(30, 64, 175, 0.05);
+  background-color: rgb(30 64 175 / 5%);
 }
 
 .border-maycole {
@@ -397,7 +394,7 @@
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .maycole-hero h1 {
     font-size: 2.5rem;
   }
@@ -424,7 +421,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .maycole-hero {
     padding: 60px 16px;
   }
@@ -455,12 +452,12 @@
   
   .maycole-card {
     background: var(--maycole-gray);
-    color: #ffffff;
+    color: #fff;
   }
   
   .maycole-header {
     background: var(--maycole-gray);
-    color: #ffffff;
+    color: #fff;
   }
 }
 
@@ -472,6 +469,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -483,6 +481,7 @@
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

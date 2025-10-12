@@ -1,0 +1,7 @@
+node_modules/
+build/
+dist/
+public/
+docs/examples/
+src/**/*.module.css
+src/**/*.md.css

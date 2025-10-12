@@ -248,6 +248,29 @@ const RecoveryCheckAgentBonding = () => {
   const [dependencyReport, setDependencyReport] = useState<DependencyPatchReport | null>(null);
   const [recoveryReport, setRecoveryReport] = useState<RecoveryReport | null>(null);
   const [enforcersEnabled, setEnforcersEnabled] = useState(true);
+  // AgentBus integration (publish recovery status updates)
+  // Importing the bus lazily to avoid heavy coupling in this large component
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { useAgentBus } = (require('../contexts/AgentBusContext') as any);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const bus = useAgentBus();
+
+  useEffect(() => {
+    // publish a periodic recovery status for monitoring
+    const id = setInterval(() => {
+      try {
+        const status = {
+          timestamp: new Date().toISOString(),
+          healthyFunctions: backendFunctions.filter(f => f.status === 'healthy').length,
+          brokenFunctions: backendFunctions.filter(f => f.status === 'broken').length
+        };
+        bus.publish('recovery:status', status);
+      } catch (e) {
+        // ignore
+      }
+    }, 30000);
+    return () => clearInterval(id);
+  }, [backendFunctions, bus]);
 
   // Simulate backend function health check
   const checkFunctionHealth = async (fnName: string): Promise<BackendFunction> => {

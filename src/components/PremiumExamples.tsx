@@ -8,7 +8,8 @@ import { Scanner } from './Scanner';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { Crown, Zap, BarChart3, Mic, QrCode, Users } from 'lucide-react';
+import { Zap, BarChart3, Mic, QrCode, Users } from 'lucide-react';
+import { Crown } from '@/lib/icons';
 
 // Example 1: Basic Premium Conditional Rendering
 export function BasicPremiumExample() {
@@ -275,7 +276,7 @@ export function HOCPatternExample() {
 
 // Example 6: Complete Usage Showcase
 export function CompletePremiumShowcase() {
-  const { user, isPremium, isEnterprise } = useUser();
+  const { user, isPremium } = useUser();
 
   return (
     <div className="space-y-8">

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Crown, Star, Shield, Zap } from 'lucide-react';
+import { Shield, Zap } from 'lucide-react';
+import { Crown, Star } from '@/lib/icons';
 
 interface ProBadgeProps {
   variant?: 'default' | 'premium' | 'enterprise' | 'small' | 'large';
@@ -7,6 +8,7 @@ interface ProBadgeProps {
   text?: string;
   pulse?: boolean;
   className?: string;
+  size?: string;
 }
 
 export function ProBadge({ 
@@ -61,11 +63,11 @@ export const ProFeatureBadge = (props: Omit<ProBadgeProps, 'text'>) => (
   <ProBadge text="Pro Feature" {...props} />
 );
 
-export const PremiumBadge = (props: Omit<ProBadgeProps, 'text' | 'variant'>) => (
+export const PremiumBadge = (props: Omit<ProBadgeProps, 'text'>) => (
   <ProBadge text="Premium" variant="premium" {...props} />
 );
 
-export const EnterpriseBadge = (props: Omit<ProBadgeProps, 'text' | 'variant'>) => (
+export const EnterpriseBadge = (props: Omit<ProBadgeProps, 'text'>) => (
   <ProBadge text="Enterprise" variant="enterprise" {...props} />
 );
 

@@ -3,6 +3,8 @@
  * Enterprise-grade performance tracking for production optimization
  */
 
+import React from 'react';
+
 interface PerformanceMetric {
   name: string;
   value: number;
@@ -85,10 +87,11 @@ class PerformanceTracker {
       }
     }).observe({ entryTypes: ['largest-contentful-paint'] });
 
-    // First Input Delay
+    // First Input Delay - processingStart exists on specific entry types; guard access
     new PerformanceObserver((list) => {
-      for (const entry of list.getEntries()) {
-        this.recordMetric('FID', entry.processingStart - entry.startTime, 'user_action');
+      for (const entry of list.getEntries() as any[]) {
+        const processingStart = (entry && (entry as any).processingStart) || entry.startTime;
+        this.recordMetric('FID', processingStart - entry.startTime, 'user_action');
       }
     }).observe({ entryTypes: ['first-input'] });
 
@@ -149,6 +152,7 @@ export const performanceTracker = new PerformanceTracker();
 
 // Enhanced React hook for component performance tracking
 export function usePerformanceTracking(componentName: string) {
+  // keep explicit React import usage to avoid UMD/module warnings in some tsconfig setups
   React.useEffect(() => {
     const tracker = performanceTracker.trackComponentMount(componentName);
     tracker.start();

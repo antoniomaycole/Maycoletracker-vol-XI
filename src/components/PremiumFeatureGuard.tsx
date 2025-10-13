@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { useUser, type PremiumFeature } from '../contexts/UserContext';
+import { useUser } from '../contexts/UserContext';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 
 interface PremiumFeatureGuardProps {
-  feature: PremiumFeature;
+  feature: string;
   children: ReactNode;
   fallback?: ReactNode;
   showUpgrade?: boolean;
@@ -32,7 +32,7 @@ export function PremiumFeatureGuard({
   description,
   className = ""
 }: PremiumFeatureGuardProps) {
-  const { user, hasFeature, isPremium, upgradeToPremium, upgradeToEnterprise } = useUser();
+  const { user, hasFeature, isPremium } = useUser();
 
   // If user has access to the feature, render children
   if (hasFeature(feature)) {
@@ -119,7 +119,7 @@ export function PremiumFeatureGuard({
     }
   };
 
-  const details = featureDetails[feature] || {
+  const details = (featureDetails as any)[feature] || {
     name: 'Premium Feature',
     description: 'This feature requires a premium subscription',
     icon: <Lock className="w-5 h-5" />,
@@ -129,11 +129,8 @@ export function PremiumFeatureGuard({
   const isEnterpriseFeature = details.tier === 'Enterprise';
 
   const handleUpgrade = async () => {
-    if (isEnterpriseFeature) {
-      await upgradeToEnterprise();
-    } else {
-      await upgradeToPremium();
-    }
+    // In this shimbed environment, trigger a simple UI flow or redirect
+    window.location.href = '/subscription';
   };
 
   return (
@@ -244,7 +241,7 @@ export function PremiumFeatureGuard({
 // Higher-order component for premium features
 export function withPremiumFeature<P extends object>(
   Component: React.ComponentType<P>,
-  feature: PremiumFeature,
+  feature: string,
   upgradeProps?: {
     title?: string;
     description?: string;
@@ -255,7 +252,7 @@ export function withPremiumFeature<P extends object>(
     return (
       <PremiumFeatureGuard 
         feature={feature}
-        {...upgradeProps}
+        {...(upgradeProps as any)}
       >
         <Component {...props} />
       </PremiumFeatureGuard>
@@ -264,13 +261,12 @@ export function withPremiumFeature<P extends object>(
 }
 
 // Hook for checking premium features in components
-export function usePremiumFeature(feature: PremiumFeature) {
-  const { hasFeature, isPremium, isEnterprise } = useUser();
+export function usePremiumFeature(feature: string) {
+  const { hasFeature, isPremium } = useUser();
   
   return {
     hasAccess: hasFeature(feature),
     isPremium: isPremium(),
-    isEnterprise: isEnterprise(),
     feature
   };
 }

@@ -3,7 +3,7 @@ import { useToast } from './ui/ToastProvider';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
-import type { InventoryItem } from './InventoryPage';
+import type { MTInventoryItem as InventoryItem } from '@/types/inventory';
 
 // Simple inline SVG bar chart (dependency-free)
 function BarChart({ items }: { items: InventoryItem[] }) {

@@ -328,7 +328,7 @@ export function Analytics({ businessConfig }: AnalyticsProps) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {businessConfig.categories?.slice(0, 4).map((category, index) => (
+                  {businessConfig.categories?.slice(0, 4).map((category: string, index: number) => (
                     <div key={category} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div 

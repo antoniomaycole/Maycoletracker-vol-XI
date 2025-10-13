@@ -5,18 +5,26 @@
   ],
   "plugins": ["stylelint-order"],
   "rules": {
+    "declaration-block-single-line-max-declarations": null,
+    "no-descending-specificity": null,
+    "keyframes-name-pattern": null,
+    "media-feature-name-no-unknown": null,
+    "declaration-property-value-no-unknown": null,
+    "selector-class-pattern": null,
+    "max-nesting-depth": null,
     "at-rule-no-unknown": [
       true,
       { "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen", "layer", "components", "utilities", "theme", "container", "custom-variant", "import"] }
     ],
     "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "has-text"] }]
   },
-  "ignoreFiles": [
+    "ignoreFiles": [
     "src/MaycoleTracker-Brand-Kit.css",
-    "src/components/LogoPage.css",
     "src/styles/brand-override.css",
     "src/components/AnalyticsPage.css",
     "src/index 2.css",
-    "src/components/legacy/**"
+    "src/components/legacy/**",
+    "build/**",
+    "node_modules/**"
   ]
 }

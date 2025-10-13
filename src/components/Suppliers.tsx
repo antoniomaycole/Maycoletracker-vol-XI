@@ -4,8 +4,9 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
-import { ArrowLeft, Users, Star, Clock, DollarSign, TrendingUp, Phone, Mail, Plus } from 'lucide-react';
-import { AppScreen } from '../App';
+import { ArrowLeft, Users, Clock, DollarSign, TrendingUp, Phone, Mail, Plus } from 'lucide-react';
+import { Star } from '@/lib/icons';
+import type { RouteKey as AppScreen } from '../types/navigation';
 
 interface SuppliersProps {
   onNavigate: (screen: AppScreen) => void;

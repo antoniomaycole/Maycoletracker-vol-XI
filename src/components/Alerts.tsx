@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { ArrowLeft, AlertTriangle, Package } from 'lucide-react';
-import type { InventoryItem } from '../types/inventory';
+import type { MTInventoryItem as InventoryItem } from '../types/inventory';
 import type { AppScreen } from '../types/navigation';
 
 interface AlertsProps {
@@ -20,7 +20,7 @@ export function Alerts({ lowStockItems, onRestock, onNavigate }: AlertsProps) {
 
   const handleRestock = (item: InventoryItem) => {
     setSelectedItem(item);
-    setRestockQuantity(item.lowStockThreshold * 2); // Suggest double the threshold
+    setRestockQuantity((item.lowStockThreshold ?? 1) * 2); // Suggest double the threshold
     setRestockDialogOpen(true);
   };
 
@@ -34,7 +34,8 @@ export function Alerts({ lowStockItems, onRestock, onNavigate }: AlertsProps) {
   };
 
   const getSuggestedReorderAmount = (item: InventoryItem) => {
-    return Math.max(item.lowStockThreshold * 2, item.lowStockThreshold + 5);
+    const thresh = item.lowStockThreshold ?? 1;
+    return Math.max(thresh * 2, thresh + 5);
   };
 
   return (
@@ -117,13 +118,13 @@ export function Alerts({ lowStockItems, onRestock, onNavigate }: AlertsProps) {
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <div className="text-muted-foreground">Current Stock</div>
-                        <div className="text-destructive font-medium">
-                          {item.quantity} {item.unit}
-                        </div>
+                          <div className="text-destructive font-medium">
+                            {(item.quantity ?? 0)} {item.unit}
+                          </div>
                       </div>
                       <div>
                         <div className="text-muted-foreground">Minimum Level</div>
-                        <div>{item.lowStockThreshold} {item.unit}</div>
+                        <div>{(item.lowStockThreshold ?? 0)} {item.unit}</div>
                       </div>
                     </div>
                   </div>
@@ -227,7 +228,7 @@ export function Alerts({ lowStockItems, onRestock, onNavigate }: AlertsProps) {
                     placeholder="Enter quantity"
                   />
                   <p className="text-xs text-muted-foreground">
-                    New total: {selectedItem.quantity + restockQuantity} {selectedItem.unit}
+                    New total: {(selectedItem.quantity ?? 0) + restockQuantity} {selectedItem.unit}
                   </p>
                 </div>
 

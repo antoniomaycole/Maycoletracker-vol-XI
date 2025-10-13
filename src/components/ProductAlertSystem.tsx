@@ -9,8 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, AlertTriangle, AlertCircle, CheckCircle, Clock, Package,
   TrendingDown, TrendingUp, Calendar, Bell, BellOff, Settings, Zap,
-  RefreshCw, Download, Filter, Search, Eye, EyeOff, Target, Shield
+  RefreshCw, Download, Filter, Search, Eye, EyeOff, Shield
 } from 'lucide-react';
+import { Target } from '../lib/icon-shims';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';

@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Badge } from './ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { ArrowLeft, Search, AlertTriangle } from 'lucide-react';
-import type { InventoryItem } from '../types/inventory';
+import type { MTInventoryItem as InventoryItem } from '../types/inventory';
 import type { AppScreen } from '../types/navigation';
 import type { BusinessConfig } from './BusinessConfig';
 
@@ -24,13 +24,13 @@ export function InventoryList({ items, onEditItem, onNavigate, trainingMode, bus
 
   const filteredItems = items.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = categoryFilter === 'all' || item.category === categoryFilter;
+    const matchesCategory = categoryFilter === 'all' || (item.category ?? 'uncategorized') === categoryFilter;
     return matchesSearch && matchesCategory;
   });
 
   // Use business config categories if available, otherwise derive from items
   const businessCategories = businessConfig?.categories || [];
-  const itemCategories = Array.from(new Set(items.map(item => item.category)));
+  const itemCategories = Array.from(new Set(items.map(item => item.category ?? 'uncategorized')));
   const categories = ['all', ...businessCategories, ...itemCategories.filter(cat => !businessCategories.includes(cat))];
 
   const TrainingTooltip = ({ children, content }: { children: React.ReactNode; content: string }) => {
@@ -121,7 +121,7 @@ export function InventoryList({ items, onEditItem, onNavigate, trainingMode, bus
           </Card>
         ) : (
           filteredItems.map(item => {
-            const isLowStock = item.quantity <= item.lowStockThreshold;
+            const isLowStock = (item.quantity ?? 0) <= (item.lowStockThreshold ?? 0);
             
             return (
               <TrainingTooltip 
@@ -148,7 +148,7 @@ export function InventoryList({ items, onEditItem, onNavigate, trainingMode, bus
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
                             <span className={`${isLowStock ? 'text-destructive font-medium' : 'text-primary'}`}>
-                              {item.quantity} {item.unit}
+                              {(item.quantity ?? 0)} {item.unit}
                             </span>
                             <Badge variant="secondary" className="text-xs">
                               {item.category}
@@ -156,7 +156,7 @@ export function InventoryList({ items, onEditItem, onNavigate, trainingMode, bus
                           </div>
                           
                           <div className="text-xs text-muted-foreground">
-                            Updated: {new Date(item.lastUpdated).toLocaleDateString()}
+                            Updated: {new Date(item.lastUpdated ?? new Date().toISOString()).toLocaleDateString()}
                           </div>
                           
                           {item.supplier && (
@@ -168,7 +168,7 @@ export function InventoryList({ items, onEditItem, onNavigate, trainingMode, bus
                       </div>
                       
                       <div className="text-right text-xs text-muted-foreground">
-                        <div>Low at: {item.lowStockThreshold}</div>
+                        <div>Low at: {(item.lowStockThreshold ?? 0)}</div>
                         {item.expiryDate && (
                           <div>Expires: {new Date(item.expiryDate).toLocaleDateString()}</div>
                         )}

@@ -8,10 +8,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BookOpen, ArrowLeft, Play, Pause, RotateCcw, CheckCircle, Clock,
-  User, Award, Target, Brain, Lightbulb, Video, FileText, Download,
+  User, Brain, Lightbulb, Video, FileText, Download,
   Star, Search, Filter, Bookmark, Share, MessageCircle, Trophy,
   Zap, Camera, Mic, QrCode, BarChart3, Settings, Building2
 } from 'lucide-react';
+import { Target, Award } from '../lib/icon-shims';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';

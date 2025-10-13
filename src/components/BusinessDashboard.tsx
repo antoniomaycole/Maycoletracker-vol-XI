@@ -18,7 +18,7 @@ import UniversalBackButton from './UniversalBackButton';
 import SystemStatusWidget from './SystemStatusWidget';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, RadialBarChart, RadialBar
+  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell
 } from 'recharts';
 
 interface BusinessMetric {
@@ -371,7 +371,7 @@ export default function BusinessDashboard() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
                     <YAxis />
-                    <Tooltip formatter={(value) => [`$${value?.toLocaleString()}`, 'Revenue']} />
+                    <Tooltip formatter={(value: any) => [`$${value?.toLocaleString()}`, 'Revenue']} />
                     <Area 
                       type="monotone" 
                       dataKey="revenue" 

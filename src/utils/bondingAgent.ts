@@ -90,6 +90,24 @@ const backendFunctions = [
   "RecoveryFallback"
 ];
 
+// Helper: map backend function names to health-check module names when possible
+const moduleNameMap: Record<string, string> = {
+  InventorySync: 'inventory',
+  AgentDispatch: 'dashboard',
+  UserAuth: 'auth',
+  WebhookListener: 'api',
+  DataSanitizer: 'data-sanitizer',
+  AgentBondingProtocol: 'agent-bonding-protocol',
+  AnalyticsEngine: 'analytics',
+  VoiceProcessor: 'voice',
+  CameraService: 'camera',
+  ScannerEngine: 'scanner',
+  PaymentProcessor: 'api',
+  NotificationService: 'api',
+  BackupService: 'database',
+  RecoveryFallback: 'dashboard'
+};
+
 // AI Agents Configuration with Backend Function Bonding
 const aiAgents: AIAgent[] = [
   {
@@ -372,10 +390,17 @@ const assessAgentHealth = async (agent: AIAgent): Promise<AIAgentBondingResult> 
   // Check backend function availability
   try {
     if (agent.bondedTo !== "RecoveryFallback") {
-      // Simulate backend function health check
-      const functionHealthy = await checkModuleHealth(agent.bondedTo);
+      // Normalize the name to a health-check module when possible
+      const mapped = moduleNameMap[agent.bondedTo] || agent.bondedTo.toLowerCase();
+
+      // Simulate backend function health check with a safety timeout
+      const functionHealthy = await Promise.race([
+        checkModuleHealth(mapped),
+        new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 8000))
+      ]);
+
       if (!functionHealthy) {
-        errors.push(`Backend function ${agent.bondedTo} is not responding`);
+        errors.push(`Backend function ${agent.bondedTo} (${mapped}) is not responding`);
         agent.errorCount++;
         agent.bondStrength = Math.max(agent.bondStrength - 15, 10);
       }
@@ -568,7 +593,12 @@ const validateDependencies = async (moduleConfig: ModuleConfig): Promise<boolean
   
   for (const dependency of moduleConfig.dependencies) {
     try {
-      const dependencyHealthy = await checkModuleHealth(dependency);
+      // map common dependency names to health-check module names when applicable
+      const mapped = moduleNameMap[dependency] || dependency.toLowerCase();
+      const dependencyHealthy = await Promise.race([
+        checkModuleHealth(mapped),
+        new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 6000))
+      ]);
       if (!dependencyHealthy) {
         console.warn(`[Bonding Agent] ⚠️ Dependency ${dependency} is not healthy for ${moduleConfig.name}`);
         return false;
@@ -881,7 +911,13 @@ const emergencyModuleRestart = async (moduleName: string): Promise<void> => {
 export const startBondingMonitor = (intervalMs: number = 300000): NodeJS.Timeout => {
   console.log('📡 [Bonding Agent] Starting continuous module bonding monitor...');
   
-  return setInterval(async () => {
+  // prevent multiple monitors from being created accidentally
+  if ((globalThis as any).__maycole_bonding_monitor) {
+    console.warn('[Bonding Agent] Monitor already running, returning existing handle');
+    return (globalThis as any).__maycole_bonding_monitor;
+  }
+
+  const handle = setInterval(async () => {
     try {
       console.log('🔍 [Bonding Monitor] Running scheduled health check...');
       const report = await bondingAgent();
@@ -894,6 +930,24 @@ export const startBondingMonitor = (intervalMs: number = 300000): NodeJS.Timeout
       console.error('❌ [Bonding Monitor] Error during scheduled check:', error);
     }
   }, intervalMs);
+
+  // store handle so startBondingMonitor is idempotent
+  (globalThis as any).__maycole_bonding_monitor = handle;
+  return handle;
+};
+
+/**
+ * Stop the continuous monitor if running
+ */
+export const stopBondingMonitor = (): void => {
+  const handle = (globalThis as any).__maycole_bonding_monitor;
+  if (handle) {
+    clearInterval(handle);
+    delete (globalThis as any).__maycole_bonding_monitor;
+    console.log('📡 [Bonding Agent] Bonding monitor stopped');
+  } else {
+    console.log('📡 [Bonding Agent] No active bonding monitor to stop');
+  }
 };
 
 /**

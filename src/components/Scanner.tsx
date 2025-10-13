@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
-import { ArrowLeft, Camera, QrCode, Mic, MicOff, Volume2, Search, Zap } from 'lucide-react';
-import { AppScreen, InventoryItem } from '../App';
+import { ArrowLeft, Camera, QrCode, Mic, MicOff, Search, Zap } from 'lucide-react';
+import { Volume2 } from '@/lib/icons';
+import type { RouteKey as AppScreen } from '../types/navigation';
+import type { MTInventoryItem as InventoryItem } from '../types/inventory';
 import VoiceControl from './VoiceControl';
 
 interface ScannerProps {
@@ -42,7 +44,7 @@ export function Scanner({
       setScanResult('QR_SALMON_001');
       const foundItem = items.find(item => item.qrCode === 'QR_SALMON_001' || item.name.toLowerCase().includes('salmon'));
       if (foundItem) {
-        onItemFound(foundItem);
+        onItemFound?.(foundItem);
       }
     }, 2000);
   };
@@ -54,7 +56,7 @@ export function Scanner({
       setScanResult('1234567890123');
       const foundItem = items.find(item => item.barcode === '1234567890123' || item.name.toLowerCase().includes('tomato'));
       if (foundItem) {
-        onItemFound(foundItem);
+        onItemFound?.(foundItem);
       }
     }, 2000);
   };
@@ -78,11 +80,11 @@ export function Scanner({
     // Enhanced command parsing
     let results: InventoryItem[] = [];
     
-    if (searchTerm.includes('find') || searchTerm.includes('show')) {
+      if (searchTerm.includes('find') || searchTerm.includes('show')) {
       // Search commands
       results = items.filter(item => 
         searchTerm.includes(item.name.toLowerCase()) || 
-        searchTerm.includes(item.category.toLowerCase())
+        searchTerm.includes((item.category ?? '').toLowerCase())
       );
     } else if (searchTerm.includes('add') || searchTerm.includes('log')) {
       // Add/Log commands - show relevant items
@@ -90,17 +92,17 @@ export function Scanner({
       results = items.filter(item => 
         keywords.some(keyword => 
           item.name.toLowerCase().includes(keyword) || 
-          item.category.toLowerCase().includes(keyword)
+          (item.category ?? '').toLowerCase().includes(keyword)
         )
       );
     } else if (searchTerm.includes('stock') || searchTerm.includes('level')) {
       // Stock level commands - show low stock items
-      results = items.filter(item => item.quantity <= item.lowStockThreshold);
+      results = items.filter(item => (item.quantity ?? 0) <= (item.lowStockThreshold ?? 0));
     } else {
       // General search
       results = items.filter(item => 
         searchTerm.includes(item.name.toLowerCase()) || 
-        searchTerm.includes(item.category.toLowerCase())
+        searchTerm.includes((item.category ?? '').toLowerCase())
       );
     }
     
@@ -133,7 +135,7 @@ export function Scanner({
       {/* Header */}
       <div className="flex items-center gap-3">
         <Button
-          onClick={() => onNavigate('dashboard')}
+          onClick={() => onNavigate?.('dashboard')}
           variant="ghost"
           size="sm"
           className="flex items-center gap-2"
@@ -337,14 +339,14 @@ export function Scanner({
                   <div>
                     <div className="font-medium">{item.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      {item.quantity} {item.unit} • {item.category}
-                      {item.quantity <= item.lowStockThreshold && (
+                      {(item.quantity ?? 0)} {item.unit} • {item.category}
+                      {(item.quantity ?? 0) <= (item.lowStockThreshold ?? 0) && (
                         <Badge variant="destructive" className="ml-2">Low Stock</Badge>
                       )}
                     </div>
                   </div>
                   <Button
-                    onClick={() => onItemFound(item)}
+                    onClick={() => onItemFound?.(item)}
                     size="sm"
                   >
                     Select
@@ -389,13 +391,13 @@ export function Scanner({
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <Button onClick={() => onNavigate('dashboard')} variant="outline">
+        <Button onClick={() => onNavigate?.('dashboard')} variant="outline">
           🏠 Back to Dashboard
         </Button>
-        <Button onClick={() => onNavigate('inventory')} variant="outline">
+        <Button onClick={() => onNavigate?.('inventory')} variant="outline">
           📋 View Inventory
         </Button>
-        <Button onClick={() => onNavigate('log-usage')} variant="outline">
+        <Button onClick={() => onNavigate?.('log-usage')} variant="outline">
           📝 Log Usage
         </Button>
       </div>

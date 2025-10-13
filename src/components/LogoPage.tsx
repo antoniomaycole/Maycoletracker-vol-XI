@@ -13,8 +13,7 @@ import './LogoPage.layout.css';
 const LogoPage = () => {
   const navigate = useNavigate();
 
-  // Debug console log
-  console.log('✅ MaycoleTracker™ Perfect LogoPage is rendering!');
+  // Debug console log removed for production hardening
 
   return (
     <div className="logo-page blue-background">

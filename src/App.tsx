@@ -22,6 +22,7 @@ import ComprehensiveInventorySystem from './components/ComprehensiveInventorySys
 import AdvertisementPage from './components/AdvertisementPage';
 import TrainingMode from './components/TrainingMode';
 import ReportsAgent from './components/ReportsAgent';
+import ReportPage from './pages/ReportPage';
 import CalculatorAgent from './components/CalculatorAgent';
 import RecoveryCheckAgentBonding from './components/RecoveryCheckAgentBonding';
 
@@ -144,6 +145,7 @@ export default function App() {
               
               {/* Analytics System */}
               <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/report" element={<ReportPage />} />
               
               {/* Settings & About Pages */}
               <Route path="/settings" element={<SettingsPage />} />

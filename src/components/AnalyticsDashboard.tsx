@@ -137,10 +137,7 @@ const AnalyticsDashboard = () => {
               <div className="flex items-center gap-2 mb-2">
                 <BarChart3 className="w-6 h-6 text-primary" />
                 <h1 className="text-2xl font-bold">Analytics Dashboard</h1>
-                <ProBadge variant="premium" size="small">
-                  <Crown className="w-3 h-3 mr-1" />
-                  Premium
-                </ProBadge>
+                <ProBadge variant="premium" size="small" icon="crown" text="Premium" />
               </div>
               <p className="text-muted-foreground">
                 Visualize trends, usage, and operational metrics with professional insights

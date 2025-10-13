@@ -106,12 +106,13 @@ export default defineConfig({
         }
       }
     },
-    terserOptions: {
+    terserOptions: ({
+      // Vite's terser types can differ across versions; use any to avoid type errors here.
       compress: {
-        drop_console: false, // Keep console logs for debugging
+        drop_console: false,
         drop_debugger: true
       }
-    }
+    } as any)
   },
   server: {
     port: 3000,

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Badge } from './ui/badge';
 import { ArrowLeft, Settings, Building, Factory, Store, Utensils, Wrench, Truck, Package, HardHat, Fuel, Building2 } from 'lucide-react';
 import { IndustrySelector } from './IndustrySelector';
-import { AppScreen } from '../App';
+import type { RouteKey as AppScreen } from '../types/navigation';
 
 interface BusinessConfigProps {
   onNavigate: (screen: AppScreen) => void;

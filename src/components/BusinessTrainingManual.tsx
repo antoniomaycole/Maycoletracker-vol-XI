@@ -6,12 +6,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  ArrowLeft, BookOpen, Users, Target, CheckCircle, Play, Pause, 
-  SkipForward, RotateCcw, Download, Star, Clock, Award, Lightbulb,
+  ArrowLeft, BookOpen, Users, CheckCircle, Play, Pause, 
+  SkipForward, RotateCcw, Download, Star, Clock, Lightbulb,
   Building2, DollarSign, BarChart3, Mic, Camera, Brain, Package,
   CreditCard, TrendingUp, AlertTriangle, Settings, Globe, Shield,
   Coffee, Presentation, FileText, Video, Headphones, Monitor
 } from 'lucide-react';
+import { Award, Crown } from '../lib/icon-shims';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Crown, Star, Globe, Zap, Shield, Target, Award, Rocket } from 'lucide-react';
+import { Globe, Zap, Shield, Rocket } from 'lucide-react';
+import { Crown, Star, Target, Award } from '@/lib/icons';
 import AppHeader from './AppHeader';
 import { MaycoleTrackerBrand } from './MaycoleTrackerBrand';
 import { Card } from './ui/card';

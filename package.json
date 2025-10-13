@@ -4,17 +4,23 @@
   "private": true,
   "license": "MIT",
   "description": "MAYCOLE Technologies — Vol XI: enterprise-ready backend with modular UI primitives",
-  "homepage": "https://github.com/antoniomaycole/MaycoleTracker-vol-XI#readme",
+  "homepage": "https://maycoletechnology.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/antoniomaycole/MaycoleTracker-vol-XI.git"
   },
-  "author": "Antonio G. Maycole",
+  "author": "MaycoleTracker <support@maycoletechnology.com>",
+  "bugs": {
+    "url": "https://github.com/antoniomaycole/MaycoleTracker-vol-XI/issues"
+  },
   "main": "api_server.js",
   "scripts": {
     "start": "node api_server.js",
     "dev": "nodemon --watch api_server.js --ext js,json --delay 200ms api_server.js",
     "dev:frontend": "vite",
+  "dev:frontend:host": "vite --host",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --max-warnings=0",
@@ -24,8 +30,18 @@
     "health": "npm audit && node -v && npm -v",
     "security": "npm audit --audit-level=moderate",
     "clean-install": "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps"
+    ,
+    "prepare-export": "bash ./scripts/prepare_export.sh"
+  ,
+    "export": "npm run build && npm run prepare-export"
   },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  
   "dependencies": {
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0",
     "@radix-ui/react-accordion": "1.2.3",
     "@radix-ui/react-alert-dialog": "1.1.6",
     "@radix-ui/react-aspect-ratio": "1.1.2",
@@ -68,12 +84,13 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.0",
     "@types/node": "^20.19.21",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-n": "^17.9.0",
+  "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "nodemon": "^3.1.0",
     "prettier": "^3.3.3",
@@ -94,22 +111,6 @@
     "npm": ">=9"
   },
   "engineStrict": true,
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "es2022": true
-    },
-    "extends": [
-      "standard"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2022,
-      "sourceType": "script"
-    },
-    "rules": {
-      "no-console": "off"
-    }
-  },
   "prettier": {
     "singleQuote": true,
     "semi": false,

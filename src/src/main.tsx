@@ -11,7 +11,7 @@ import { createRoot } from 'react-dom/client'
 import '../styles/globals.css'
 
 // Import main app
-import App from '../App.tsx'
+import App from '../App'
 
 // Service Worker Registration for PWA
 async function registerServiceWorker() {

@@ -5,7 +5,8 @@
 
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Package, BarChart3, Scan, Crown, Camera, Mic, Brain, Info } from 'lucide-react';
+import { Home, Package, BarChart3, Scan, Camera, Mic, Brain, Info } from 'lucide-react';
+import { Crown } from '@/lib/icons';
 
 export default function SimpleNavigation() {
   const navigate = useNavigate();

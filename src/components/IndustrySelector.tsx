@@ -130,10 +130,10 @@ const industries = [
 
 export function IndustrySelector({ currentConfig, onIndustryChange, onCustomizeClick, compact = false }: IndustrySelectorProps) {
   const [showAll, setShowAll] = useState(false);
-  const [selectedIndustry, setSelectedIndustry] = useState(currentConfig?.businessType || 'custom');
+  const [selectedIndustry, setSelectedIndustry] = useState<string>(currentConfig?.businessType || 'custom');
 
   const handleIndustrySelect = (industryId: string) => {
-    setSelectedIndustry(industryId);
+  setSelectedIndustry(industryId as any);
     onIndustryChange(industryId);
   };
 
@@ -301,7 +301,7 @@ export function IndustryPills({ currentConfig, onIndustryChange }: {
   currentConfig: BusinessConfig | null; 
   onIndustryChange: (industryType: string) => void;
 }) {
-  const [selectedIndustry, setSelectedIndustry] = useState(currentConfig?.businessType || 'custom');
+  const [selectedIndustry, setSelectedIndustry] = useState<string>(currentConfig?.businessType || 'custom');
 
   const handleIndustrySelect = (industryId: string) => {
     setSelectedIndustry(industryId);

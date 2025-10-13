@@ -5,7 +5,8 @@
  */
 
 import React, { useState } from 'react';
-import { BookOpen, Play, CheckCircle, Clock, Users, Award, Target, BarChart, Mic, Camera, Settings, HeadphonesIcon, Zap, Brain, Star, Trophy, ChevronRight } from 'lucide-react';
+import { BookOpen, Play, CheckCircle, Clock, Users, BarChart, Mic, Camera, Settings, HeadphonesIcon, Zap, Brain, ChevronRight } from 'lucide-react';
+import { Award, Target, Star, Trophy } from '@/lib/icons';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';

@@ -16,6 +16,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
+import VerificationModal from './VerificationModal';
 
 interface InventoryItem {
   id: string;
@@ -117,6 +118,10 @@ export default function InventoryPage() {
     status: 'in-stock'
   });
 
+  // Verification modal state
+  const [verificationOpen, setVerificationOpen] = useState(false);
+  const [verificationAction, setVerificationAction] = useState<{ type: 'add' | 'delete' | 'receive' | 'consume'; payload?: any } | null>(null);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -131,38 +136,44 @@ export default function InventoryPage() {
       else console.warn('Please fill in all required fields');
       return;
     }
+    const skipVerification = (window as any)?.MAYCOLE_CONFIG?.skipVerification === true;
+    if (skipVerification) {
+      const item: InventoryItem = {
+        id: Date.now().toString(),
+        name: newItem.name!,
+        category: newItem.category!,
+        quantity: newItem.quantity!,
+        unitPrice: newItem.unitPrice || 0,
+        totalValue: (newItem.quantity || 0) * (newItem.unitPrice || 0),
+        location: newItem.location || 'Default Location',
+        supplier: newItem.supplier || 'Unknown Supplier',
+        dateAdded: new Date().toISOString(),
+        lastUpdated: new Date().toISOString(),
+        status: newItem.quantity! > newItem.minStockLevel! ? 'in-stock' : 'low-stock',
+        industry: selectedIndustry,
+        description: newItem.description,
+        minStockLevel: newItem.minStockLevel || 10
+      };
 
-    const item: InventoryItem = {
-      id: Date.now().toString(),
-      name: newItem.name!,
-      category: newItem.category!,
-      quantity: newItem.quantity!,
-      unitPrice: newItem.unitPrice || 0,
-      totalValue: (newItem.quantity || 0) * (newItem.unitPrice || 0),
-      location: newItem.location || 'Default Location',
-      supplier: newItem.supplier || 'Unknown Supplier',
-      dateAdded: new Date().toISOString(),
-      lastUpdated: new Date().toISOString(),
-      status: newItem.quantity! > newItem.minStockLevel! ? 'in-stock' : 'low-stock',
-      industry: selectedIndustry,
-      description: newItem.description,
-      minStockLevel: newItem.minStockLevel || 10
-    };
+      setInventoryItems([...inventoryItems, item]);
+      setNewItem({
+        name: '',
+        category: '',
+        quantity: 0,
+        unitPrice: 0,
+        location: '',
+        supplier: '',
+        description: '',
+        minStockLevel: 10,
+        industry: selectedIndustry,
+        status: 'in-stock'
+      });
+      setIsAddingItem(false);
+      return;
+    }
 
-    setInventoryItems([...inventoryItems, item]);
-    setNewItem({
-      name: '',
-      category: '',
-      quantity: 0,
-      unitPrice: 0,
-      location: '',
-      supplier: '',
-      description: '',
-      minStockLevel: 10,
-      industry: selectedIndustry,
-      status: 'in-stock'
-    });
-    setIsAddingItem(false);
+    setVerificationAction({ type: 'add' });
+    setVerificationOpen(true);
   };
 
   const startVoiceRecognition = () => {
@@ -200,16 +211,92 @@ export default function InventoryPage() {
     };
 
     const handleReceiveStock = (id: string) => {
-      navigate(`/inventory/receive/${id}`);
+      const skipVerification = (window as any)?.MAYCOLE_CONFIG?.skipVerification === true;
+      if (skipVerification) {
+        navigate(`/inventory/receive/${id}`);
+        return;
+      }
+      setVerificationAction({ type: 'receive', payload: id });
+      setVerificationOpen(true);
     };
 
     const handleConsumeStock = (id: string) => {
-      navigate(`/inventory/consume/${id}`);
+      const skipVerification = (window as any)?.MAYCOLE_CONFIG?.skipVerification === true;
+      if (skipVerification) {
+        navigate(`/inventory/consume/${id}`);
+        return;
+      }
+      setVerificationAction({ type: 'consume', payload: id });
+      setVerificationOpen(true);
     };
 
     const handleDeleteItem = (id: string) => {
-      if (!confirm('Delete this item? This action cannot be undone.')) return;
-      setInventoryItems((prev) => prev.filter((it) => it.id !== id));
+      const skipVerification = (window as any)?.MAYCOLE_CONFIG?.skipVerification === true;
+      if (skipVerification) {
+        if (!confirm('Delete this item? This action cannot be undone.')) return;
+        setInventoryItems((prev) => prev.filter((it) => it.id !== id));
+        return;
+      }
+      setVerificationAction({ type: 'delete', payload: id });
+      setVerificationOpen(true);
+    };
+
+    // Verification result handler
+    const handleVerified = (result?: { scan?: string; face?: string }) => {
+      if (!verificationAction) return;
+      const act = verificationAction;
+      setVerificationOpen(false);
+      setVerificationAction(null);
+
+      if (act.type === 'add') {
+        const item: InventoryItem = {
+          id: Date.now().toString(),
+          name: newItem.name!,
+          category: newItem.category!,
+          quantity: newItem.quantity!,
+          unitPrice: newItem.unitPrice || 0,
+          totalValue: (newItem.quantity || 0) * (newItem.unitPrice || 0),
+          location: newItem.location || 'Default Location',
+          supplier: newItem.supplier || 'Unknown Supplier',
+          dateAdded: new Date().toISOString(),
+          lastUpdated: new Date().toISOString(),
+          status: newItem.quantity! > newItem.minStockLevel! ? 'in-stock' : 'low-stock',
+          industry: selectedIndustry,
+          description: newItem.description,
+          minStockLevel: newItem.minStockLevel || 10
+        };
+
+        setInventoryItems([...inventoryItems, item]);
+        setNewItem({
+          name: '',
+          category: '',
+          quantity: 0,
+          unitPrice: 0,
+          location: '',
+          supplier: '',
+          description: '',
+          minStockLevel: 10,
+          industry: selectedIndustry,
+          status: 'in-stock'
+        });
+        setIsAddingItem(false);
+        return;
+      }
+
+      if (act.type === 'delete') {
+        const id = act.payload as string;
+        setInventoryItems((prev) => prev.filter((it) => it.id !== id));
+        return;
+      }
+
+      if (act.type === 'receive' || act.type === 'consume') {
+        const id = act.payload as string;
+        (window as any).MAYCOLE_STATE = (window as any).MAYCOLE_STATE || {};
+        (window as any).MAYCOLE_STATE.lastVerified = { id, action: act.type, at: Date.now(), via: result };
+        if (act.type === 'receive') navigate(`/inventory/receive/${id}`);
+        else navigate(`/inventory/consume/${id}`);
+        return;
+      }
     };
 
   const industryStats = {
@@ -577,6 +664,7 @@ export default function InventoryPage() {
               </CardContent>
             </Card>
           )}
+    <VerificationModal open={verificationOpen} onClose={() => setVerificationOpen(false)} onVerified={handleVerified} items={inventoryItems} />
         </div>
       </div>
     </div>

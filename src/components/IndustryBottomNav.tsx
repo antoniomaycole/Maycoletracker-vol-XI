@@ -10,7 +10,7 @@ import {
   ShoppingCart, Tag, Package2, Shirt, Home, Gamepad2, BookOpen,
   
   // Manufacturing 
-  Factory, Cog, Wrench, Hammer, Drill, Screwdriver, Bolt, Zap,
+  Factory, Cog, Wrench, Hammer, /*Drill, Screwdriver, Bolt*/ Zap,
   
   // Warehouse/Distribution
   Truck, Package, Box, Forklift, Warehouse, ClipboardList, Archive,
@@ -22,7 +22,7 @@ import {
   Car, Wrench as CarWrench, Settings, Fuel, Battery, Gauge,
   
   // Electronics/Tech
-  Cpu, Smartphone, Monitor, Cable, Zap as Electric, HardDrive, Microchip,
+  Cpu, Smartphone, Monitor, Cable, Zap as Electric, HardDrive,
   
   // General/Custom
   Box as GenericBox, Plus, Search, AlertTriangle, BarChart3, Calendar, Circle,
@@ -39,7 +39,7 @@ import {
   // Additional interactive icons
   Scan, Mic, Camera, TrendingUp, Users2, Settings2, Crown, Mail, MessageSquare
 } from 'lucide-react';
-import { AppScreen } from '../App';
+import type { RouteKey as AppScreen } from '../types/navigation';
 import type { BusinessConfig } from './BusinessConfig';
 
 interface IndustryBottomNavProps {
@@ -91,8 +91,8 @@ const industryNavigationData = {
     ],
     tools: [
       { icon: <Hammer className="w-4 h-4" />, label: 'Tools', category: 'Tools' },
-      { icon: <Drill className="w-4 h-4" />, label: 'Components', category: 'Components' },
-      { icon: <Bolt className="w-4 h-4" />, label: 'Hardware', category: 'Hardware' },
+  { icon: <Wrench className="w-4 h-4" />, label: 'Components', category: 'Components' },
+  { icon: <Zap className="w-4 h-4" />, label: 'Hardware', category: 'Hardware' },
       { icon: <Zap className="w-4 h-4" />, label: 'Chemicals', category: 'Chemicals' },
       { icon: <Box className="w-4 h-4" />, label: 'Packaging', category: 'Packaging' },
     ]
@@ -149,12 +149,12 @@ const industryNavigationData = {
   electronics: {
     primary: [
       { screen: 'dashboard' as AppScreen, icon: <Cpu className="w-5 h-5" />, label: 'Assembly', description: 'Assembly Line' },
-      { screen: 'inventory' as AppScreen, icon: <Microchip className="w-5 h-5" />, label: 'Components', description: 'Electronic Components' },
+  { screen: 'inventory' as AppScreen, icon: <Cpu className="w-5 h-5" />, label: 'Components', description: 'Electronic Components' },
       { screen: 'log-usage' as AppScreen, icon: <Electric className="w-5 h-5" />, label: 'Consumed', description: 'Parts Consumed' },
       { screen: 'alerts' as AppScreen, icon: <AlertTriangle className="w-5 h-5" />, label: 'Alerts', description: 'Component Alerts' },
     ],
     tools: [
-      { icon: <Microchip className="w-4 h-4" />, label: 'Semiconductors', category: 'Semiconductors' },
+  { icon: <Cpu className="w-4 h-4" />, label: 'Semiconductors', category: 'Semiconductors' },
       { icon: <Cable className="w-4 h-4" />, label: 'Cables', category: 'Cables' },
       { icon: <HardDrive className="w-4 h-4" />, label: 'PCBs', category: 'PCBs' },
       { icon: <Monitor className="w-4 h-4" />, label: 'Connectors', category: 'Connectors' },

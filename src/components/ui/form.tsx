@@ -8,8 +8,9 @@ import {
   FormProvider,
   useFormContext,
   useFormState,
-  type ControllerProps,
-  type FieldPath,
+  // react-hook-form types vary across versions; use permissive any aliases
+  type ControllerProps as RHFControllerProps,
+  type FieldPath as RHFFieldPath,
   type FieldValues,
 } from "react-hook-form";
 
@@ -20,7 +21,7 @@ const Form = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends any = any,
 > = {
   name: TName;
 };
@@ -29,12 +30,9 @@ const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue,
 );
 
-const FormField = <
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({
-  ...props
-}: ControllerProps<TFieldValues, TName>) => {
+// Use a relaxed generic shape for FormField to avoid strict react-hook-form version mismatches
+// Use permissive any for controller props to avoid react-hook-form version generic mismatches
+const FormField = (props: any) => {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />

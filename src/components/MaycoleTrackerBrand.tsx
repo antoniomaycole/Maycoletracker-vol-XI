@@ -8,13 +8,17 @@ import { useNavigate } from 'react-router-dom';
 
 interface MaycoleTrackerBrandProps {
   fontSize?: number;
-  variant?: 'light' | 'dark';
+  variant?: 'light' | 'dark' | 'horizontal';
   showSubtitle?: boolean;
   showAppStoreButton?: boolean;
   className?: string;
   clickable?: boolean;
   compact?: boolean;
   onClick?: () => void;
+  // Added for compatibility with various callers
+  iconSize?: number;
+  size?: 'small' | 'medium' | 'large' | string;
+  navigateTo?: string;
 }
 
 export function MaycoleTrackerBrand({
@@ -25,7 +29,10 @@ export function MaycoleTrackerBrand({
   className = '',
   clickable = true,
   compact = false,
-  onClick
+  onClick,
+  iconSize: propIconSize,
+  size,
+  navigateTo
 }: MaycoleTrackerBrandProps) {
   const navigate = useNavigate();
 
@@ -34,12 +41,17 @@ export function MaycoleTrackerBrand({
     if (onClick) {
       onClick();
     } else {
-      navigate('/');
+      // prefer navigateTo prop if provided
+      if (navigateTo && typeof navigateTo === 'string') {
+        navigate(navigateTo);
+      } else {
+        navigate('/');
+      }
     }
   };
 
   // Calculate responsive sizes based on fontSize
-  const iconSize = Math.max(16, fontSize * 0.75);
+  const iconSize = Math.max(16, (propIconSize ?? fontSize * 0.75));
   const containerGap = compact ? fontSize * 0.4 : fontSize * 0.5;
   
   const textColor = variant === 'light' ? 'text-white' : 'text-gray-900';

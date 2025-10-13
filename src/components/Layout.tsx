@@ -1,8 +1,3 @@
-/**
- * Layout Component for MaycoleTracker™
- * Provides common layout structure for application pages
- */
-
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';

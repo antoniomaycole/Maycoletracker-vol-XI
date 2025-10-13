@@ -261,11 +261,13 @@ const ComprehensiveInventorySystem = () => {
       return matchesSearch && matchesCategory && matchesIndustry && matchesStatus && matchesPriority;
     });
 
-    // Sort the filtered results
+    // Sort the filtered results defensively (values may be undefined)
     filtered.sort((a, b) => {
-      const aValue = a[sortBy];
-      const bValue = b[sortBy];
-      
+      const aValue = a[sortBy] as any;
+      const bValue = b[sortBy] as any;
+      if (aValue == null && bValue == null) return 0;
+      if (aValue == null) return sortOrder === 'asc' ? 1 : -1;
+      if (bValue == null) return sortOrder === 'asc' ? -1 : 1;
       if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1;
       if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1;
       return 0;

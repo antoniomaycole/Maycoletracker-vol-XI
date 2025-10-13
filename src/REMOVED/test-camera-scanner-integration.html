@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Camera Scanner Integration - Complete System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1a202c;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+        .logo-icon {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 0.5rem;
+            margin-right: 0.75rem;
+            position: relative;
+            vertical-align: middle;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1rem;
+            height: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+            transform: translate(-50%, -50%);
+        }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #3b82f6;
+            border-radius: 0.1875rem;
+            transform: translate(-50%, -50%);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card.camera {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+        }
+        .feature-card.scanner {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+        .feature-card.integration {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .feature-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .feature-card.camera .feature-icon {
+            background: #8b5cf6;
+            color: white;
+        }
+        .feature-card.scanner .feature-icon {
+            background: #10b981;
+            color: white;
+        }
+        .feature-card.integration .feature-icon {
+            background: #f59e0b;
+            color: white;
+        }
+        .feature-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+        .check-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .button {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .button.camera {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        .button.camera:hover {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        }
+        .button.scanner {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .button.scanner:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+        .button.integration {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .button.integration:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+        .system-overview {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        .routes-demo {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        .route-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #374151;
+        }
+        .route-item:last-child {
+            border-bottom: none;
+        }
+        .route-path {
+            color: #10b981;
+            font-weight: 600;
+        }
+        .route-desc {
+            color: #9ca3af;
+            margin-left: 2rem;
+        }
+        .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        .badge.new {
+            background: #10b981;
+        }
+        .badge.enhanced {
+            background: #8b5cf6;
+        }
+        .code-demo {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .code-comment {
+            color: #059669;
+            font-weight: 600;
+        }
+        .code-function {
+            color: #7c3aed;
+        }
+        .code-string {
+            color: #d97706;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <span class="logo-icon"></span>
+                MaycoleTracker<span class="tm">™</span> Camera Scanner Integration
+            </h1>
+            <p>Professional Camera & Scanner System Integrated into Your Enterprise Platform</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <span class="badge new">Camera System</span>
+                <span class="badge enhanced">Barcode Scanner</span>
+                <span class="badge">vol. XI Enterprise</span>
+            </div>
+        </div>
+
+        <!-- Features Overview -->
+        <div class="features-grid">
+            <!-- Camera System -->
+            <div class="feature-card camera">
+                <div class="feature-title">
+                    <div class="feature-icon">📸</div>
+                    Live Camera System
+                </div>
+                <div class="feature-description">
+                    Professional inventory image capture with real-time camera access and file upload support.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Real-time camera access</li>
+                    <li><span class="check-icon">✓</span> Mobile-optimized (rear camera)</li>
+                    <li><span class="check-icon">✓</span> Image upload from gallery</li>
+                    <li><span class="check-icon">✓</span> Professional UI integration</li>
+                    <li><span class="check-icon">✓</span> Stream management</li>
+                </ul>
+                <a href="/camera" class="button camera">
+                    📸 Test Live Camera
+                </a>
+            </div>
+
+            <!-- Scanner System -->
+            <div class="feature-card scanner">
+                <div class="feature-title">
+                    <div class="feature-icon">📱</div>
+                    Barcode & QR Scanner
+                </div>
+                <div class="feature-description">
+                    Advanced scanning system for inventory codes, product labels, and QR codes with processing simulation.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Barcode scanning simulation</li>
+                    <li><span class="check-icon">✓</span> QR code processing</li>
+                    <li><span class="check-icon">✓</span> Batch scan mode</li>
+                    <li><span class="check-icon">✓</span> Recent scans tracking</li>
+                    <li><span class="check-icon">✓</span> Export functionality</li>
+                </ul>
+                <a href="/camera" class="button scanner">
+                    📱 Test Scanner System
+                </a>
+            </div>
+
+            <!-- Integration -->
+            <div class="feature-card integration">
+                <div class="feature-title">
+                    <div class="feature-icon">🔗</div>
+                    Dashboard Integration
+                </div>
+                <div class="feature-description">
+                    Seamlessly integrated into your MaycoleTracker™ inventory dashboard with direct access and workflow.
+                </div>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✓</span> Dashboard quick access</li>
+                    <li><span class="check-icon">✓</span> Inventory workflow integration</li>
+                    <li><span class="check-icon">✓</span> Professional styling</li>
+                    <li><span class="check-icon">✓</span> Navigation consistency</li>
+                    <li><span class="check-icon">✓</span> Voice alert compatibility</li>
+                </ul>
+                <a href="/dashboard" class="button integration">
+                    🔗 View Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- System Overview -->
+        <div class="system-overview">
+            <h2>Complete Camera Scanner Integration</h2>
+            <p>Your camera scanner system is now fully integrated into the MaycoleTracker™ vol. XI Enterprise Edition:</p>
+            
+            <div class="code-demo">
+                <div class="code-comment">// Enhanced Camera Scanner Component</div>
+                <div>const CameraScanner = () => {</div>
+                <div style="margin-left: 1rem;">const [cameraActive, setCameraActive] = useState(false);</div>
+                <div style="margin-left: 1rem;">const [scannerActive, setScannerActive] = useState(false);</div>
+                <div style="margin-left: 1rem;">const [lastScanned, setLastScanned] = useState(null);</div>
+                <div style="margin-top: 0.5rem;">
+                    <div style="margin-left: 1rem;"><span class="code-comment">// Professional camera activation</span></div>
+                    <div style="margin-left: 1rem;">const stream = await <span class="code-function">navigator.mediaDevices.getUserMedia</span>({</div>
+                    <div style="margin-left: 2rem;">video: { facingMode: <span class="code-string">'environment'</span> }</div>
+                    <div style="margin-left: 1rem;">});</div>
+                </div>
+                <div style="margin-top: 0.5rem;">
+                    <div style="margin-left: 1rem;"><span class="code-comment">// Barcode scanning simulation</span></div>
+                    <div style="margin-left: 1rem;"><span class="code-function">setLastScanned</span>(<span class="code-string">'INVENTORY-ITEM-12345'</span>);</div>
+                </div>
+                <div>};</div>
+            </div>
+        </div>
+
+        <!-- Complete Route System -->
+        <div class="system-overview">
+            <h2>Complete MaycoleTracker™ Route System</h2>
+            <p>Your camera scanner is now part of the comprehensive routing system:</p>
+            
+            <div class="routes-demo">
+                <div class="route-item">
+                    <span class="route-path">/camera</span><span class="badge new">NEW</span>
+                    <div class="route-desc">Complete Camera & Scanner System with live camera access</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/dashboard</span>
+                    <div class="route-desc">Enhanced Inventory Dashboard with scanner integration</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/logo</span>
+                    <div class="route-desc">Core MaycoleTracker™ logo page (protected)</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/ads</span>
+                    <div class="route-desc">Advertisement system</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/training</span>
+                    <div class="route-desc">Training mode</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/reports</span>
+                    <div class="route-desc">Reports agent</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/calculator</span>
+                    <div class="route-desc">Calculator agent</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/recovery</span>
+                    <div class="route-desc">Recovery system with 8 backend enforcers</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/industries</span>
+                    <div class="route-desc">Enhanced industry selector</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/configure/:industryType</span>
+                    <div class="route-desc">Industry configuration system</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/quick-setup/:industry</span>
+                    <div class="route-desc">Quick industry setup</div>
+                </div>
+                <div class="route-item">
+                    <span class="route-path">/simple-setup/:industry</span>
+                    <div class="route-desc">Simple industry configuration</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Features -->
+        <div class="system-overview">
+            <h2>Camera Scanner Features</h2>
+            
+            <h3>🎥 Live Camera System:</h3>
+            <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li><strong>Real-time Video Stream:</strong> Access device camera with rear-facing preference</li>
+                <li><strong>Stream Management:</strong> Proper camera activation/deactivation with cleanup</li>
+                <li><strong>Mobile Optimized:</strong> Uses 'environment' facingMode for rear camera</li>
+                <li><strong>File Upload:</strong> Alternative image upload from device gallery</li>
+                <li><strong>Professional UI:</strong> Consistent MaycoleTracker™ styling</li>
+            </ul>
+            
+            <h3>📱 Barcode & QR Scanner:</h3>
+            <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li><strong>Scanning Simulation:</strong> Mock barcode processing for demonstration</li>
+                <li><strong>Progress Feedback:</strong> Visual scanning indicators and status</li>
+                <li><strong>Recent Scans:</strong> Track and display successfully scanned items</li>
+                <li><strong>Batch Processing:</strong> Quick actions for multiple scans</li>
+                <li><strong>Export Functionality:</strong> Data export capabilities</li>
+            </ul>
+            
+            <h3>🔗 Dashboard Integration:</h3>
+            <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li><strong>Quick Access:</strong> Camera scanner button in dashboard quick actions</li>
+                <li><strong>Navigation Flow:</strong> Seamless navigation between camera and inventory</li>
+                <li><strong>Workflow Integration:</strong> "Add to Inventory" from scanned items</li>
+                <li><strong>Consistent Styling:</strong> Matches your existing MaycoleTracker™ design</li>
+                <li><strong>Voice Alert Compatibility:</strong> Works with your voice alert system</li>
+            </ul>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="system-overview">
+            <h2>How to Use Your Camera Scanner System</h2>
+            
+            <h3>📸 Camera Usage:</h3>
+            <ol style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li>Navigate to <code>/camera</code> or click "Camera Scanner" from dashboard</li>
+                <li>Click "Activate Camera" to start live video stream</li>
+                <li>Position inventory items within camera view</li>
+                <li>Use "Stop Camera" to end session</li>
+                <li>Alternative: Use "Upload Image" for existing photos</li>
+            </ol>
+            
+            <h3>📱 Scanner Usage:</h3>
+            <ol style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li>Click "Activate Scanner" to start barcode detection</li>
+                <li>System simulates scanning process (2-second delay)</li>
+                <li>View scanned results in "Recent Scans" section</li>
+                <li>Click "Add to Inventory" to process scanned items</li>
+                <li>Use "Batch Scan Mode" for multiple items</li>
+            </ol>
+            
+            <h3>🔄 Workflow Integration:</h3>
+            <ol style="margin-left: 2rem;">
+                <li>Start from Dashboard → Camera Scanner</li>
+                <li>Scan or photograph inventory items</li>
+                <li>Process scanned data</li>
+                <li>Return to Dashboard with new inventory data</li>
+                <li>Voice alerts work with new items automatically</li>
+            </ol>
+        </div>
+
+        <!-- Test Your System -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3>Test Your Complete Camera Scanner System:</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                <a href="/camera" class="button camera">
+                    📸 Camera & Scanner System
+                </a>
+                <a href="/dashboard" class="button scanner">
+                    📊 Enhanced Dashboard
+                </a>
+                <a href="/industries" class="button integration">
+                    🏭 Industry Configuration
+                </a>
+                <a href="/logo" class="button">
+                    🎯 MaycoleTracker™ Logo
+                </a>
+            </div>
+            
+            <p style="margin-top: 2rem; color: #6b7280; font-size: 0.875rem;">
+                Your Camera Scanner is now fully integrated into MaycoleTracker™ vol. XI Enterprise Edition<br>
+                Complete with professional styling, workflow integration, and mobile optimization!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simulate route navigation
+        document.querySelectorAll('a[href^="/"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const route = this.getAttribute('href');
+                
+                if (route === '/camera') {
+                    alert(`📸 Camera Scanner System\n\nFeatures:\n• Live camera access with rear-facing preference\n• Real-time video stream\n• Barcode & QR code scanning simulation\n• Image upload from gallery\n• Professional MaycoleTracker™ styling\n• Recent scans tracking\n• Batch processing mode\n• Direct dashboard integration\n\nRoute: ${route}`);
+                } else if (route === '/dashboard') {
+                    alert(`📊 Enhanced Inventory Dashboard\n\nIntegrated Features:\n• Camera scanner quick access button\n• Voice alerts for low stock items\n• Professional inventory management\n• Your original voice synthesis system\n• Seamless navigation to camera system\n• Complete workflow integration\n\nRoute: ${route}`);
+                } else if (route === '/industries') {
+                    alert(`🏭 Industry Configuration System\n\nMultiple Setup Options:\n• Enhanced industry selector\n• Quick setup configurations\n• Simple industry templates\n• Professional configuration wizards\n• Your original templates + enhanced options\n\nRoute: ${route}`);
+                } else if (route === '/logo') {
+                    alert(`🎯 MaycoleTracker™ Logo Page\n\nProtected Core System:\n• Original blue gradient background\n• Protected logo page (never modified)\n• Professional branding\n• Core system entry point\n• Enterprise Edition identity\n\nRoute: ${route}`);
+                }
+            });
+        });
+
+        // Animate elements on load
+        setTimeout(() => {
+            document.querySelectorAll('.feature-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        }, 500);
+    </script>
+</body>
+</html>

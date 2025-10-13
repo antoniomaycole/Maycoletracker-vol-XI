@@ -20,7 +20,7 @@ import { Slider } from './ui/slider';
 interface VoiceAlert {
   id: string;
   productName: string;
-  alertType: 'low_stock' | 'out_of_stock' | 'expiring' | 'reorder' | 'quality_issue';
+  alertType: 'low_stock' | 'out_of_stock' | 'expiring' | 'reorder' | 'quality_issue' | 'critical';
   message: string;
   priority: 'critical' | 'high' | 'medium' | 'low';
   industry: string;
@@ -171,6 +171,7 @@ export default function VoiceAlertSystem() {
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const synthesisRef = useRef<SpeechSynthesis | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -180,31 +181,48 @@ export default function VoiceAlertSystem() {
   }, []);
 
   useEffect(() => {
-    // Initialize speech synthesis
-    if ('speechSynthesis' in window) {
-      synthesisRef.current = window.speechSynthesis;
-      
-      // Load available voices
-      const loadVoices = () => {
-        const voices = synthesisRef.current?.getVoices() || [];
-        setAvailableVoices(voices);
-      };
-      
-      loadVoices();
-      synthesisRef.current.onvoiceschanged = loadVoices;
-    }
+    // Initialize speech synthesis and audio context (only in browser)
+    try {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        synthesisRef.current = window.speechSynthesis;
 
-    // Check for alerts that need to be played
-    const alertInterval = setInterval(() => {
-      checkAndPlayAlerts();
-    }, voiceSettings.alertFrequency * 60 * 1000);
+        // Load available voices
+        const loadVoices = () => {
+          try {
+            const voices = synthesisRef.current?.getVoices() || [];
+            setAvailableVoices(voices);
+          } catch (e) {
+            // ignore voice loading errors
+            setAvailableVoices([]);
+          }
+        };
 
-    return () => {
-      clearInterval(alertInterval);
-      if (synthesisRef.current) {
-        synthesisRef.current.cancel();
+        loadVoices();
+        synthesisRef.current.onvoiceschanged = loadVoices;
       }
-    };
+
+      // alert check interval (in minutes)
+      const alertInterval = setInterval(() => {
+        checkAndPlayAlerts();
+      }, Math.max(1, Number(voiceSettings.alertFrequency)) * 60 * 1000);
+
+      return () => {
+        clearInterval(alertInterval);
+        try {
+          if (synthesisRef.current) synthesisRef.current.cancel();
+        } catch (_) {}
+        try {
+          if (audioContextRef.current) {
+            audioContextRef.current.close().catch(() => {});
+            audioContextRef.current = null;
+          }
+        } catch (_) {}
+      };
+    } catch (err) {
+      // If any initialization fails, keep the component functional without synthesis
+      console.warn('VoiceAlertSystem initialization failed', err);
+      return () => {};
+    }
   }, [voiceSettings]);
 
   const checkAndPlayAlerts = () => {
@@ -297,9 +315,20 @@ export default function VoiceAlertSystem() {
   };
 
   const playAlertSound = (priority: string) => {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    
-    const frequencies = {
+    try {
+      if (!audioContextRef.current) {
+        const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
+        if (typeof AC === 'function') {
+          audioContextRef.current = new AC();
+        } else {
+          console.warn('AudioContext not available in this environment');
+          return;
+        }
+      }
+
+      const audioContext = audioContextRef.current;
+
+      const frequencies = {
       critical: [800, 1000, 1200],
       high: [600, 800],
       medium: [400, 600],
@@ -310,23 +339,31 @@ export default function VoiceAlertSystem() {
 
     freqs.forEach((freq, index) => {
       setTimeout(() => {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
+        try {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
 
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
 
-        oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
-        oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+          oscillator.type = 'sine';
 
-        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.1);
-        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5);
+          gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.05);
+          gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.4);
 
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.5);
-      }, index * 200);
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.45);
+        } catch (e) {
+          // ignore per-tone errors to avoid breaking alert flow
+          console.warn('Failed to play tone', e);
+        }
+      }, index * 180);
     });
+  } catch (e) {
+    console.warn('playAlertSound failed', e);
+  }
   };
 
   const testVoiceAlert = () => {

@@ -4,7 +4,8 @@
  */
 
 import React from 'react';
-import { Globe, Building2, Users, TrendingUp, Shield, Zap, Award, Crown, Star, Info } from 'lucide-react';
+import { Globe, Building2, Users, TrendingUp, Shield, Zap, Info } from 'lucide-react';
+import { Award, Crown, Star } from '@/lib/icons';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import UniversalBackButton from './UniversalBackButton';

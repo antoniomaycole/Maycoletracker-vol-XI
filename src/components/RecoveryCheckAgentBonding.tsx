@@ -327,6 +327,7 @@ const RecoveryCheckAgentBonding = () => {
   const [dependencyReport, setDependencyReport] = useState<DependencyPatchReport | null>(null);
   const [recoveryReport, setRecoveryReport] = useState<NormalizedRecoveryReport>(DEFAULT_RECOVERY_REPORT);
   const [enforcersEnabled, setEnforcersEnabled] = useState(true);
+  const [monitorHandle, setMonitorHandle] = useState<any | null>(null);
   // AgentBus integration (publish recovery status updates)
   // Importing the bus lazily to avoid heavy coupling in this large component
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -353,6 +354,31 @@ const RecoveryCheckAgentBonding = () => {
     }, 30000);
     return () => clearInterval(id);
   }, [backendFunctions, bus]);
+
+  // Expose start/stop monitor controls
+  const startMonitor = (intervalMs: number = 300000) => {
+    try {
+      // dynamic import to avoid bundling the monitor into light-weight pages
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { startBondingMonitor } = require('../utils/bondingAgent') as { startBondingMonitor: (n?: number) => NodeJS.Timeout };
+      const handle = startBondingMonitor(intervalMs);
+      setMonitorHandle(handle);
+    } catch (e) {
+      // ignore if module not available in some environments
+      console.warn('Unable to start bonding monitor', e);
+    }
+  };
+
+  const stopMonitor = () => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { stopBondingMonitor } = require('../utils/bondingAgent') as { stopBondingMonitor: () => void };
+      stopBondingMonitor();
+      setMonitorHandle(null);
+    } catch (e) {
+      console.warn('Unable to stop bonding monitor', e);
+    }
+  };
 
   // Simulate backend function health check
   const checkFunctionHealth = async (fnName: string): Promise<BackendFunction> => {

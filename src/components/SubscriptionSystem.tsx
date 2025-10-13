@@ -7,10 +7,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  ArrowLeft, CreditCard, Calendar, Crown, CheckCircle, AlertTriangle,
-  Shield, Star, Zap, Users, Building2, Target, Award, Clock, DollarSign,
+  ArrowLeft, CreditCard, Calendar, CheckCircle, AlertTriangle,
+  Shield, Star, Zap, Users, Building2, Globe, Clock, DollarSign,
   Lock, Unlock, RefreshCw, Download, Eye, Settings, Gift, Sparkles
 } from 'lucide-react';
+import { Activity } from 'lucide-react';
+import { Crown, Target } from '@/lib/icons';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';

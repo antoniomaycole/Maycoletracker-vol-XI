@@ -428,7 +428,7 @@ export default function FinancialManagement() {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <Tooltip formatter={(value) => [`$${value?.toLocaleString()}`, 'Amount']} />
+                        <Tooltip formatter={(value: any) => [`$${value?.toLocaleString()}`, 'Amount']} />
                         <Area 
                           type="monotone" 
                           dataKey="revenue" 
@@ -468,7 +468,7 @@ export default function FinancialManagement() {
                           cx="50%"
                           cy="50%"
                           labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="value"
@@ -477,7 +477,7 @@ export default function FinancialManagement() {
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value) => [`$${value?.toLocaleString()}`, 'Amount']} />
+                        <Tooltip formatter={(value: any) => [`$${(value as number)?.toLocaleString()}`, 'Amount']} />
                       </RechartsPieChart>
                     </ResponsiveContainer>
                   </div>

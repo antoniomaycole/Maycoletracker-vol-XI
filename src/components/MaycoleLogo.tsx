@@ -403,7 +403,7 @@ export const MaycoleLogo: React.FC<MaycoleLogoProps> = ({
       </svg>
 
       {/* Advanced 4D CSS animations */}
-      <style jsx>{`
+      <style>{`
         .logo-animate {
           animation: logo4DFloat 8s ease-in-out infinite;
         }
@@ -794,7 +794,7 @@ export const MaycoleFooterLogo: React.FC<{ size?: number; className?: string }> 
         />
       </svg>
 
-      <style jsx>{`
+  <style>{`
         .footer-logo {
           transition: all 0.2s ease;
         }

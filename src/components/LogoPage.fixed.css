@@ -1,0 +1,130 @@
+/* LogoPage.fixed.css — validated replacement used during migration
+   This file is intentionally small and conflict-free. Components import
+   this file to avoid legacy parsing errors in the original LogoPage.css.
+*/
+
+:root{--brand-blue:#007bff;--brand-blue-dark:#0056b3}
+.logo-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;color:#fff;text-align:center;background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-blue-dark) 100%)}
+.logo-page h1{font-size:2rem;font-weight:800;margin:.25rem 0;line-height:1.1;background:linear-gradient(135deg,#fff 0%,#e0e7ff 100%);background-clip:text;-webkit-text-fill-color:transparent}
+.logo-container{margin:2rem 0;display:flex;align-items:center;justify-content:center;gap:1rem}
+.blue-icon-button{background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-blue-dark) 100%);color:#fff;padding:.9rem 1.8rem;border-radius:9999px;border:2px solid rgb(255 255 255 / 20%)}
+
+@media (width <=640px){.logo-page{padding:1rem}.logo-page h1{font-size:1.6rem}}
+
+/* End LogoPage.fixed.css */
+
+/* Minimal overrides for LogoPage to guarantee stable layout and visuals
+   This file intentionally contains only the classes used by LogoPage.tsx
+   to avoid touching the large legacy stylesheet. It is imported after
+   LogoPage.css so its rules take precedence where required. */
+
+.centered-brand-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  /* raised to ensure it sits above the global reset in index.css */
+  z-index: 1200;
+  pointer-events: auto;
+}
+
+.brand-unit-perfect {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.brand-icon-left {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.brand-name-perfect {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+  color: white;
+  background: linear-gradient(90deg, #fff 0%, #cfe0ff 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.tm-standard {
+  font-size: 0.45em;
+  vertical-align: super;
+  margin-left: 0.08em;
+  opacity: 0.9;
+}
+
+.brand-subtitle-perfect {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgb(255 255 255 / 92%);
+}
+
+.centered-logo-container {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  /* ensure the interactive logo sits above decorative background dots */
+  z-index: 1250;
+}
+
+.kinetic-logo-centered {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
+.perfect-status {
+  margin-top: 1.5rem;
+  z-index: 3;
+}
+
+/* Ensure the decorative dots container does not block pointer events */
+.logo-page .absolute.pointer-events-none { pointer-events: none; }
+
+/* More specific selectors to override the global ".logo-page.blue-background > * { z-index: 1 }" rule */
+.logo-page.blue-background .centered-brand-container,
+.logo-page.blue-background .centered-logo-container,
+.logo-page.blue-background .perfect-status {
+  z-index: 1200 !important;
+  pointer-events: auto !important;
+}
+
+/* Small responsive adjustments */
+@media (width <= 640px) {
+  .brand-name-perfect { font-size: 1.4rem; }
+  .kinetic-logo-centered { width: 140px; }
+}
+
+/* Positional classes for decorative dots originally expressed as inline styles */
+.dot-pos-1 { top: 15%; left: 10%; }
+.dot-pos-2 { top: 25%; right: 15%; }
+.dot-pos-3 { bottom: 20%; left: 20%; }
+.dot-pos-4 { bottom: 30%; right: 25%; }
+
+.dot-pos-5 { top: 40%; left: 80%; }
+.dot-pos-6 { top: 60%; left: 5%; }
+.dot-pos-7 { bottom: 40%; left: 85%; }
+.dot-pos-8 { top: 70%; right: 30%; }
+
+.dot-pos-9 { top: 35%; left: 45%; }
+.dot-pos-10 { top: 75%; right: 5%; }
+.dot-pos-11 { top: 10%; left: 50%; }
+.dot-pos-12 { bottom: 10%; right: 50%; }
+
+.dot-pos-13 { top: 18%; left: 35%; }
+.dot-pos-14 { top: 55%; right: 20%; }
+.dot-pos-15 { bottom: 35%; left: 65%; }
+.dot-pos-16 { bottom: 50%; right: 40%; }

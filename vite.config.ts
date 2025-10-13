@@ -57,6 +57,7 @@
       outDir: 'build',
     },
     server: {
+      host: '0.0.0.0', // bind to all interfaces so LAN devices can reach the dev server
       port: 3000,
       open: true,
     },

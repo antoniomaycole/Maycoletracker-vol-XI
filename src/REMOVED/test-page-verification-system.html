@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Page Verification Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 1rem;
+            color: white;
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .test-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .test-section h2 {
+            color: #1f2937;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .test-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .test-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .test-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .test-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .test-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            margin: 0.25rem;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+        }
+
+        .test-link:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+        }
+
+        .test-link.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+        }
+
+        .test-link.danger:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35);
+        }
+
+        .test-link.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+        }
+
+        .test-link.success:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+        }
+
+        .test-link.warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
+        }
+
+        .test-link.warning:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .status-success { background: #10b981; }
+        .status-warning { background: #f59e0b; }
+        .status-error { background: #ef4444; }
+        .status-info { background: #3b82f6; }
+
+        .code-block {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 1px solid #93c5fd;
+            color: #1e40af;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .system-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .test-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MaycoleTracker™ Page Verification System</h1>
+            <p class="subtitle">Enterprise-Grade Route Validation Testing Suite</p>
+            <p style="font-size: 0.875rem; margin-top: 1rem; opacity: 0.8;">
+                Timestamp: [2025-10-02T02:26EDT] • vol. XI Enterprise Edition
+            </p>
+        </div>
+
+        <!-- Valid Page Tests -->
+        <div class="test-section">
+            <h2>
+                <div class="section-icon">✓</div>
+                Valid Pages (Should Pass Verification)
+            </h2>
+            <p style="margin-bottom: 1.5rem; color: #6b7280;">
+                These routes should pass verification and load normally without triggering the fallback system:
+            </p>
+            <div class="test-grid test-grid-3">
+                <div class="test-item">
+                    <h3>Core System Pages</h3>
+                    <a href="/" class="test-link success">🏠 Home/Logo</a>
+                    <a href="/main" class="test-link success">📊 Main Dashboard</a>
+                    <a href="/inventory" class="test-link success">📦 Inventory</a>
+                    <a href="/analytics" class="test-link success">📈 Analytics</a>
+                </div>
+                <div class="test-item">
+                    <h3>Media & Capture</h3>
+                    <a href="/scanner" class="test-link success">📱 Scanner</a>
+                    <a href="/camera" class="test-link success">📷 Camera</a>
+                    <a href="/voice" class="test-link success">🎤 Voice Control</a>
+                </div>
+                <div class="test-item">
+                    <h3>Premium Features</h3>
+                    <a href="/premium" class="test-link success">👑 Premium</a>
+                    <a href="/ai-agent" class="test-link success">🤖 AI Agent</a>
+                    <a href="/business-analytics" class="test-link success">📊 Business Analytics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invalid Page Tests -->
+        <div class="test-section">
+            <h2>
+                <div class="section-icon">!</div>
+                Invalid Pages (Should Trigger Verification)
+            </h2>
+            <p style="margin-bottom: 1.5rem; color: #6b7280;">
+                These routes should trigger the page verification system and show the redirect dialog:
+            </p>
+            <div class="test-grid test-grid-2">
+                <div class="test-item">
+                    <h3>Non-Existent Routes</h3>
+                    <a href="/invalid-page" class="test-link danger">❌ Invalid Page</a>
+                    <a href="/old-dashboard" class="test-link danger">❌ Old Dashboard</a>
+                    <a href="/legacy-inventory" class="test-link danger">❌ Legacy Inventory</a>
+                    <a href="/removed-feature" class="test-link danger">❌ Removed Feature</a>
+                </div>
+                <div class="test-item">
+                    <h3>Typo Simulations</h3>
+                    <a href="/inventroy" class="test-link danger">❌ Inventroy (typo)</a>
+                    <a href="/analitics" class="test-link danger">❌ Analitics (typo)</a>
+                    <a href="/scaner" class="test-link danger">❌ Scaner (typo)</a>
+                    <a href="/premum" class="test-link danger">❌ Premum (typo)</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recovery System Tests -->
+        <div class="test-section">
+            <h2>
+                <div class="section-icon">🔧</div>
+                Recovery System Tests
+            </h2>
+            <p style="margin-bottom: 1.5rem; color: #6b7280;">
+                Test the recovery fallback system and emergency routes:
+            </p>
+            <div class="test-grid test-grid-2">
+                <div class="test-item">
+                    <h3>Recovery Routes</h3>
+                    <a href="/RecoveryFallback" class="test-link warning">🔧 Recovery Fallback</a>
+                    <a href="/Main" class="test-link warning">📊 Main (Capital M)</a>
+                    <a href="/Dashboard" class="test-link warning">📈 Dashboard (Capital D)</a>
+                    <a href="/Recovery" class="test-link warning">🚨 Recovery (Capital R)</a>
+                </div>
+                <div class="test-item">
+                    <h3>Edge Cases</h3>
+                    <a href="/main/" class="test-link warning">📊 Main with trailing slash</a>
+                    <a href="//main" class="test-link warning">📊 Main with double slash</a>
+                    <a href="/main?test=1" class="test-link warning">📊 Main with query</a>
+                    <a href="/main#section" class="test-link warning">📊 Main with hash</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="test-section">
+            <h2>
+                <div class="section-icon">ℹ</div>
+                Page Verification System Information
+            </h2>
+            
+            <div class="info-box">
+                <strong>How It Works:</strong> The Page Verification System monitors each route change and validates it against a list of expected pages. If an invalid page is detected, it shows a countdown dialog and redirects to a fallback page.
+            </div>
+
+            <div class="warning-box">
+                <strong>Testing Notes:</strong> When testing invalid routes, you should see a modal dialog with a countdown timer. You can choose to redirect immediately or stay on the current page to see the enhanced 404 system.
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem 0;">Expected Pages Configuration:</h3>
+            <div class="code-block">
+expectedPages: [
+  '', 'main', 'inventory', 'analytics', 'scanner', 'camera', 'voice',
+  'premium', 'ai-agent', 'business-analytics', 'automated-ordering',
+  'voice-alerts', 'spending-reports', 'essential-products-intelligence',
+  'business-config', 'industry', 'industry-setup', 'subscription',
+  'company-health', 'comprehensive-industry', 'performance',
+  'supplies', 'reports', 'dashboard', 'training', 'weekly-reports',
+  'product-alerts', 'about', 'payment-processing', 'investor-presentation'
+]
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem 0;">Verification Flow:</h3>
+            <div class="code-block">
+1. User navigates to route
+2. PageVerificationSystem checks if route exists in expectedPages
+3. If valid: ✅ Continue normally
+4. If invalid: ⚠️ Show verification dialog with countdown
+5. User can choose: Redirect immediately OR Stay and see 404 page
+6. Fallback redirect: /main (configurable)
+7. Analytics logged to sessionStorage for debugging
+            </div>
+        </div>
+
+        <!-- System Statistics -->
+        <div class="system-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalPages">32</div>
+                <div class="stat-label">Total Valid Pages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="redirectDelay">2.0s</div>
+                <div class="stat-label">Redirect Delay</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="fallbackPage">main</div>
+                <div class="stat-label">Fallback Page</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="systemStatus">Active</div>
+                <div class="stat-label">System Status</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('🧪 MaycoleTracker™ Page Verification Test Suite Loaded');
+        console.log('📍 Timestamp: [2025-10-02T02:26EDT]');
+        
+        // Track clicks for testing
+        document.querySelectorAll('.test-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const route = e.target.getAttribute('href');
+                const isValid = e.target.classList.contains('success');
+                const isInvalid = e.target.classList.contains('danger');
+                const isRecovery = e.target.classList.contains('warning');
+                
+                let type = 'unknown';
+                if (isValid) type = 'valid';
+                if (isInvalid) type = 'invalid';
+                if (isRecovery) type = 'recovery';
+                
+                console.log(`🔗 Testing ${type} route: ${route}`);
+                
+                if (isInvalid) {
+                    console.log('⚠️ This should trigger the Page Verification System dialog');
+                } else if (isRecovery) {
+                    console.log('🔧 This should test recovery/edge case handling');
+                } else {
+                    console.log('✅ This should load normally');
+                }
+            });
+        });
+
+        // Check if we have any verification logs
+        document.addEventListener('DOMContentLoaded', () => {
+            const verificationLog = sessionStorage.getItem('maycoletracker_page_verification_log');
+            if (verificationLog) {
+                console.log('📋 Found previous verification log:', JSON.parse(verificationLog));
+            }
+            
+            // Update current path indicator
+            const currentPath = window.location.pathname;
+            console.log('📍 Current test suite path:', currentPath);
+        });
+
+        // Add system status monitoring
+        setInterval(() => {
+            const now = new Date().toLocaleTimeString();
+            document.getElementById('systemStatus').textContent = 'Active';
+            console.log(`⏰ ${now} - Page Verification Test Suite monitoring active`);
+        }, 30000);
+    </script>
+</body>
+</html>

@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";  
+import { MotionDiv } from '@/lib/shims';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -467,7 +468,7 @@ export default function IndustryConfiguration() {
               <h3 className="text-xl font-semibold mb-4">Included Features</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {config.features.map((feature, index) => (
-                  <motion.div
+                  <MotionDiv
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -476,7 +477,7 @@ export default function IndustryConfiguration() {
                   >
                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                     <span className="text-sm font-medium">{feature}</span>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
             </Card>
@@ -495,7 +496,7 @@ export default function IndustryConfiguration() {
                   const isSelected = selectedModules.includes(module.name);
                   
                   return (
-                    <motion.div
+                    <MotionDiv
                       key={index}
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -531,7 +532,7 @@ export default function IndustryConfiguration() {
                           )}
                         </div>
                       </Card>
-                    </motion.div>
+                    </MotionDiv>
                   );
                 })}
               </div>
@@ -545,7 +546,7 @@ export default function IndustryConfiguration() {
               </p>
               <div className="space-y-3">
                 {config.setupSteps.map((step, index) => (
-                  <motion.div
+                  <MotionDiv
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -556,7 +557,7 @@ export default function IndustryConfiguration() {
                       {index + 1}
                     </div>
                     <span className="text-gray-700">{step}</span>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
             </Card>
@@ -582,7 +583,7 @@ export default function IndustryConfiguration() {
           </div>
         ) : (
           /* Setup Complete */
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-16"
@@ -597,7 +598,7 @@ export default function IndustryConfiguration() {
             <div className="w-12 h-12 mx-auto">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
     </div>

@@ -170,30 +170,32 @@ export function SubscriptionManager({ onNavigate, currentUsage, onSubscriptionCh
     return subscriptionTiers.find(tier => tier.id === currentSubscription.tier) || subscriptionTiers[0];
   };
 
-  const isAtLimit = (feature: keyof UsageStats) => {
+  const isAtLimit = (feature: keyof UsageStats | string) => {
     const currentTier = getCurrentTier();
-    const limit = currentTier.limits[feature];
+    const limit = (currentTier.limits as any)[feature];
     if (limit === -1) return false; // unlimited
     
-    if (feature === 'storage') {
-      const limitMB = parseInt(limit.replace('MB', '').replace('GB', '')) * (limit.includes('GB') ? 1024 : 1);
+    if (feature === 'storage' || feature === 'storageUsed') {
+      const limitStr = String(limit);
+      const limitMB = parseInt(limitStr.replace('MB', '').replace('GB', '')) * (limitStr.includes('GB') ? 1024 : 1);
       return currentUsage.storageUsed >= limitMB;
     }
     
-    return currentUsage[feature] >= limit;
+    return (currentUsage as any)[feature] >= limit;
   };
 
-  const getUsagePercentage = (feature: keyof UsageStats) => {
+  const getUsagePercentage = (feature: keyof UsageStats | string) => {
     const currentTier = getCurrentTier();
-    const limit = currentTier.limits[feature];
+    const limit = (currentTier.limits as any)[feature];
     if (limit === -1) return 0; // unlimited
     
-    if (feature === 'storage') {
-      const limitMB = parseInt(limit.replace('MB', '').replace('GB', '')) * (limit.includes('GB') ? 1024 : 1);
+    if (feature === 'storage' || feature === 'storageUsed') {
+      const limitStr = String(limit);
+      const limitMB = parseInt(limitStr.replace('MB', '').replace('GB', '')) * (limitStr.includes('GB') ? 1024 : 1);
       return Math.min((currentUsage.storageUsed / limitMB) * 100, 100);
     }
     
-    return Math.min((currentUsage[feature] / limit) * 100, 100);
+    return Math.min(((currentUsage as any)[feature] / limit) * 100, 100);
   };
 
   const startTrial = (tierId: 'professional' | 'enterprise') => {
@@ -491,15 +493,17 @@ export function useUsageLimits(currentUsage: UsageStats, subscription: UserSubsc
     subscriptionTiers.find(tier => tier.id === subscription.tier) || subscriptionTiers[0] :
     subscriptionTiers[0];
 
-  const checkLimit = (feature: keyof UsageStats) => {
+  const checkLimit = (feature: keyof UsageStats | string) => {
     const limit = currentTier.limits[feature];
     if (limit === -1) return { allowed: true, remaining: -1 };
     
-    if (feature === 'storage') {
-      const limitMB = parseInt(limit.replace('MB', '').replace('GB', '')) * (limit.includes('GB') ? 1024 : 1);
+  if (String(feature) === 'storage') {
+      const limitStr = String(limit);
+      const limitMB = parseInt(limitStr.replace('MB', '').replace('GB', '')) * (limitStr.includes('GB') ? 1024 : 1);
+      const used = (currentUsage as any).storageUsed ?? (currentUsage as any).storage ?? 0;
       return {
-        allowed: currentUsage.storageUsed < limitMB,
-        remaining: limitMB - currentUsage.storageUsed
+        allowed: used < limitMB,
+        remaining: limitMB - used
       };
     }
     

@@ -189,7 +189,7 @@ export default function RecoverySystem() {
       const results = await runRecoveryCheck();
       
       // Convert results to component format
-      const functionChecks = results.map(result => ({
+      const functionChecks = results.map((result: any) => ({
         name: result.fnName,
         status: result.status === "✅ Healthy" ? 'healthy' as const : 'broken' as const,
         lastCheck: result.timestamp,
@@ -200,14 +200,14 @@ export default function RecoverySystem() {
       setBackendFunctions(functionChecks);
       
       // Generate recovery report
-      const brokenFunctions = functionChecks.filter(fn => fn.status === 'broken');
+  const brokenFunctions = functionChecks.filter((fn: any) => fn.status === 'broken');
       const report: RecoveryReport = {
         timestamp: new Date().toISOString(),
-        healthyFunctions: functionChecks.filter(fn => fn.status === 'healthy').map(fn => fn.name),
-        repairedFunctions: brokenFunctions.map(fn => fn.name),
+  healthyFunctions: functionChecks.filter((fn: any) => fn.status === 'healthy').map((fn: any) => fn.name),
+  repairedFunctions: brokenFunctions.map((fn: any) => fn.name),
         agentBondingStatus: aiAgents.map(a => ({ id: a.id, bondedTo: a.bondedTo })),
         dependenciesPatched: dependencies.filter(d => !isCompatible(d)).map(d => d.name),
-        systemHealth: Math.round((functionChecks.filter(fn => fn.status === 'healthy').length / functionChecks.length) * 100)
+        systemHealth: Math.round((functionChecks.filter((fn: any) => fn.status === 'healthy').length / functionChecks.length) * 100)
       };
       
       setRecoveryReport(report);

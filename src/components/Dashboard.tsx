@@ -3,9 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-import { Plus, Package, BarChart3, AlertTriangle, TrendingUp, DollarSign, Users, Building, Crown, Lock, Zap, Share } from 'lucide-react';
+import { Plus, Package, BarChart3, AlertTriangle, TrendingUp, DollarSign, Users, Building, Lock, Zap, Share } from 'lucide-react';
+import { Crown } from '@/lib/icons';
 import { ShareApp } from './ShareApp';
-import type { InventoryItem } from '../types/inventory';
+import UsageMonitor from './UsageMonitor';
+import type { MTInventoryItem as InventoryItem } from '../types/inventory';
 import type { AppScreen } from '../types/navigation';
 import { AppIcon } from './AppIcon';
 import { PremiumFeature } from './UpgradePrompt';
@@ -22,15 +24,15 @@ interface DashboardProps {
   trainingMode: boolean;
   inventoryMetrics: InventoryMetrics;
   businessConfig: BusinessConfig | null;
-  subscription?: UserSubscription | null;
+  subscription?: UserSubscription | null | undefined;
   onBusinessConfigChange?: (config: BusinessConfig) => void;
 }
 
 export function Dashboard({ items, lowStockCount, onNavigate, onAddItem, trainingMode, inventoryMetrics, businessConfig, subscription, onBusinessConfigChange }: DashboardProps) {
   const [showShareDialog, setShowShareDialog] = useState(false);
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = items.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
   const lastUpdated = items.length > 0 
-    ? new Date(Math.max(...items.map(item => new Date(item.lastUpdated).getTime()))).toLocaleDateString()
+    ? new Date(Math.max(...items.map(item => new Date(item.lastUpdated ?? new Date().toISOString()).getTime()))).toLocaleDateString()
     : 'Never';
   
   const formatCurrency = (amount: number) => {
@@ -70,7 +72,9 @@ export function Dashboard({ items, lowStockCount, onNavigate, onAddItem, trainin
             <h1 className="text-primary font-bold tracking-tight">MaycoleTracker</h1>
             <p className="text-xs text-muted-foreground">by MaycoleTechnologies™</p>
           </div>
-          
+          <div className="absolute right-20">
+            <UsageMonitor live={false} />
+          </div>
           {/* Share Button */}
           <Button
             variant="outline"
@@ -250,8 +254,8 @@ export function Dashboard({ items, lowStockCount, onNavigate, onAddItem, trainin
       <div className="space-y-3">
         <h3 className="font-medium">Power Features</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <PremiumFeature
-            subscription={subscription}
+      <PremiumFeature
+        subscription={subscription ?? null}
             requiredTier="professional"
             feature="AI Analytics"
             onUpgrade={() => onNavigate('subscription')}
@@ -279,7 +283,7 @@ export function Dashboard({ items, lowStockCount, onNavigate, onAddItem, trainin
           </PremiumFeature>
 
           <PremiumFeature
-            subscription={subscription}
+            subscription={subscription ?? null}
             requiredTier="professional"
             feature="Smart Scanner"
             onUpgrade={() => onNavigate('subscription')}

@@ -44,7 +44,7 @@ export function ProBadgeExamples() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-wrap items-center gap-4">
-            <ProFeatureBadge variant="small" />
+            <ProFeatureBadge />
             <ProFeatureBadge />
             <ProFeatureBadge variant="large" />
           </div>
@@ -105,7 +105,7 @@ export function ProBadgeExamples() {
           <div className="border rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold">Advanced Analytics Dashboard</h4>
-              <ProFeatureBadge variant="small" />
+              <ProFeatureBadge />
             </div>
             <p className="text-sm text-muted-foreground">
               Get AI-powered insights and predictive analytics for your inventory.
@@ -116,7 +116,7 @@ export function ProBadgeExamples() {
           <div className="border rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold">Voice Control System</h4>
-              <PremiumBadge variant="small" icon="star" />
+              <PremiumBadge icon="star" />
             </div>
             <p className="text-sm text-muted-foreground">
               Control your inventory with hands-free voice commands.
@@ -127,7 +127,7 @@ export function ProBadgeExamples() {
           <div className="border rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold">Multi-Location Management</h4>
-              <EnterpriseBadge variant="small" icon="shield" />
+              <EnterpriseBadge icon="shield" />
             </div>
             <p className="text-sm text-muted-foreground">
               Manage inventory across multiple locations with centralized control.
@@ -138,7 +138,7 @@ export function ProBadgeExamples() {
           <div className="border rounded-lg p-4 bg-green-50 dark:bg-green-950/20">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold">All Premium Features</h4>
-              <LaunchPhaseBadge variant="small" />
+              <LaunchPhaseBadge />
             </div>
             <p className="text-sm text-muted-foreground">
               During launch phase, all premium features are available at no cost!

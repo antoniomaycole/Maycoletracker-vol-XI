@@ -5,7 +5,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Clock, Crown, AlertTriangle, CheckCircle, Calendar, CreditCard } from 'lucide-react';
+import { Clock, AlertTriangle, CheckCircle, Calendar, CreditCard } from 'lucide-react';
+import { Crown } from '@/lib/icons';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';

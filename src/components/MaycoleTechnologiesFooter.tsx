@@ -4,7 +4,8 @@
  */
 
 import React from 'react';
-import { Globe, Building2, Star, Zap } from 'lucide-react';
+import { Globe, Building2, Zap } from 'lucide-react';
+import { Star } from '@/lib/icons';
 
 interface MaycoleTechnologiesFooterProps {
   variant?: 'minimal' | 'standard' | 'expanded';

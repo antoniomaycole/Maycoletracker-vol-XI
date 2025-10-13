@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaycoleTracker™ Simple Logo Test</title>
+    <style>
+        .logo-page.purple-background {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #4B0082; /* Purple */
+            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .center-logo {
+            width: 200px;
+            height: auto;
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .center-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Basic responsive design */
+        @media (max-width: 768px) {
+            .center-logo {
+                width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .center-logo {
+                width: 120px;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        p {
+            margin-top: 1rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-page purple-background">
+        <h1>Inventory Management System</h1>
+        <h2>Volume XI — Enterprise Edition</h2>
+        
+        <img
+            src="/icons/icon-512.png"
+            alt="MAYCOLETracker™ Logo"
+            class="center-logo"
+            onclick="alert('🚀 Navigation would work here!')"
+            title="Click to launch MaycoleTracker™"
+        />
+        
+        <p>Click the logo to launch the application</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaycoleTracker™ SPA Routing Test</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .test-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .test-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      margin: 0.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .test-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    }
+    
+    .test-button.warning {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+    
+    .test-button.success {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    
+    .instructions {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .code {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      margin: 0.5rem 0;
+      font-weight: 600;
+    }
+    
+    .status.success {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+    
+    .status.warning {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
+    
+    .status.error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+    
+    h2 {
+      margin-top: 0;
+      color: #60a5fa;
+    }
+    
+    h3 {
+      color: #a78bfa;
+      margin-bottom: 0.5rem;
+    }
+    
+    ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    li {
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">MT</div>
+      <h1>MaycoleTracker™ SPA Routing Test</h1>
+      <p>Test your Single Page Application routing setup</p>
+    </div>
+
+    <div class="test-section">
+      <h2>🚀 Quick Tests</h2>
+      <p>Click these buttons to test different routing scenarios:</p>
+      
+      <a href="/" class="test-button success">🏠 Home Page (/)</a>
+      <a href="/main" class="test-button">📊 Main Dashboard (/main)</a>
+      <a href="/invalid-route" class="test-button warning">❌ Invalid Route</a>
+      <a href="/analytics" class="test-button warning">📈 Non-existent Route</a>
+    </div>
+
+    <div class="test-section">
+      <h2>🧪 Manual Testing Steps</h2>
+      
+      <h3>Test 1: Direct URL Navigation</h3>
+      <div class="instructions">
+        <ol>
+          <li>Copy your app's URL (e.g., https://your-app.netlify.app)</li>
+          <li>Add <code>/main</code> to the end</li>
+          <li>Paste in new browser tab and press Enter</li>
+          <li><strong>Expected:</strong> Should show MaycoleTracker™ app, not 404</li>
+        </ol>
+      </div>
+
+      <h3>Test 2: Invalid Route Handling</h3>
+      <div class="instructions">
+        <ol>
+          <li>Try visiting: <code>your-app.com/nonexistent-page</code></li>
+          <li><strong>Expected:</strong> Should redirect to home after ~1.5 seconds</li>
+          <li>Should see branded redirect page, not generic 404</li>
+        </ol>
+      </div>
+
+      <h3>Test 3: Browser Navigation</h3>
+      <div class="instructions">
+        <ol>
+          <li>Navigate: Home → Main → Browser back button</li>
+          <li><strong>Expected:</strong> Smooth navigation, no page reloads</li>
+          <li>URLs should update correctly in address bar</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>🔍 Debugging Information</h2>
+      
+      <div class="code">
+        <strong>Current URL:</strong> <span id="currentUrl"></span><br>
+        <strong>User Agent:</strong> <span id="userAgent"></span><br>
+        <strong>Stored Redirect:</strong> <span id="storedRedirect"></span><br>
+        <strong>Deployment Platform:</strong> <span id="platform"></span>
+      </div>
+
+      <div id="testResults"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>📋 Platform-Specific Instructions</h2>
+      
+      <h3>Netlify</h3>
+      <div class="status success">✅ Configured via netlify.toml</div>
+      <p>Your redirects should work automatically.</p>
+
+      <h3>Vercel</h3>
+      <div class="status success">✅ Configured via vercel.json</div>
+      <p>SPA routing handled by Vercel's routing system.</p>
+
+      <h3>GitHub Pages</h3>
+      <div class="status warning">⚠️  Requires 404.html</div>
+      <p>Custom 404.html created for proper SPA handling.</p>
+
+      <h3>Other Platforms</h3>
+      <div class="status warning">⚠️  May need additional configuration</div>
+      <p>Check your hosting provider's SPA routing documentation.</p>
+    </div>
+
+    <div class="test-section">
+      <h2>🎯 Expected Behavior</h2>
+      
+      <div class="status success">✅ Direct /main URL loads the app</div>
+      <div class="status success">✅ Logo page navigation works</div>
+      <div class="status success">✅ Invalid routes redirect to home</div>
+      <div class="status success">✅ Browser navigation buttons work</div>
+      <div class="status success">✅ PWA installation preserves routing</div>
+    </div>
+
+    <div class="test-section">
+      <h2>🔧 Troubleshooting</h2>
+      
+      <h3>If direct URLs show 404:</h3>
+      <ul>
+        <li>Check your hosting provider's SPA configuration</li>
+        <li>Verify 404.html is in the public directory</li>
+        <li>Ensure deployment includes all redirect rules</li>
+        <li>Check browser developer console for errors</li>
+      </ul>
+
+      <h3>If routing is slow:</h3>
+      <ul>
+        <li>This is normal - 404.html adds ~1.5s redirect delay</li>
+        <li>Direct access to root (/) should be instant</li>
+        <li>Internal navigation should be immediate</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Populate debug information
+    document.getElementById('currentUrl').textContent = window.location.href;
+    document.getElementById('userAgent').textContent = navigator.userAgent.slice(0, 50) + '...';
+    document.getElementById('storedRedirect').textContent = 
+      sessionStorage.getItem('maycoletracker_redirect_path') || 'None';
+    
+    // Detect platform
+    const hostname = window.location.hostname;
+    let platform = 'Unknown';
+    if (hostname.includes('netlify')) platform = 'Netlify';
+    else if (hostname.includes('vercel')) platform = 'Vercel';
+    else if (hostname.includes('github.io')) platform = 'GitHub Pages';
+    else if (hostname.includes('firebase')) platform = 'Firebase';
+    else if (hostname === 'localhost') platform = 'Development';
+    
+    document.getElementById('platform').textContent = platform;
+
+    // Test session storage functionality
+    const testResults = document.getElementById('testResults');
+    
+    try {
+      // Test sessionStorage
+      sessionStorage.setItem('test', 'value');
+      const testValue = sessionStorage.getItem('test');
+      sessionStorage.removeItem('test');
+      
+      if (testValue === 'value') {
+        testResults.innerHTML += '<div class="status success">✅ SessionStorage working</div>';
+      } else {
+        testResults.innerHTML += '<div class="status error">❌ SessionStorage not working</div>';
+      }
+    } catch (e) {
+      testResults.innerHTML += '<div class="status error">❌ SessionStorage error: ' + e.message + '</div>';
+    }
+
+    // Test if we're in an iframe (which might affect routing)
+    if (window.self !== window.top) {
+      testResults.innerHTML += '<div class="status warning">⚠️  Running in iframe - routing may be affected</div>';
+    } else {
+      testResults.innerHTML += '<div class="status success">✅ Running in main window</div>';
+    }
+
+    // Test React Router detection
+    if (window.history && window.history.pushState) {
+      testResults.innerHTML += '<div class="status success">✅ History API supported</div>';
+    } else {
+      testResults.innerHTML += '<div class="status error">❌ History API not supported</div>';
+    }
+
+    console.log('🧪 MaycoleTracker™ SPA Routing Test Loaded');
+    console.log('📊 Platform:', platform);
+    console.log('🔗 URL:', window.location.href);
+  </script>
+</body>
+</html>

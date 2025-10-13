@@ -5,7 +5,8 @@
  */
 
 import React, { useState } from 'react';
-import { Crown, Star, Zap, Gift, TrendingUp, Users, Building2, Sparkles, CheckCircle, ArrowRight, Megaphone, Trophy, Rocket, Heart, Shield, Diamond } from 'lucide-react';
+import { Zap, Gift, TrendingUp, Users, Building2, Sparkles, CheckCircle, ArrowRight, Megaphone, Trophy, Rocket, Heart, Shield, Diamond } from 'lucide-react';
+import { Crown, Star } from '@/lib/icons';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';

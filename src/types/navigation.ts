@@ -23,3 +23,6 @@ export const ROUTES: Record<string, RouteConfig> = {
 };
 
 export type RouteKey = keyof typeof ROUTES;
+
+// Backwards-compatible alias for components expecting an `AppScreen` type
+export type AppScreen = RouteKey;

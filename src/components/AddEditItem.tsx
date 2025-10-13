@@ -6,11 +6,12 @@ import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog';
 import { ArrowLeft, Trash2 } from 'lucide-react';
-import type { InventoryItem } from '../types/inventory';
+import VerificationModal from './VerificationModal';
+import type { MTInventoryItem as InventoryItem, MTNewInventoryItem as NewInventoryItem } from '../types/inventory';
 
 interface AddEditItemProps {
   item?: InventoryItem | null;
-  onSave: (item: Omit<InventoryItem, 'id' | 'lastUpdated'>) => void;
+  onSave: (item: NewInventoryItem) => void;
   onCancel: () => void;
   onDelete?: () => void;
 }
@@ -33,11 +34,11 @@ export function AddEditItem({ item, onSave, onCancel, onDelete }: AddEditItemPro
       setFormData({
         name: item.name,
         category: item.category,
-        quantity: item.quantity,
+        quantity: item.quantity ?? 0,
         unit: item.unit,
-        supplier: item.supplier || '',
-        expiryDate: item.expiryDate || '',
-        lowStockThreshold: item.lowStockThreshold,
+        supplier: item.supplier ?? '',
+        expiryDate: item.expiryDate ?? '',
+        lowStockThreshold: item.lowStockThreshold ?? 1,
       });
     }
   }, [item]);
@@ -68,11 +69,19 @@ export function AddEditItem({ item, onSave, onCancel, onDelete }: AddEditItemPro
       return;
     }
 
-    onSave({
-      ...formData,
-      supplier: formData.supplier || undefined,
-      expiryDate: formData.expiryDate || undefined,
-    });
+    // Require verification modal before save unless app config opts out
+    const skipVerification = (window as any)?.MAYCOLE_CONFIG?.skipVerification === true;
+    if (skipVerification) {
+      onSave({
+        ...formData,
+        supplier: formData.supplier || undefined,
+        expiryDate: formData.expiryDate || undefined,
+        lastUpdated: new Date().toISOString(),
+      });
+      return;
+    }
+
+    setVerificationOpen(true);
   };
 
   const updateField = (field: keyof typeof formData, value: any) => {
@@ -83,13 +92,24 @@ export function AddEditItem({ item, onSave, onCancel, onDelete }: AddEditItemPro
     }
   };
 
-  const categories: InventoryItem['category'][] = [
-    'Seafood', 'Produce', 'Dry Goods', 'Dairy', 'Meat', 'Other'
-  ];
+  const [verificationOpen, setVerificationOpen] = React.useState(false);
 
-  const units: InventoryItem['unit'][] = [
-    'Box', 'lb', 'kg', 'pcs', 'gal', 'L'
-  ];
+  const handleVerified = (result?: { scan?: string; face?: string }) => {
+    // proceed to save after verification
+    onSave({
+      ...formData,
+      supplier: formData.supplier || undefined,
+      expiryDate: formData.expiryDate || undefined,
+      lastUpdated: new Date().toISOString(),
+    });
+  };
+
+  // Narrow the allowed category/unit values used by the form to concrete strings
+  const categories = [
+    'Seafood', 'Produce', 'Dry Goods', 'Dairy', 'Meat', 'Other'
+  ] as const;
+
+  const units = ['Box', 'lb', 'kg', 'pcs', 'gal', 'L'] as const;
 
   return (
     <div className="p-4 space-y-4 max-w-md mx-auto">
@@ -206,6 +226,8 @@ export function AddEditItem({ item, onSave, onCancel, onDelete }: AddEditItemPro
                 </Select>
               </div>
             </div>
+
+            <VerificationModal open={verificationOpen} onClose={() => setVerificationOpen(false)} onVerified={handleVerified} expectedScan={item?.id ?? undefined} />
 
             {/* Low Stock Threshold */}
             <div className="space-y-2">

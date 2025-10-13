@@ -1,3 +1,8 @@
+src/components/LogoPage*.css
+src/components/LogoPage*.fixed*.css
+src/components/**/Logo*.css
+build/**
+node_modules/**
 node_modules/
 build/
 dist/

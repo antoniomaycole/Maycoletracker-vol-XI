@@ -1,0 +1,6 @@
+.industry-bar{display:flex;flex-direction:column;gap:.75rem;align-items:center}
+.industry-btn{padding:.5rem 1rem;border-radius:.5rem;background:rgba(255,255,255,0.12);color:var(--text-light);border:1px solid rgba(255,255,255,0.06)}
+.inventory-table table{width:100%;border-collapse:collapse}
+.inventory-table th,.inventory-table td{padding:.5rem;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left}
+.app-header{position:sticky;top:0;background:transparent;padding:.5rem}
+.app-layout main{max-width:960px;margin:0 auto;padding:1rem}

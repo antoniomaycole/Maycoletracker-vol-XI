@@ -225,7 +225,7 @@ export default function NavigationHeader() {
               <div
                 key={dropdown.label}
                 className="relative"
-                ref={(el) => (dropdownRefs.current[dropdown.label] = el)}
+                ref={(el) => { dropdownRefs.current[dropdown.label] = el; /* void */ }}
               >
                 <button
                   onClick={() => handleDropdownToggle(dropdown.label)}

@@ -1,0 +1,2840 @@
+/* 
+ * LogoPage.css - MaycoleTracker™ Volume XI Simple Design
+ * Clean, minimal styling for the simple LogoPage component
+ */
+
+/* This legacy/compiled CSS is being re-enabled for stylelint checks. */
+
+/* ORIGINAL MAYCOLETRACKER™ BLUE BACKGROUND - YOUR EXACT LOGO PAGE */
+.logo-page.blue-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 50%, #004085 100%) !important;
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-page.blue-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgb(255 255 255 / 5%) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgb(255 255 255 / 3%) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.logo-page.blue-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+.logo-page.purple-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4B0082 0%, #6B46C1 50%, #8B5CF6 100%);
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-page.purple-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgb(59 130 246 / 10%) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgb(168 85 247 / 8%) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.logo-page.purple-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+.logo-page h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-page h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  opacity: 0.95;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+  letter-spacing: 0.05em;
+}
+
+.logo-page h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+  letter-spacing: 0.03em;
+}
+
+.logo-container {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blue-icon-button {
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+  border: 2px solid rgb(255 255 255 / 20%);
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+-webkit-
+
+  box-shadow: 
+    0 8px 32px rgb(0 123 255 / 30%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadow
+  margin-top: 2rem;margin-top
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blue-icon-button:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  border-color: rgb(255 255 255 / 30%);
+  box-shadow: 
+    0 12px 48px rgb(0 123 255 / 40%),
+    0 6px 24px rgb(0 123 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-2px) scale(1.02);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+.blue-icon-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 
+    0 4px 16px rgb(0 123 255 / 30%),
+    0 2px 8px rgb(0 123 255 / 20%);
+}
+
+.blue-icon-button:focus {
+  outline: none;
+  box-shadow: 
+    0 8px 32px rgb(0 123 255 / 30%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%),
+    0 0 0 3px rgb(255 255 255 / 30%);
+}
+
+.system-status {
+  margin-top: 2rem;
+  opacity: 0.8;
+}
+
+.system-status p {
+  font-size: 0.9rem;
+  color: rgb(255 255 255 / 90%);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+/* Responsive Design */
+@media (width <= 640px) {
+  .logo-page h1 {
+    font-size: 1.8rem;
+  }
+  
+  .logo-page h2 {
+    font-size: 1.1rem;
+  }
+  
+  .logo-page h3 {
+    font-size: 1rem;
+  }
+  
+  .blue-icon-button {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 40px;
+  }
+  
+  .logo-page {
+    padding: 1rem;
+  }
+}
+
+@media (width >= 641px) and (width <= 1024px) {
+  .logo-page h1 {
+    font-size: 2.2rem;
+  }
+  
+  .logo-page h2 {
+    font-size: 1.3rem;
+  }
+  
+  .logo-page h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Loading animations and enhanced interactions */
+.blue-icon-button.loading {
+  opacity: 0.8;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgb(255 255 255 / 30%);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.system-status.initializing p {
+  animation: pulse-text 2s ease-in-out infinite;
+}
+
+.system-status.ready p {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes pulse-text {
+  0%, 100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced logo container with keyboard focus */
+.logo-container > div:focus {
+  outline: 2px solid rgb(255 255 255 / 50%);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.logo-container > div:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 70%);
+  outline-offset: 4px;
+}
+
+/* Improved accessibility for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+  
+  .system-status.initializing p,
+  .system-status.ready p {
+    animation: none;
+  }
+  
+  .blue-icon-button:hover {
+    transform: none;
+  }
+}
+
+/* Enhanced responsive improvements */
+@media (width <= 480px) {
+  .logo-page {
+    padding: 1rem 0.5rem;
+  }
+  
+  .logo-container {
+    margin: 1rem 0;
+  }
+}
+
+/* MAYCOLETRACKER™ LOGO PAGE STYLING */
+.maycole-brand-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.brand-name-container {
+  text-align: center;
+}
+
+.logo-page-title-massive {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+  text-shadow: 0 4px 8px rgb(0 0 0 / 30%);
+}
+
+.maycole-text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-glow 3s ease-in-out infinite alternate;
+}
+
+.trademark-symbol-tiny {
+  font-size: 0.5em;
+  vertical-align: super;
+  opacity: 0.9;
+  margin-left: -0.1em;
+  position: relative;
+  top: -0.5em;
+  font-weight: 300;
+  line-height: 0;
+}
+
+.brand-icon-next-to-name {
+  filter: drop-shadow(0 4px 8px rgb(0 123 255 / 30%));
+  transition: all 0.3s ease;
+}
+
+.brand-icon-next-to-name:hover {
+  filter: drop-shadow(0 6px 12px rgb(0 123 255 / 50%));
+  transform: scale(1.05);
+}
+
+.app-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgb(255 255 255 / 10%);
+-webkit-
+
+  border: 1px solid rgb(255 255 255 / 20%);borderborder
+  border-radius: 0.5rem;border-radius
+  padding: 0.5rem;
+  min-width: 12rem;
+  z-index: 50;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);
+}
+
+.app-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  color: white;
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.app-menu-item:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.logo-container-reduced {
+  margin: 2rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.system-title-container {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 50rem;
+  position: relative;
+  z-index: 10;
+}
+
+.system-title-main {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+}
+
+.worlds-first-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  box-shadow: 
+    0 4px 20px rgb(251 191 36 / 40%),
+    0 2px 10px rgb(251 191 36 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: worlds-first-glow 2s infinite;
+  border: 2px solid rgb(255 255 255 / 80%);
+  margin-bottom: 1rem;
+}
+
+@keyframes worlds-first-glow {
+  0%, 100% {
+    box-shadow: 
+      0 4px 20px rgb(251 191 36 / 40%),
+      0 2px 10px rgb(251 191 36 / 30%),
+      inset 0 1px 0 rgb(255 255 255 / 30%);
+  }
+
+  50% {
+    box-shadow: 
+      0 8px 30px rgb(251 191 36 / 60%),
+      0 4px 15px rgb(251 191 36 / 50%),
+      inset 0 1px 0 rgb(255 255 255 / 40%),
+      0 0 0 4px rgb(251 191 36 / 20%);
+  }
+}
+
+.system-subtitle {
+  color: rgb(255 255 255 / 90%);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+.industry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.industry-tag {
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+-webkit-
+
+}
+
+.business-focus-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 10;
+}
+
+.focus-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.focus-percentage {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fbbf24;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+}
+
+.focus-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.focus-divider {
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+.subscription-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.subscription-tier {
+  background: rgb(255 255 255 / 10%);
+-webkit-
+
+  border: 1px solid rgb(255 255 255 / 20%);borderborder
+  border-radius: 0.5rem;border-radius
+  padding: 0.75rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.subscription-tier:hover {
+  background: rgb(255 255 255 / 15%);
+  border-color: rgb(255 255 255 / 30%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(255 255 255 / 10%);
+}
+
+.tier-name {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.tier-professional .tier-name {
+  color: #3b82f6;
+}
+
+.tier-enterprise .tier-name {
+  color: #fbbf24;
+}
+
+.tier-description {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.blue-icon-button-under {
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+  border: 2px solid rgb(255 255 255 / 20%);
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+-webkit-
+
+  box-shadow: 
+    0 8px 32px rgb(0 123 255 / 30%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadow
+  position: relative;position
+  overflow: hidden;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 2rem 0 1rem;
+}
+
+.blue-icon-button-under:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  border-color: rgb(255 255 255 / 30%);
+  box-shadow: 
+    0 12px 48px rgb(0 123 255 / 40%),
+    0 6px 24px rgb(0 123 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-2px) scale(1.02);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+.features-footer {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  opacity: 0.8;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.features-footer p {
+  color: rgb(255 255 255 / 90%);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-operational {
+  background: #10b981;
+  box-shadow: 0 0 10px rgb(16 185 129 / 50%);
+}
+
+/* Responsive adjustments for MaycoleTracker™ */
+@media (width <= 640px) {
+  .logo-page-title-massive {
+    font-size: 2rem;
+  }
+  
+  .system-title-main {
+    font-size: 1.25rem;
+  }
+  
+  .worlds-first-badge {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .maycole-brand-with-icon {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .subscription-tiers {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .blue-icon-button-under {
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+  }
+}
+
+/* Logo Page App Store Icon Button Seal - Professional Styling */
+.logo-page .app-store-icon-button {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%) !important;
+  border: 2px solid rgb(255 255 255 / 80%) !important;
+  color: #007BFF !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 4px 16px rgb(255 255 255 / 40%),
+    0 2px 8px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 90%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  flex-shrink: 0 !important;
+}
+
+.logo-page .app-store-icon-button:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  transform: translateY(-2px) scale(1.08) !important;
+  box-shadow: 
+    0 8px 24px rgb(255 255 255 / 60%),
+    0 4px 12px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 100%) !important;
+  border-color: rgb(255 255 255 / 100%) !important;
+}
+
+.logo-page .app-store-icon-button:active {
+  transform: translateY(0) scale(0.95) !important;
+  box-shadow: 
+    0 2px 8px rgb(255 255 255 / 30%),
+    0 1px 4px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 70%) !important;
+}
+
+.logo-page .app-store-icon-button:focus {
+  outline: none !important;
+  box-shadow: 
+    0 4px 16px rgb(255 255 255 / 40%),
+    0 2px 8px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 0 0 3px rgb(255 255 255 / 50%) !important;
+}
+
+/* App Name and Icon Container */
+.logo-page .flex.items-center.justify-center {
+  flex-wrap: wrap;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments for app store icon seal */
+@media (width <= 640px) {
+  .logo-page .app-store-icon-button {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+  }
+  
+  .logo-page .flex.items-center.justify-center {
+    gap: 0.75rem !important;
+  }
+  
+  .logo-page h1 {
+    font-size: clamp(1.2rem, 4vw, 1.8rem) !important;
+    line-height: 1.2 !important;
+  }
+}
+
+@media (width >= 641px) and (width <= 1024px) {
+  .logo-page .app-store-icon-button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 11px !important;
+  }
+  
+  .logo-page h1 {
+    font-size: clamp(1.8rem, 4vw, 2.2rem) !important;
+  }
+}
+
+@media (width >= 1025px) {
+  .logo-page .app-store-icon-button {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 12px !important;
+  }
+  
+  .logo-page h1 {
+    font-size: clamp(2.2rem, 4vw, 2.5rem) !important;
+  }
+}
+
+/* App Store Icon Button Shine Effect */
+.logo-page .app-store-icon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(59 130 246 / 20%), transparent);
+  transition: left 0.5s ease;
+}
+
+.logo-page .app-store-icon-button:hover::before {
+  left: 100%;
+}
+
+/* Ensure proper alignment and spacing */
+.logo-page .flex.items-center.justify-center.gap-4 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* YOUR PERFECT LOGO PAGE - RESTORED WITH ALL FEATURES */
+
+/* Perfect Logo Page Foundation */
+.logo-page.blue-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 50%, #004085 100%) !important;
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CENTERED MAYCOLETRACKER™ WITH ICON BUTTON */
+.perfect-brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.brand-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.perfect-title-fitted {
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  text-shadow: 0 4px 8px rgb(0 0 0 / 30%) !important;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%) !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  line-height: 1.1 !important;
+  animation: text-glow 3s ease-in-out infinite alternate;
+  color: white !important; /* Fallback for browsers that don't support background-clip */
+  display: inline-block !important;
+  text-align: center !important;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports (not (background-clip: text)) and (not (-webkit-background-clip: text)) {
+  .perfect-title {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    background: none !important;
+  }
+}
+
+.trademark-symbol-perfect {
+  font-size: 0.5em;
+  vertical-align: super;
+  opacity: 0.9;
+  margin-left: -0.1em;
+  position: relative;
+  top: -0.5em;
+  font-weight: 300;
+  line-height: 0;
+}
+
+/* FAR RIGHT DROPDOWN - POSITIONED AWAY FROM BRAND */
+.far-right-dropdown-container {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 50;
+}
+
+.far-right-dropdown-trigger {
+  background: rgb(255 255 255 / 15%);
+  border: 2px solid rgb(255 255 255 / 30%);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  transition: all 0.3s ease;
+-webkit-
+
+  box-shadow: 0 4px 8px rgb(0 123 255 / 30%);box-shadowbox-shadow
+}
+
+.far-right-dropdown-trigger:hover {
+  background: rgb(255 255 255 / 25%);
+  border-color: rgb(255 255 255 / 50%);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgb(0 123 255 / 50%);
+}
+
+.far-right-app-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgb(255 255 255 / 10%);
+-webkit-
+
+  border: 1px solid rgb(255 255 255 / 20%);borderborder
+  border-radius: 0.5rem;border-radius
+  padding: 0.5rem;
+  min-width: 12rem;
+  z-index: 50;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);
+}
+
+/* VOL. XI ENTERPRISE EDITION - IMMEDIATELY UNDER */
+.perfect-subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  opacity: 0.95;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 20%) !important;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* THREE BUTTON DROPDOWN MENU */
+.perfect-app-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgb(255 255 255 / 95%);
+-webkit-
+
+  border-radius: 8px;border-radiusborder-radius
+  border: 1px solid rgb(255 255 255 / 30%);border
+  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
+  z-index: 50;
+  min-width: 160px;
+}
+
+.perfect-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.perfect-menu-item:hover {
+  background: rgb(59 130 246 / 10%);
+  color: #1d4ed8;
+}
+
+.perfect-menu-item:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.perfect-menu-item:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.perfect-menu-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* SMALLER, BEAUTIFUL LOGO - NO SQUARE SHADOW BOX */
+.perfect-logo-container {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+
+.perfect-logo-container:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.perfect-logo {
+  /* NO SQUARE SHADOW BOX - CLEAN AND BEAUTIFUL */
+  box-shadow: none !important;
+  background: none !important;
+  border: none !important;
+-webkit-
+
+  
+  /* Only the logo itself with subtle glow */
+  filter: drop-shadow(0 8px 32px rgb(59 130 246 / 30%));filterfilter
+  transition: all 0.3s ease;transition
+}
+
+.perfect-logo-container:hover .perfect-logo {
+  filter: drop-shadow(0 12px 48px rgb(59 130 246 / 40%));
+}
+
+.beautiful-logo {
+  /* Clean, no-background styling */
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* CENTERED BRAND CONTAINER - PERFECT ALIGNMENT */
+.centered-brand-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 3rem;
+  z-index: 10;
+  position: relative;
+}
+
+/* BRAND UNIT - ICON BUTTON + MAYCOLETRACKER™ AS ONE */
+.brand-unit-perfect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* BRAND ICON TO THE LEFT OF MAYCOLETRACKER */
+.brand-icon-left {
+  filter: drop-shadow(0 4px 8px rgb(0 123 255 / 30%));
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.brand-icon-left:hover {
+  filter: drop-shadow(0 6px 12px rgb(0 123 255 / 50%));
+  transform: scale(1.05);
+}
+
+/* PERFECT MAYCOLETRACKER™ NAME */
+.brand-name-perfect {
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  text-shadow: 0 4px 8px rgb(0 0 0 / 30%) !important;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%) !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  line-height: 1.1 !important;
+  animation: text-glow 3s ease-in-out infinite alternate;
+  color: white !important; /* Fallback */
+  display: inline-block !important;
+}
+
+/* PERFECT TRADEMARK SYMBOL */
+.tm-perfect {
+  font-size: 0.3em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: -0.05em;
+  opacity: 0.85;
+  font-weight: 400;
+  position: relative;
+  top: -0.7em;
+  letter-spacing: 0.1em;
+}
+
+/* BRAND SUBTITLE - VOL. XI */
+.brand-subtitle-perfect {
+  font-size: clamp(1rem, 2.5vw, 1.5rem) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  color: rgb(255 255 255 / 95%) !important;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 30%) !important;
+  letter-spacing: 0.05em !important;
+  opacity: 0.95;
+}
+
+/* CENTERED KINETIC LOGO CONTAINER */
+.centered-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.centered-logo-container:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.kinetic-logo-centered {
+  filter: drop-shadow(0 8px 32px rgb(0 123 255 / 25%));
+  transition: all 0.3s ease;
+}
+
+.kinetic-logo-centered:hover {
+  filter: drop-shadow(0 12px 48px rgb(0 123 255 / 35%));
+}
+
+/* SYSTEM STATUS */
+.perfect-status {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  opacity: 0.8;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+
+
+/* MaycoleTracker™ Brand with Icon Button Container */
+.maycole-brand-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 8vh;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.brand-name-container {
+  display: flex;
+  align-items: center;
+}
+
+/* App Store Icon Button Next to Name */
+.app-store-icon-button-next-to-name {
+  width: 40px !important;
+  height: 44px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%) !important;
+  border: 2px solid rgb(255 255 255 / 90%) !important;
+  color: #007BFF !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 4px 16px rgb(255 255 255 / 40%),
+    0 2px 8px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 90%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.app-store-icon-button-next-to-name:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 
+    0 8px 24px rgb(255 255 255 / 60%),
+    0 4px 12px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 100%) !important;
+  border-color: rgb(255 255 255 / 100%) !important;
+}
+
+.app-store-icon-button-next-to-name:active {
+  transform: translateY(0) scale(0.95) !important;
+  box-shadow: 
+    0 2px 8px rgb(255 255 255 / 30%),
+    0 1px 4px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 70%) !important;
+}
+
+/* App Menu Dropdown Positioning */
+.app-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgb(255 255 255 / 95%);
+-webkit-
+
+  border-radius: 8px;border-radiusborder-radius
+  border: 1px solid rgb(255 255 255 / 30%);border
+  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
+  z-index: 50;
+  min-width: 160px;
+}
+
+.app-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.app-menu-item:hover {
+  background: rgb(59 130 246 / 10%);
+  color: #1d4ed8;
+}
+
+.app-menu-item:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.app-menu-item:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.app-menu-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Clean Background Overlay */
+.logo-page.blue-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgb(59 130 246 / 10%) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgb(168 85 247 / 8%) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.logo-page.blue-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Professional Logo Page Title */
+.logo-page-title {
+  font-size: clamp(1.8rem, 5vw, 3rem) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 30%) !important;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%) !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Logo Container - Front and Center */
+.logo-container {
+  margin: 3rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 8px 32px rgb(0 123 255 / 30%));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-container:hover {
+  filter: drop-shadow(0 12px 48px rgb(0 123 255 / 40%));
+  transform: translateY(-2px);
+}
+
+/* Clean Fade-in Animation */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.animate-fade-in.delay-500 {
+  animation: fadeIn 0.8s ease-in-out 0.5s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Blue Launch Button - Clean Professional Style */
+.blue-icon-button {
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%) !important;
+  border: 2px solid rgb(255 255 255 / 20%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+  padding: 1rem 2rem !important;
+  border-radius: 50px !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+-webkit-
+
+  box-shadow: 
+    0 8px 32px rgb(0 123 255 / 30%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%) !important;box-shadowbox-shadow
+  margin-top: 2rem !important;margin-top
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 52px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.blue-icon-button:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%) !important;
+  border-color: rgb(255 255 255 / 30%) !important;
+  box-shadow: 
+    0 12px 48px rgb(0 123 255 / 40%),
+    0 6px 24px rgb(0 123 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 30%) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%) !important;
+}
+
+.blue-icon-button:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 
+    0 4px 16px rgb(0 123 255 / 30%),
+    0 2px 8px rgb(0 123 255 / 20%) !important;
+}
+
+.blue-icon-button:focus {
+  outline: none !important;
+  box-shadow: 
+    0 8px 32px rgb(0 123 255 / 30%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%),
+    0 0 0 3px rgb(255 255 255 / 30%) !important;
+}
+
+/* App Store Icon Button - Clean Professional Style */
+.logo-page .app-store-icon-button {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%) !important;
+  border: 2px solid rgb(255 255 255 / 80%) !important;
+  color: #007BFF !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 4px 16px rgb(255 255 255 / 40%),
+    0 2px 8px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 90%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  flex-shrink: 0 !important;
+}
+
+.logo-page .app-store-icon-button:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  transform: translateY(-2px) scale(1.08) !important;
+  box-shadow: 
+    0 8px 24px rgb(255 255 255 / 60%),
+    0 4px 12px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 100%) !important;
+  border-color: rgb(255 255 255 / 100%) !important;
+}
+
+.logo-page .app-store-icon-button:active {
+  transform: translateY(0) scale(0.95) !important;
+  box-shadow: 
+    0 2px 8px rgb(255 255 255 / 30%),
+    0 1px 4px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 70%) !important;
+}
+
+.logo-page .app-store-icon-button:focus {
+  outline: none !important;
+  box-shadow: 
+    0 4px 16px rgb(255 255 255 / 40%),
+    0 2px 8px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 0 0 3px rgb(255 255 255 / 50%) !important;
+}
+
+/* App Name and Icon Container */
+.logo-page .flex.items-center.justify-center {
+  flex-wrap: wrap;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+/* RESPONSIVE DESIGN FOR YOUR PERFECT LOGO PAGE */
+@media (width <= 640px) {
+  .brand-with-icon {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .perfect-title-fitted {
+    font-size: 1.6rem !important;
+    text-align: center;
+  }
+  
+  .perfect-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .brand-icon-perfect {
+    order: -1;
+  }
+  
+  .perfect-logo-container {
+    margin: 1.5rem 0;
+  }
+  
+  .perfect-launch-button {
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+  }
+}
+
+@media (width >= 641px) and (width <= 1024px) {
+  .perfect-title-fitted {
+    font-size: 2rem !important;
+  }
+  
+  .perfect-subtitle {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (width >= 1025px) {
+  .perfect-title-fitted {
+    font-size: 2.8rem !important;
+  }
+  
+  .perfect-subtitle {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* SMALLER, BEAUTIFUL LOGO SIZING */
+@media (width <= 640px) {
+  .logo-page .perfect-logo {
+    width: 140px !important;
+    height: 140px !important;
+  }
+}
+
+@media (width >= 641px) and (width <= 1024px) {
+  .logo-page .perfect-logo {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}
+
+@media (width >= 1025px) {
+  .logo-page .perfect-logo {
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+
+/* Ensure mobile adjustments for logo page icon and spacing */
+@media (width <= 640px) {
+  .logo-page .app-store-icon-button {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+  }
+
+  .logo-page .flex.items-center.justify-center {
+    gap: 0.75rem !important;
+  }
+
+  .blue-icon-button {
+    font-size: 1rem !important;
+    padding: 0.875rem 1.5rem !important;
+    border-radius: 40px !important;
+  }
+
+  .logo-page {
+    padding: 1rem !important;
+  }
+}
+
+@media (width >= 641px) and (width <= 1024px) {
+  .logo-page .app-store-icon-button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 11px !important;
+  }
+  
+  .logo-page-title {
+    font-size: 2.2rem !important;
+  }
+}
+
+@media (width >= 1025px) {
+  .logo-page .app-store-icon-button {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 12px !important;
+  }
+  
+  .logo-page-title {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .logo-page * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .blue-icon-button:hover,
+  .app-store-icon-button:hover {
+    transform: scale(1.05) !important;
+  }
+}
+
+/* Ensure proper alignment and spacing */
+.logo-page .flex.items-center.justify-center.gap-4 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ===================================================================
+   ENHANCED MAYCOLETRACKER™ LOGO PAGE - IMPROVED DESIGN
+   1. MaycoleTracker comes down more on the page ✓
+   2. Icon button on the left side of the name ✓
+   3. Logo reduced size ✓
+   4. More attractive name with icon button seal ✓
+   =================================================================== */
+
+/* Enhanced Brand Container - POSITIONED LOWER ON PAGE - SINGLE BUTTON ONLY */
+.maycole-brand-container-enhanced {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8vh auto 2rem; /* MOVED DOWN FROM TOP */
+  max-width: 90vw;
+}
+
+/* SINGLE SEALED App Store Icon Button - ATTACHED TO NAME */
+.app-store-icon-button-sealed-only {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%) !important;
+  border: 3px solid rgb(255 255 255 / 90%) !important;
+  color: #007BFF !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 6px 20px rgb(255 255 255 / 50%),
+    0 3px 10px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 95%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  flex-shrink: 0 !important;
+  margin-left: 0.75rem !important;
+}
+
+/* NEW: App Store Icon Button - BY THE M */
+.app-store-icon-button-by-m {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%) !important;
+  border: 3px solid rgb(255 255 255 / 90%) !important;
+  color: #007BFF !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 6px 20px rgb(255 255 255 / 50%),
+    0 3px 10px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 95%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  flex-shrink: 0 !important;
+  order: 1; /* POSITIONED FIRST - BY THE M */
+}
+
+/* SINGLE SEALED Button Hover States */
+.app-store-icon-button-sealed-only:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  transform: translateY(-3px) scale(1.1) !important;
+  box-shadow: 
+    0 10px 30px rgb(255 255 255 / 70%),
+    0 5px 15px rgb(255 255 255 / 40%),
+    inset 0 1px 0 rgb(255 255 255 / 100%) !important;
+  border-color: rgb(255 255 255 / 100%) !important;
+}
+
+.app-store-icon-button-sealed-only:active {
+  transform: translateY(0) scale(0.95) !important;
+  box-shadow: 
+    0 3px 12px rgb(255 255 255 / 40%),
+    0 2px 6px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 80%) !important;
+}
+
+/* NEW: Icon Button BY THE M Hover States */
+.app-store-icon-button-by-m:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  transform: translateY(-3px) scale(1.1) !important;
+  box-shadow: 
+    0 10px 30px rgb(255 255 255 / 70%),
+    0 5px 15px rgb(255 255 255 / 40%),
+    inset 0 1px 0 rgb(255 255 255 / 100%) !important;
+  border-color: rgb(255 255 255 / 100%) !important;
+}
+
+.app-store-icon-button-by-m:active {
+  transform: translateY(0) scale(0.95) !important;
+  box-shadow: 
+    0 3px 12px rgb(255 255 255 / 40%),
+    0 2px 6px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 80%) !important;
+}
+
+/* Brand Seal Container - ENHANCED STYLING */
+.maycole-brand-seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 1rem 2rem;
+  background: rgb(255 255 255 / 5%);
+  border-radius: 20px;
+  border: 2px solid rgb(255 255 255 / 15%);
+-webkit-
+
+  box-shadow: 
+    0 8px 32px rgb(255 255 255 / 10%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadow
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transition
+  order: 2; /* CENTER/RIGHT */
+}
+
+/* NEW: Brand Seal with SEALED Icon Button */
+.maycole-brand-seal-with-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 1rem 2rem;
+  background: rgb(255 255 255 / 5%);
+  border-radius: 20px;
+  border: 2px solid rgb(255 255 255 / 15%);
+-webkit-
+
+  box-shadow: 
+    0 8px 32px rgb(255 255 255 / 10%),
+    0 4px 16px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadow
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);transition
+  order: 2; /* CENTER */
+}
+
+/* Title and Icon Container - SEALED TOGETHER */
+.maycole-title-and-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* NEW: Title and Icon Container - ICON BY THE M */
+.maycole-title-and-icon-container-by-m {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.maycole-brand-seal:hover {
+  background: rgb(255 255 255 / 8%);
+  border-color: rgb(255 255 255 / 25%);
+  box-shadow: 
+    0 12px 48px rgb(255 255 255 / 15%),
+    0 6px 24px rgb(0 123 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-2px);
+}
+
+/* Enhanced Title with Gradient */
+.logo-page-title-enhanced {
+  font-size: clamp(2rem, 6vw, 3.5rem) !important;
+  font-weight: 800 !important;
+  margin: 0 !important;
+  text-shadow: 0 3px 6px rgb(0 0 0 / 40%) !important;
+  line-height: 1.2 !important;
+  display: flex;
+  align-items: baseline;
+  gap: 0.1em;
+}
+
+/* Gradient Text Effect */
+.maycole-text-gradient {
+  background: linear-gradient(135deg, 
+    #fff 0%, 
+    #e0e7ff 25%, 
+    #c7d2fe 50%, 
+    #a5b4fc 75%, 
+    #fff 100%) !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-size: 200% 200%;
+  animation: gradient-text-flow 4s ease-in-out infinite;
+}
+
+@keyframes gradient-text-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced Trademark Symbol */
+.trademark-symbol {
+  font-size: 0.4em !important;
+  vertical-align: super !important;
+  line-height: 0 !important;
+  margin-left: -0.1em !important;
+  opacity: 0.9 !important;
+  font-weight: 400 !important;
+  position: relative !important;
+  top: -0.8em !important;
+  color: rgb(255 255 255 / 80%) !important;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 30%) !important;
+}
+
+/* TINY ™ Symbol Styling - POSITIONED BY THE M */
+.trademark-symbol-tiny {
+  font-size: 0.25em !important;
+  vertical-align: super !important;
+  line-height: 0 !important;
+  margin-left: -0.1em !important;
+  opacity: 0.8 !important;
+  font-weight: 300 !important;
+  position: relative !important;
+  top: -0.8em !important;
+  color: rgb(255 255 255 / 90%) !important;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 10%) !important;
+}
+
+/* ========================================
+   SEALED ICON BUTTON WITH MAYCOLETRACKER™
+   Professional App Store Integration
+   ======================================== */
+
+/* Sealed Brand Container - Icon and Text as One Unit */
+.maycole-brand-seal-with-icon-sealed {
+  background: linear-gradient(135deg, 
+    rgb(255 255 255 / 15%) 0%, 
+    rgb(255 255 255 / 8%) 50%,
+    rgb(255 255 255 / 12%) 100%);
+-webkit-
+
+  border-radius: 20px;border-radiusborder-radius
+  border: 2px solid rgb(255 255 255 / 25%);border
+  padding: 1.5rem 2rem;
+  box-shadow: 
+    0 12px 40px rgb(0 123 255 / 20%),
+    0 6px 20px rgb(255 255 255 / 15%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+}
+
+.maycole-brand-seal-with-icon-sealed:hover {
+  background: linear-gradient(135deg, 
+    rgb(255 255 255 / 20%) 0%, 
+    rgb(255 255 255 / 12%) 50%,
+    rgb(255 255 255 / 18%) 100%);
+  border-color: rgb(255 255 255 / 35%);
+  box-shadow: 
+    0 16px 50px rgb(0 123 255 / 25%),
+    0 8px 25px rgb(255 255 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 40%);
+  transform: translateY(-2px);
+}
+
+/* Sealed Brand Container Layout */
+.maycole-sealed-brand-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+/* App Icon Seal Container */
+.app-icon-seal-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* SEALED App Store Icon Button - ENHANCED VISIBILITY */
+.app-store-icon-button-sealed {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #1e3a8a 100%) !important;
+  border: 2px solid rgb(255 255 255 / 30%) !important;
+  color: white !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 8px 25px rgb(30 64 175 / 40%),
+    0 4px 12px rgb(30 64 175 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 20%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.app-store-icon-button-sealed:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 50%, #1e1b4b 100%) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 
+    0 12px 35px rgb(30 64 175 / 50%),
+    0 6px 15px rgb(30 64 175 / 40%),
+    inset 0 1px 0 rgb(255 255 255 / 30%) !important;
+  border-color: rgb(255 255 255 / 40%) !important;
+}
+
+.app-store-icon-button-sealed:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 
+    0 4px 15px rgb(30 64 175 / 40%),
+    0 2px 8px rgb(30 64 175 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 15%) !important;
+}
+
+/* Icon Button Inner Container */
+.icon-button-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 5%) 100%);
+}
+
+/* ENHANCED DOWNLOAD ARROW VISIBILITY */
+.download-icon-enhanced {
+  width: 20px !important;
+  height: 20px !important;
+  color: white !important;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 30%)) !important;
+  stroke-width: 2.5 !important;
+  transition: all 0.3s ease !important;
+}
+
+.app-store-icon-button-sealed:hover .download-icon-enhanced {
+  color: #fff !important;
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / 40%)) drop-shadow(0 0 8px rgb(255 255 255 / 50%)) !important;
+  transform: scale(1.1) !important;
+}
+
+/* App Menu Dropdown */
+.app-menu-dropdown {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: linear-gradient(135deg, rgb(255 255 255 / 95%) 0%, rgb(255 255 255 / 90%) 100%);
+-webkit-
+
+  border-radius: 12px;border-radiusborder-radius
+  border: 1px solid rgb(255 255 255 / 30%);border
+  box-shadow: 
+    0 15px 50px rgb(0 0 0 / 20%),
+    0 8px 25px rgb(0 0 0 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 50%);
+  padding: 0.5rem;
+  min-width: 180px;
+  z-index: 1000;
+  animation: dropdownSlideIn 0.3s ease-out;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.app-menu-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  padding: 0.75rem 1rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: #1f2937 !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-align: left !important;
+}
+
+.app-menu-item:hover {
+  background: linear-gradient(135deg, rgb(59 130 246 / 10%) 0%, rgb(30 64 175 / 5%) 100%) !important;
+  color: #1e40af !important;
+  transform: translateX(2px) !important;
+}
+
+.app-menu-item:active {
+  background: linear-gradient(135deg, rgb(59 130 246 / 15%) 0%, rgb(30 64 175 / 8%) 100%) !important;
+  transform: translateX(0) scale(0.98) !important;
+}
+
+.app-menu-item svg {
+  color: #6b7280 !important;
+  transition: color 0.2s ease !important;
+}
+
+.app-menu-item:hover svg {
+  color: #1e40af !important;
+}
+
+/* Enhanced Sealed Title */
+.logo-page-title-enhanced-sealed {
+  font-size: clamp(2.2rem, 5vw, 3.5rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+  background: linear-gradient(135deg, 
+    rgb(255 255 255 / 100%) 0%,
+    rgb(255 255 255 / 95%) 25%,
+    rgb(240 248 255 / 90%) 50%,
+    rgb(255 255 255 / 95%) 75%,
+    rgb(255 255 255 / 100%) 100%
+  ) !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 3px 10px rgb(255 255 255 / 40%) !important;
+  position: relative !important;
+  text-align: left !important;
+  animation: text-glow-enhanced 4s ease-in-out infinite alternate !important;
+}
+
+/* MASSIVE MAYCOLETRACKER™ TITLE - MUCH BIGGER */
+.logo-page-title-massive {
+  font-size: clamp(3.5rem, 8vw, 6rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  margin: 0 0 2rem !important;
+  background: linear-gradient(135deg, 
+    rgb(255 255 255 / 100%) 0%,
+    rgb(255 255 255 / 95%) 25%,
+    rgb(240 248 255 / 90%) 50%,
+    rgb(255 255 255 / 95%) 75%,
+    rgb(255 255 255 / 100%) 100%
+  ) !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 4px 20px rgb(255 255 255 / 60%) !important;
+  position: relative !important;
+  text-align: center !important;
+  animation: text-glow-massive 3s ease-in-out infinite alternate !important;
+  letter-spacing: -0.02em !important;
+}
+
+@keyframes text-glow-massive {
+  0% {
+    filter: drop-shadow(0 0 10px rgb(255 255 255 / 50%));
+    text-shadow: 0 4px 20px rgb(255 255 255 / 60%);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 25px rgb(255 255 255 / 80%));
+    text-shadow: 0 6px 30px rgb(255 255 255 / 80%);
+  }
+}
+
+/* CENTERED ICON BUTTON CONTAINER */
+.app-icon-seal-container-centered {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+/* LARGE APP STORE ICON BUTTON - POSITIONED WHERE LAUNCH WAS */
+.app-store-icon-button-large {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #1e3a8a 100%) !important;
+  border: 3px solid rgb(255 255 255 / 30%) !important;
+  color: white !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 10px 35px rgb(30 64 175 / 40%),
+    0 5px 15px rgb(30 64 175 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 20%) !important;
+-webkit-
+
+  position: relative !important;positionposition
+  overflow: hidden !important;overflow
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: large-button-pulse 3s ease-in-out infinite;
+}
+
+.app-store-icon-button-large:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 50%, #1e1b4b 100%) !important;
+  transform: translateY(-3px) scale(1.08) !important;
+  box-shadow: 
+    0 15px 45px rgb(30 64 175 / 50%),
+    0 8px 20px rgb(30 64 175 / 40%),
+    inset 0 1px 0 rgb(255 255 255 / 30%) !important;
+  border-color: rgb(255 255 255 / 40%) !important;
+}
+
+.app-store-icon-button-large:active {
+  transform: translateY(-1px) scale(1.02) !important;
+  box-shadow: 
+    0 6px 20px rgb(30 64 175 / 40%),
+    0 3px 10px rgb(30 64 175 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 15%) !important;
+}
+
+@keyframes large-button-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 10px 35px rgb(30 64 175 / 40%),
+      0 5px 15px rgb(30 64 175 / 30%),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+  }
+
+  50% {
+    box-shadow: 
+      0 12px 40px rgb(30 64 175 / 50%),
+      0 6px 18px rgb(30 64 175 / 40%),
+      inset 0 1px 0 rgb(255 255 255 / 25%),
+      0 0 0 3px rgb(255 255 255 / 10%);
+  }
+}
+
+/* Enhanced Download Icon for Large Button */
+.app-store-icon-button-large .download-icon-enhanced {
+  width: 28px !important;
+  height: 28px !important;
+  color: white !important;
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / 30%)) !important;
+  stroke-width: 2.5 !important;
+  transition: all 0.3s ease !important;
+}
+
+.app-store-icon-button-large:hover .download-icon-enhanced {
+  color: #fff !important;
+  filter: drop-shadow(0 4px 8px rgb(0 0 0 / 40%)) drop-shadow(0 0 12px rgb(255 255 255 / 60%)) !important;
+  transform: scale(1.15) !important;
+}
+
+/* LAUNCH PLATFORM BUTTON - MOVED UNDER */
+.blue-icon-button-under {
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+  border: 2px solid rgb(255 255 255 / 20%);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+-webkit-
+
+  box-shadow: 
+    0 6px 24px rgb(0 123 255 / 30%),
+    0 3px 12px rgb(0 123 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);box-shadowbox-shadow
+  position: relative;position
+  overflow: hidden;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+}
+
+.blue-icon-button-under:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  border-color: rgb(255 255 255 / 30%);
+  box-shadow: 
+    0 8px 32px rgb(0 123 255 / 40%),
+    0 4px 16px rgb(0 123 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-2px) scale(1.02);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+.blue-icon-button-under:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 
+    0 3px 12px rgb(0 123 255 / 30%),
+    0 2px 6px rgb(0 123 255 / 20%);
+}
+
+/* Enhanced Brand Seal Underline */
+.brand-seal-underline-enhanced {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, 
+    rgb(255 255 255 / 60%) 0%, 
+    rgb(59 130 246 / 30%) 50%,
+    rgb(255 255 255 / 60%) 100%);
+  border-radius: 2px;
+  margin-top: 1rem;
+  box-shadow: 
+    0 2px 8px rgb(255 255 255 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 80%);
+  animation: underline-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes underline-glow {
+  0% {
+    box-shadow: 
+      0 2px 8px rgb(255 255 255 / 30%),
+      inset 0 1px 0 rgb(255 255 255 / 80%);
+  }
+
+  100% {
+    box-shadow: 
+      0 4px 12px rgb(255 255 255 / 50%),
+      0 0 15px rgb(59 130 246 / 30%),
+      inset 0 1px 0 rgb(255 255 255 / 100%);
+  }
+}
+
+/* Brand Seal Underline */
+.brand-seal-underline {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(135deg, 
+    transparent 0%, 
+    rgb(255 255 255 / 60%) 25%, 
+    rgb(255 255 255 / 90%) 50%, 
+    rgb(255 255 255 / 60%) 75%, 
+    transparent 100%);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  animation: underline-glow 3s ease-in-out infinite;
+}
+
+@keyframes underline-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scaleX(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleX(1.1);
+  }
+}
+
+/* Logo Container - REDUCED SIZE */
+.logo-container-reduced {
+  margin: 2rem 0; /* REDUCED FROM 3rem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 8px 32px rgb(0 123 255 / 30%));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.9); /* REDUCED SIZE */
+}
+
+.logo-container-reduced:hover {
+  filter: drop-shadow(0 12px 48px rgb(0 123 255 / 40%));
+  transform: translateY(-2px) scale(0.95); /* SLIGHTLY LARGER ON HOVER BUT STILL REDUCED */
+}
+
+/* Responsive Design - ENHANCED FOR SEALED ICON BUTTON */
+@media (width <= 640px) {
+  .maycole-brand-container-enhanced {
+    margin-top: 6vh; /* REDUCED FOR MOBILE */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .app-store-icon-button-by-m {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 9px !important;
+  }
+  
+  .app-store-icon-button-sealed-only {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 9px !important;
+    margin-left: 0.5rem !important;
+  }
+  
+  /* SEALED BUTTON MOBILE STYLES */
+  .app-store-icon-button-sealed {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+  }
+  
+  /* LARGE BUTTON MOBILE STYLES */
+  .app-store-icon-button-large {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 14px !important;
+  }
+  
+  .app-store-icon-button-large .download-icon-enhanced {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  
+  .download-icon-enhanced {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  
+  /* MASSIVE TITLE MOBILE */
+  .logo-page-title-massive {
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* LAUNCH BUTTON UNDER MOBILE */
+  .blue-icon-button-under {
+    font-size: 0.95rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+  
+  .maycole-brand-seal-with-icon,
+  .maycole-brand-seal-with-icon-sealed {
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .maycole-sealed-brand-container {
+    gap: 0.75rem;
+  }
+  
+  .maycole-title-and-icon-container,
+  .maycole-title-and-icon-container-by-m {
+    gap: 0.5rem;
+  }
+  
+  .logo-page-title-enhanced,
+  .logo-page-title-enhanced-sealed {
+    font-size: clamp(1.2rem, 6vw, 1.6rem) !important;
+  }
+  
+  .trademark-symbol-tiny {
+    font-size: 0.2em !important;
+    top: -0.6em !important;
+  }
+  
+  .app-menu-dropdown {
+    top: 50px;
+    min-width: 160px;
+  }
+  
+  .app-menu-item {
+    padding: 0.625rem 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .logo-container-reduced {
+    transform: scale(0.8); /* SMALLER ON MOBILE */
+    margin: 1.5rem 0;
+  }
+  
+  .logo-container-reduced:hover {
+    transform: translateY(-2px) scale(0.85);
+  }
+
+@media (width >= 641px) and (width <= 1024px) {
+  .maycole-brand-container-enhanced {
+    margin-top: 7vh;
+  }
+  
+  .app-store-icon-button-by-m {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 11px !important;
+  }
+  
+  .app-store-icon-button-sealed-only {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 11px !important;
+    margin-left: 0.625rem !important;
+  }
+  
+  /* SEALED BUTTON TABLET STYLES */
+  .app-store-icon-button-sealed {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+  }
+  
+  /* LARGE BUTTON TABLET STYLES */
+  .app-store-icon-button-large {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 16px !important;
+  }
+  
+  .app-store-icon-button-large .download-icon-enhanced {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  
+  .download-icon-enhanced {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  /* MASSIVE TITLE TABLET */
+  .logo-page-title-massive {
+    font-size: clamp(3rem, 8vw, 4.5rem) !important;
+    margin-bottom: 1.75rem !important;
+  }
+  
+  /* LAUNCH BUTTON UNDER TABLET */
+  .blue-icon-button-under {
+    font-size: 1rem !important;
+    padding: 0.8rem 1.6rem !important;
+  }
+  
+  .maycole-brand-seal-with-icon-sealed {
+    padding: 1.25rem 1.75rem;
+    border-radius: 18px;
+  }
+  
+  .maycole-sealed-brand-container {
+    gap: 0.875rem;
+  }
+  
+  .logo-page-title-enhanced,
+  .logo-page-title-enhanced-sealed {
+    font-size: clamp(1.8rem, 5vw, 2.4rem) !important;
+  }
+  
+  .trademark-symbol-tiny {
+    font-size: 0.22em !important;
+    top: -0.7em !important;
+  }
+  
+  .app-menu-dropdown {
+    top: 54px;
+    min-width: 170px;
+  }
+  
+  .logo-container-reduced {
+    transform: scale(0.85);
+  }
+  
+  .logo-container-reduced:hover {
+    transform: translateY(-2px) scale(0.9);
+  }
+}
+
+@media (width >= 1025px) {
+  .maycole-brand-container-enhanced {
+    margin-top: 8vh;
+  }
+  
+  .app-store-icon-button-by-m {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+  }
+  
+  .app-store-icon-button-sealed-only {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    margin-left: 0.75rem !important;
+  }
+  
+  /* SEALED BUTTON DESKTOP STYLES */
+  .app-store-icon-button-sealed {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
+  }
+  
+  /* LARGE BUTTON DESKTOP STYLES */
+  .app-store-icon-button-large {
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 18px !important;
+  }
+  
+  .app-store-icon-button-large .download-icon-enhanced {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .download-icon-enhanced {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  /* MASSIVE TITLE DESKTOP */
+  .logo-page-title-massive {
+    font-size: clamp(3.5rem, 8vw, 6rem) !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  /* LAUNCH BUTTON UNDER DESKTOP */
+  .blue-icon-button-under {
+    font-size: 1.1rem !important;
+    padding: 0.875rem 1.75rem !important;
+  }
+  
+  .maycole-brand-seal-with-icon-sealed {
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+  }
+  
+  .maycole-sealed-brand-container {
+    gap: 1rem;
+  }
+  
+  .logo-page-title-enhanced,
+  .logo-page-title-enhanced-sealed {
+    font-size: clamp(2.2rem, 4vw, 3rem) !important;
+  }
+  
+  .trademark-symbol-tiny {
+    font-size: 0.25em !important;
+    top: -0.8em !important;
+  }
+  
+  .app-menu-dropdown {
+    top: 60px;
+    min-width: 180px;
+  }
+  
+  .logo-container-reduced {
+    transform: scale(0.9);
+  }
+  
+  .logo-container-reduced:hover {
+    transform: translateY(-2px) scale(0.95);
+  }
+}
+
+/* SINGLE SEALED Icon Button Shine Effect */
+.app-store-icon-button-sealed-only::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(59 130 246 / 30%), transparent);
+  transition: left 0.6s ease;
+}
+
+.app-store-icon-button-sealed-only:hover::before {
+  left: 100%;
+}
+
+/* NEW: Icon Button BY THE M Shine Effect */
+.app-store-icon-button-by-m::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(59 130 246 / 30%), transparent);
+  transition: left 0.6s ease;
+}
+
+.app-store-icon-button-by-m:hover::before {
+  left: 100%;
+}
+
+/* SEALED BUTTON SHINE EFFECT */
+.app-store-icon-button-sealed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 40%), transparent);
+  transition: left 0.5s ease;
+  border-radius: 12px;
+}
+
+.app-store-icon-button-sealed:hover::before {
+  left: 100%;
+}
+
+/* SEALED BUTTON PULSE ANIMATION */
+.app-store-icon-button-sealed {
+  animation: sealed-button-pulse 3s ease-in-out infinite;
+}
+
+@keyframes sealed-button-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 25px rgb(30 64 175 / 40%),
+      0 4px 12px rgb(30 64 175 / 30%),
+      inset 0 1px 0 rgb(255 255 255 / 20%);
+  }
+
+  50% {
+    box-shadow: 
+      0 10px 30px rgb(30 64 175 / 50%),
+      0 5px 15px rgb(30 64 175 / 40%),
+      inset 0 1px 0 rgb(255 255 255 / 25%),
+      0 0 0 2px rgb(255 255 255 / 10%);
+  }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .maycole-text-gradient,
+  .brand-seal-underline,
+  .app-store-icon-button-sealed-only::before {
+    animation: none !important;
+  }
+  
+  .maycole-brand-seal-with-icon:hover,
+  .logo-container-reduced:hover,
+  .app-store-icon-button-sealed-only:hover {
+    transform: scale(1.02) !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more), (prefers-contrast: high) {
+  .maycole-brand-seal-with-icon {
+    border-width: 3px;
+    border-color: rgb(255 255 255 / 80%);
+  }
+  
+  .app-store-icon-button-sealed-only {
+    border-width: 4px;
+    border-color: rgb(255 255 255 / 100%);
+  }
+}
+
+/* FIXED: Launch Platform Button Bottom Spacing */
+.logo-page.blue-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh !important;
+  padding: 2rem 1rem 4rem !important; /* Added bottom padding */
+  box-sizing: border-box !important;
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 50%, #004085 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure Launch Platform button has proper spacing from bottom */
+.logo-page .blue-icon-button {
+  margin-bottom: 2rem !important; /* Extra bottom margin */
+}
+
+/* Mobile spacing fixes */
+@media (width <= 640px) {
+  .logo-page.blue-background {
+    padding: 1rem 0.5rem 3rem !important;
+  }
+  
+  .logo-page .blue-icon-button {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Tablet spacing fixes */
+@media (width >= 641px) and (width <= 1024px) {
+  .logo-page.blue-background {
+    padding: 1.5rem 1rem 3.5rem !important;
+  }
+}
+
+/* Desktop spacing fixes */
+@media (width >= 1025px) {
+  .logo-page.blue-background {
+    padding: 2rem 1rem 4rem !important;
+  }
+}
+
+/* This file works in conjunction with globals.css for complete styling */
+
+/* ========================================================================
+   MAYCOLETRACKER™ BRAND ICON BUTTON - PROFESSIONAL POSITIONING & STYLING
+   ======================================================================== */
+
+/* Brand Icon Button Positioning - Clean Professional Layout - 100% IDENTICAL LOGO */
+.brand-icon-next-to-name {
+  margin-left: 1.5rem !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: transform, box-shadow !important;
+
+  /* Perfect brand consistency - matches main logo filter */
+  filter: drop-shadow(0 4px 16px rgb(0 123 255 / 25%)) !important;
+}
+
+/* Enhanced hover effects for brand icon shine animation */
+.brand-icon-next-to-name:hover .shine-effect {
+  left: 100% !important;
+}
+
+/* Brand icon button animations - Perfect logo consistency */
+.brand-icon-next-to-name:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+
+  /* Enhanced glow to match main logo interaction */
+  filter: drop-shadow(0 6px 24px rgb(0 123 255 / 35%)) !important;
+}
+
+.brand-icon-next-to-name:active {
+  transform: translateY(0) scale(0.95) !important;
+  filter: drop-shadow(0 2px 8px rgb(0 123 255 / 30%)) !important;
+}
+
+/* Brand icon button focus state */
+.brand-icon-next-to-name:focus {
+  outline: 2px solid rgb(255 255 255 / 40%) !important;
+  outline-offset: 2px !important;
+}
+
+/* Brand container responsive adjustments */
+@media (width <= 640px) {
+  .brand-icon-next-to-name {
+    margin-left: 1rem !important;
+  }
+}
+
+@media (width >= 1025px) {
+  .brand-icon-next-to-name {
+    margin-left: 2rem !important;
+  }
+}
+
+/* Brand icon button accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .brand-icon-next-to-name {
+    transition: none !important;
+  }
+  
+  .brand-icon-next-to-name:hover {
+    transform: scale(1.02) !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .brand-icon-next-to-name {
+    border-width: 3px !important;
+    border-color: rgb(255 255 255 / 100%) !important;
+  }
+}
+
+/* Brand icon button shine animation */
+.brand-icon-next-to-name .shine-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 30%), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Perfect brand integration with MaycoleTracker™ name */
+.maycole-brand-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 8vh auto 2rem;
+  position: relative;
+  z-index: 10;
+  max-width: 90vw;
+}
+
+/* Brand name container adjustments */
+.brand-name-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Text glow animation for MaycoleTracker™ title */
+@keyframes text-glow {
+  0% {
+    filter: drop-shadow(0 0 5px rgb(255 255 255 / 50%));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 15px rgb(255 255 255 / 80%));
+  }
+}
+
+/* RESPONSIVE BRAND PERFECTION */
+@media (width <= 640px) {
+  .far-right-dropdown-container {
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .brand-unit-perfect {
+    gap: 0.75rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .brand-name-perfect {
+    font-size: 1.6rem !important;
+    text-align: center;
+  }
+  
+  .brand-subtitle-perfect {
+    font-size: 0.9rem !important;
+  }
+  
+  .brand-icon-left {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (width >= 641px) and (width <= 1024px) {
+  .far-right-dropdown-container {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .brand-unit-perfect {
+    gap: 0.875rem;
+  }
+  
+  .brand-name-perfect {
+    font-size: 2.2rem !important;
+  }
+  
+  .brand-subtitle-perfect {
+    font-size: 1.125rem !important;
+  }
+}
+
+@media (width >= 1025px) {
+  .far-right-dropdown-container {
+    top: 2rem;
+    right: 2rem;
+  }
+  
+  .brand-unit-perfect {
+    gap: 1rem;
+  }
+  
+  .brand-name-perfect {
+    font-size: 3.2rem !important;
+  }
+  
+  .brand-subtitle-perfect {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Ensure proper touch targets on mobile */
+@media (width <= 768px) {
+  .brand-icon-left {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    touch-action: manipulation;
+  }
+  
+  .far-right-dropdown-trigger {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    touch-action: manipulation;
+  }
+}}

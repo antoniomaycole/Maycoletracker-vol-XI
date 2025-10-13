@@ -8,10 +8,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, ShoppingCart, Truck, Building2, CheckCircle, AlertTriangle,
-  Clock, DollarSign, Package, Users, Zap, Brain, Target, Award, Shield,
+  Clock, DollarSign, Package, Users, Zap, Brain, Shield, Globe,
   Calendar, Phone, Mail, MapPin, CreditCard, Settings, Download, RefreshCw,
-  PlayCircle, PauseCircle, Edit3, Save, X, Plus, Minus, Star, TrendingUp
+  PlayCircle, PauseCircle, Edit3, Save, X, Plus, Minus, TrendingUp
 } from 'lucide-react';
+import { Target, Volume2, Star } from '@/lib/icons';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';

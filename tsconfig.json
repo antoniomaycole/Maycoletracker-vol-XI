@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+  "module": "ESNext",
+  "jsx": "react-jsx",
+  "moduleResolution": "Bundler",
+  "strict": false,
+  "allowSyntheticDefaultImports": true,
+  "types": ["vite/client", "node"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "src/REMOVED",
+    "src/REMOVED/**",
+    "src/WelcomePage-As-Launcher-Replacement.tsx"
+  ]
+}

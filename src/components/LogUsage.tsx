@@ -7,13 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Textarea } from './ui/textarea';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { ArrowLeft } from 'lucide-react';
-import type { InventoryItem } from '../types/inventory';
+import type { MTInventoryItem as InventoryItem } from '../types/inventory';
 import type { AppScreen } from '../types/navigation';
-import type { Transaction as UsageLog } from '../types/inventory';
+import type { MTNewInventoryItem as UsageLog } from '../types/inventory';
 
 interface LogUsageProps {
   items: InventoryItem[];
-  onLogUsage: (log: Omit<UsageLog, 'id'>) => void;
+  onLogUsage: (log: Record<string, any>) => void;
   onNavigate: (screen: AppScreen) => void;
   trainingMode: boolean;
 }
@@ -41,8 +41,8 @@ export function LogUsage({ items, onLogUsage, onNavigate, trainingMode }: LogUsa
     }
 
     const selectedItem = items.find(item => item.id === formData.itemId);
-    if (selectedItem && formData.action === 'Used' && formData.quantity > selectedItem.quantity) {
-      newErrors.quantity = `Cannot use more than available (${selectedItem.quantity} ${selectedItem.unit})`;
+    if (selectedItem && formData.action === 'Used' && formData.quantity > (selectedItem.quantity ?? 0)) {
+      newErrors.quantity = `Cannot use more than available (${(selectedItem.quantity ?? 0)} ${selectedItem.unit})`;
     }
 
     setErrors(newErrors);
@@ -183,16 +183,16 @@ export function LogUsage({ items, onLogUsage, onNavigate, trainingMode }: LogUsa
             {selectedItem && (
               <div className="p-3 bg-muted rounded-md">
                 <div className="text-sm">
-                  <strong>Current Stock:</strong> {selectedItem.quantity} {selectedItem.unit}
+                  <strong>Current Stock:</strong> {(selectedItem.quantity ?? 0)} {selectedItem.unit}
                 </div>
                 {formData.action === 'Used' && (
                   <div className="text-sm text-muted-foreground">
-                    After usage: {Math.max(0, selectedItem.quantity - formData.quantity)} {selectedItem.unit}
+                    After usage: {Math.max(0, (selectedItem.quantity ?? 0) - formData.quantity)} {selectedItem.unit}
                   </div>
                 )}
                 {formData.action === 'Received' && (
                   <div className="text-sm text-muted-foreground">
-                    After receipt: {selectedItem.quantity + formData.quantity} {selectedItem.unit}
+                    After receipt: {(selectedItem.quantity ?? 0) + formData.quantity} {selectedItem.unit}
                   </div>
                 )}
               </div>

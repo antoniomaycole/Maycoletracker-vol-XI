@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaycoleTracker™ 404 Functionality Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #4B0082 0%, #6B46C1 50%, #8B5CF6 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      padding: 3rem;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .test-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .test-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    
+    .test-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .test-link {
+      display: block;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .test-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .test-link.invalid {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.1);
+    }
+    
+    .test-link.valid {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.1);
+    }
+    
+    .instructions {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .instructions h3 {
+      margin-bottom: 1rem;
+      color: #93c5fd;
+    }
+    
+    .instructions ol {
+      margin-left: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .status-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+    
+    .status-good { background: #10b981; }
+    .status-error { background: #ef4444; }
+    .status-warning { background: #f59e0b; }
+    
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .current-url {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      word-break: break-all;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 MaycoleTracker™ 404 Test Suite</h1>
+    
+    <div class="current-url">
+      <strong>Current URL:</strong> <span id="currentUrl"></span>
+    </div>
+    
+    <div class="instructions">
+      <h3>📋 Testing Instructions</h3>
+      <ol>
+        <li>Click on any of the test links below</li>
+        <li>Valid routes should load the correct page</li>
+        <li>Invalid routes should show the 404 NotFoundPage component</li>
+        <li>The 404 page should have navigation buttons to return</li>
+        <li>Use browser back/forward buttons to test navigation</li>
+      </ol>
+    </div>
+    
+    <div class="test-section">
+      <h2><span class="status-indicator status-good"></span>Valid Routes (Should Work)</h2>
+      <div class="test-links">
+        <a href="/" class="test-link valid">🏠 Home (LogoPage)</a>
+        <a href="/main" class="test-link valid">📊 Main Dashboard</a>
+        <a href="/supplies" class="test-link valid">📦 Supplies Page</a>
+        <a href="/analytics" class="test-link valid">📈 Analytics Page</a>
+        <a href="/scanner" class="test-link valid">📱 Scanner Page</a>
+        <a href="/ai" class="test-link valid">🧠 AI Insights Page</a>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2><span class="status-indicator status-error"></span>Invalid Routes (Should Show 404)</h2>
+      <div class="test-links">
+        <a href="/nonexistent" class="test-link invalid">❌ /nonexistent</a>
+        <a href="/invalid-page" class="test-link invalid">❌ /invalid-page</a>
+        <a href="/random-url" class="test-link invalid">❌ /random-url</a>
+        <a href="/test/nested/path" class="test-link invalid">❌ /test/nested/path</a>
+        <a href="/supplies/invalid" class="test-link invalid">❌ /supplies/invalid</a>
+        <a href="/main/nonexistent" class="test-link invalid">❌ /main/nonexistent</a>
+        <a href="/xyz" class="test-link invalid">❌ /xyz</a>
+        <a href="/404-test" class="test-link invalid">❌ /404-test</a>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2><span class="status-indicator status-warning"></span>Edge Case Tests</h2>
+      <div class="test-links">
+        <a href="/MAIN" class="test-link invalid">❌ /MAIN (case sensitive)</a>
+        <a href="/supplies/" class="test-link invalid">❌ /supplies/ (trailing slash)</a>
+        <a href="/main?" class="test-link invalid">❌ /main? (query string)</a>
+        <a href="/analytics#section" class="test-link invalid">❌ /analytics#section (hash)</a>
+        <a href="//double-slash" class="test-link invalid">❌ //double-slash</a>
+        <a href="/main%20space" class="test-link invalid">❌ /main%20space (encoded)</a>
+      </div>
+    </div>
+    
+    <div class="instructions">
+      <h3>✅ Expected 404 Page Features</h3>
+      <ul style="list-style: none; margin-left: 0;">
+        <li>✓ MaycoleTracker™ branding with purple gradient background</li>
+        <li>✓ Professional 404 error message</li>
+        <li>✓ Current URL display</li>
+        <li>✓ Navigation buttons: "Go to Home", "Dashboard", "Go Back"</li>
+        <li>✓ List of available routes</li>
+        <li>✓ Responsive design for mobile/desktop</li>
+        <li>✓ Consistent with MaycoleTracker™ Volume XI branding</li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      <p><strong>MaycoleTracker™ Volume XI — Enterprise Edition</strong></p>
+      <p>404 Testing Suite | Professional Inventory Management System</p>
+    </div>
+  </div>
+  
+  <script>
+    // Display current URL
+    document.getElementById('currentUrl').textContent = window.location.href;
+    
+    // Add click logging
+    document.querySelectorAll('.test-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        console.log('🔗 Testing route:', e.target.href);
+        console.log('🎯 Expected behavior:', e.target.classList.contains('valid') ? 'Load page' : 'Show 404');
+      });
+    });
+    
+    // Log current test environment
+    console.log('🧪 MaycoleTracker™ 404 Test Suite Initialized');
+    console.log('📍 Current URL:', window.location.href);
+    console.log('🔍 Test environment ready');
+  </script>
+</body>
+</html>

@@ -9,8 +9,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Building2, DollarSign, Users, TrendingUp, Package, 
-  BarChart3, Scan, Camera, Crown, Shield, Rocket, Star, Globe
+  BarChart3, Scan, Camera, Shield, Rocket, Globe
 } from 'lucide-react';
+import { Star } from '@/lib/icons';
 import AppHeader from './AppHeader';
 
 export default function MainPage() {
@@ -58,7 +59,7 @@ export default function MainPage() {
       id: 'projects',
       title: 'Project Management',
       description: 'Tasks, workflows, deadlines & collaboration',
-      icon: Target,
+      icon: Globe,
       route: '/projects',
       color: 'from-orange-600 to-orange-700',
       priority: 'primary',
@@ -68,7 +69,7 @@ export default function MainPage() {
       id: 'hr',
       title: 'Human Resources',
       description: 'Staff management, payroll & performance',
-      icon: Award,
+      icon: Users,
       route: '/hr',
       color: 'from-pink-600 to-pink-700',
       priority: 'primary',
@@ -225,7 +226,7 @@ export default function MainPage() {
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${system.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-200`}>
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
-                    <Crown className="w-4 h-4 text-purple-500" />
+                    <Star className="w-4 h-4 text-purple-500" />
                   </div>
                   
                   <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">

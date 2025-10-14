@@ -164,7 +164,7 @@ git push origin main
 
   # MaycoleTracker vol XI
 
-  This is a code bundle for MaycoleTracker vol XI. The original project is available at https://www.figma.com/design/DXTQSHiAguJ8K8Wpa3hDMp/MaycoleTracker-vol-XI. DEPLOYMENT-MILESTONE-VOL-XI.md
+  This is a code bundle for MaycoleTracker vol XI. The original project is available at https://www.maycoletechnologies.com/MaycoleTracker-vol-XI. DEPLOYMENT-MILESTONE-VOL-XI.md
 - Location: Root of MaycoleTracker-vol-XI or inside /docs/
 - Benefits:
   - Timestamped via commit history
@@ -195,3 +195,13 @@ Deployment Milestone — Vol XI
   Run `npm i` to install the dependencies.
 
   Run `npm run dev` to start the development server.
+
+### 📦 Install Dependencies
+To make this app functional, run:
+```bash
+npm install
+npm run dev run 'npm'
+ README.md
+git commit -m "docs: resolved HEAD conflict and merged icon button logic into README"
+git push origin main
+

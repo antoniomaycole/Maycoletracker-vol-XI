@@ -164,7 +164,8 @@ git push origin main
 
   # MaycoleTracker vol XI
 
-  This is a code bundle for MaycoleTracker vol XI. The original project is available at https://www.maycoletechnologies.com/MaycoleTracker-vol-XI. DEPLOYMENT-MILESTONE-VOL-XI.md
+  This is a code bundle for MaycoleTracker vol XI. 
+The original project is available at https://www.maycoletechnologies.com/MaycoleTracker-vol-XI. DEPLOYMENT-MILESTONE-VOL-XI.md
 - Location: Root of MaycoleTracker-vol-XI or inside /docs/
 - Benefits:
   - Timestamped via commit history
